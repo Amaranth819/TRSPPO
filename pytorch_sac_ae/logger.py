@@ -21,6 +21,17 @@ FORMAT_CONFIG = {
 }
 
 
+FORMAT_CONFIG['ppo'] = {
+    'train': [
+        ('episode', 'E', 'int'), ('step', 'S', 'int'),
+        ('episode_reward', 'R', 'float'), ('actor_loss', 'ALOSS', 'float'),
+        ('critic_loss', 'VLOSS', 'float'), ('entropy', 'ENT', 'float'),
+        ('approx_kl', 'KL', 'float'), ('clip_fraction', 'CLIP', 'float')
+    ],
+    'eval': FORMAT_CONFIG['rl']['eval']
+}
+
+
 class AverageMeter(object):
     def __init__(self):
         self._sum = 0
@@ -35,11 +46,12 @@ class AverageMeter(object):
 
 
 class MetersGroup(object):
-    def __init__(self, file_name, formating):
+    def __init__(self, file_name, formating, skip_missing=False):
         self._file_name = file_name
         if os.path.exists(file_name):
             os.remove(file_name)
         self._formating = formating
+        self._skip_missing = skip_missing
         self._meters = defaultdict(AverageMeter)
 
     def log(self, key, value, n=1):
@@ -76,6 +88,8 @@ class MetersGroup(object):
         prefix = colored(prefix, 'yellow' if prefix == 'train' else 'green')
         pieces = ['{:5}'.format(prefix)]
         for key, disp_key, ty in self._formating:
+            if self._skip_missing and key not in data:
+                continue
             value = data.get(key, 0)
             pieces.append(self._format(disp_key, value, ty))
         print('| %s' % (' | '.join(pieces)))
@@ -102,7 +116,8 @@ class Logger(object):
             self._sw = None
         self._train_mg = MetersGroup(
             os.path.join(log_dir, 'train.log'),
-            formating=FORMAT_CONFIG[config]['train']
+            formating=FORMAT_CONFIG[config]['train'],
+            skip_missing=(config == 'ppo')
         )
         self._eval_mg = MetersGroup(
             os.path.join(log_dir, 'eval.log'),
@@ -161,3 +176,8 @@ class Logger(object):
     def dump(self, step):
         self._train_mg.dump(step, 'train')
         self._eval_mg.dump(step, 'eval')
+
+    def close(self):
+        if self._sw is not None:
+            self._sw.flush()
+            self._sw.close()

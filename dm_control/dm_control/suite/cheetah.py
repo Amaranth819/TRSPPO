@@ -49,6 +49,17 @@ def run(time_limit=_DEFAULT_TIME_LIMIT, random=None, environment_kwargs=None):
                              **environment_kwargs)
 
 
+@SUITE.add()
+def bidirectional(time_limit=_DEFAULT_TIME_LIMIT, random=None,
+                  environment_kwargs=None):
+  """Returns a task rewarding running in either horizontal direction."""
+  physics = Physics.from_xml_string(*get_model_and_assets())
+  task = BidirectionalCheetah(random=random)
+  environment_kwargs = environment_kwargs or {}
+  return control.Environment(physics, task, time_limit=time_limit,
+                             **environment_kwargs)
+
+
 class Physics(mujoco.Physics):
   """Physics simulation with additional features for the Cheetah domain."""
 
@@ -86,6 +97,18 @@ class Cheetah(base.Task):
   def get_reward(self, physics):
     """Returns a reward to the agent."""
     return rewards.tolerance(physics.speed(),
+                             bounds=(_RUN_SPEED, float('inf')),
+                             margin=_RUN_SPEED,
+                             value_at_margin=0,
+                             sigmoid='linear')
+
+
+class BidirectionalCheetah(Cheetah):
+  """A Cheetah task with the same reward for equal forward/backward speeds."""
+
+  def get_reward(self, physics):
+    """Returns a reward based on absolute horizontal speed."""
+    return rewards.tolerance(abs(physics.speed()),
                              bounds=(_RUN_SPEED, float('inf')),
                              margin=_RUN_SPEED,
                              value_at_margin=0,

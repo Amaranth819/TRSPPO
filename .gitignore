@@ -13,3 +13,8 @@ dm_control/dm_control/mujoco/wrapper/mjbindings/*.py
 __pycache__/
 .ipynb_checkpoints/
 runs
+
+
+pytorch_sac_ae/
+.vscode/
+*nohup.out

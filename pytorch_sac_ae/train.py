@@ -18,31 +18,32 @@ from logger import Logger
 from video import VideoRecorder
 
 from sac_ae import SacAeAgent
+from ppo import PPOAgent, RolloutBuffer
 # import custom_env
 
 def parse_args():
     parser = argparse.ArgumentParser()
     # environment
-    parser.add_argument('--domain_name', default='cartpole')
+    parser.add_argument('--domain_name', default='cheetah')
     # parser.add_argument('--task_name', default='two_pole_balance')
     # parser.add_argument('--task_name', default='swingup')
-    parser.add_argument('--task_name', default='swingup')
+    parser.add_argument('--task_name', default='run')
 
 
     parser.add_argument('--image_size', default=84, type=int)
-    parser.add_argument('--action_repeat', default=1, type=int)
+    parser.add_argument('--action_repeat', default=4, type=int)
     parser.add_argument('--frame_stack', default=3, type=int)
     # replay buffer
-    parser.add_argument('--replay_buffer_capacity', default=20000, type=int)
+    parser.add_argument('--replay_buffer_capacity', default=1000000, type=int)
     # train
-    parser.add_argument('--agent', default='sac_ae', type=str)
+    parser.add_argument('--agent', default='sac_ae', choices=['sac_ae', 'ppo'])
     parser.add_argument('--init_steps', default=1000, type=int)
-    parser.add_argument('--num_train_steps', default=200000, type=int)
-    parser.add_argument('--batch_size', default=128, type=int)
-    parser.add_argument('--hidden_dim', default=1024, type=int)
+    parser.add_argument('--num_train_steps', default=1000000, type=int)
+    parser.add_argument('--batch_size', default=256, type=int)
+    parser.add_argument('--hidden_dim', default=256, type=int)
     # eval
-    parser.add_argument('--eval_freq', default=4000, type=int)
-    parser.add_argument('--num_eval_episodes', default=1, type=int)
+    parser.add_argument('--eval_freq', default=10000, type=int)
+    parser.add_argument('--num_eval_episodes', default=10, type=int)
     # critic
     parser.add_argument('--critic_lr', default=1e-3, type=float)
     parser.add_argument('--critic_beta', default=0.9, type=float)
@@ -55,6 +56,16 @@ def parse_args():
     parser.add_argument('--actor_log_std_min', default=-10, type=float)
     parser.add_argument('--actor_log_std_max', default=2, type=float)
     parser.add_argument('--actor_update_freq', default=1, type=int)
+    # PPO (shared actor/critic learning rates, hidden_dim, batch_size, discount)
+    parser.add_argument('--rollout_steps', default=2048, type=int)
+    parser.add_argument('--ppo_epochs', default=10, type=int)
+    parser.add_argument('--gae_lambda', default=0.95, type=float)
+    parser.add_argument('--ppo_clip', default=0.2, type=float)
+    parser.add_argument('--entropy_coef', default=0.0, type=float)
+    parser.add_argument('--value_coef', default=0.5, type=float)
+    parser.add_argument('--max_grad_norm', default=0.5, type=float)
+    parser.add_argument('--target_kl', default=0.03, type=float,
+                        help='PPO early-stop KL threshold; 0 disables it')
     # encoder/decoder
     # parser.add_argument('--encoder_type', default='pixel', type=str)
     parser.add_argument('--encoder_type', default='identity', type=str)
@@ -76,14 +87,16 @@ def parse_args():
     parser.add_argument('--alpha_lr', default=1e-4, type=float)
     parser.add_argument('--alpha_beta', default=0.5, type=float)
     # misc
-    parser.add_argument('--seed', default=3, type=int)
+    parser.add_argument('--seed', default=1, type=int)
     # parser.add_argument('--work_dir', default='./hand_log/gripper_sparse2', type=str)
-    parser.add_argument('--work_dir', default='./multiact_cartpole_log/test', type=str)
+    parser.add_argument('--work_dir', default='./cheetah', type=str)
 
     parser.add_argument('--save_tb', default=True, action='store_true')
-    parser.add_argument('--save_model', default=False, action='store_true')
-    parser.add_argument('--save_buffer', default=False, action='store_true')
-    parser.add_argument('--save_video', default=False, action='store_true')
+    parser.add_argument('--save_model', default=True, action='store_true')
+    parser.add_argument('--save_buffer', default=True, action='store_true')
+    parser.add_argument('--save_video', default=True, action='store_true')
+    for output in ('tb', 'model', 'buffer', 'video'):
+        parser.add_argument('--no_save_' + output, dest='save_' + output, action='store_false')
     parser.add_argument('--gpu_choice', default=0, type=int)
     parser.add_argument('--gym_env', default=False, action='store_true')
     parser.add_argument('--time_rev', default=False, type=bool)
@@ -95,6 +108,25 @@ def parse_args():
     # parser.add_argument('--reset_agent_aftersteps', default=False, action='store_true')
 
     args = parser.parse_args()
+    if args.agent == 'ppo':
+        if args.encoder_type != 'identity' or args.decoder_type != 'identity':
+            parser.error('PPO supports only identity encoder/decoder (state observations).')
+        if args.time_rev or args.prioritized_replay or args.gym_env:
+            parser.error('PPO currently supports standard dmc2gym rollouts without time reversal or replay.')
+        for name in ('rollout_steps', 'ppo_epochs', 'batch_size', 'hidden_dim',
+                     'num_train_steps', 'eval_freq', 'num_eval_episodes', 'action_repeat'):
+            if getattr(args, name) <= 0:
+                parser.error('--{} must be positive for PPO'.format(name))
+        if not 0 <= args.discount <= 1 or not 0 <= args.gae_lambda <= 1:
+            parser.error('--discount and --gae_lambda must be between 0 and 1')
+        if not 0 < args.ppo_clip < 1:
+            parser.error('--ppo_clip must be between 0 and 1')
+        if args.actor_log_std_min > args.actor_log_std_max:
+            parser.error('--actor_log_std_min must not exceed --actor_log_std_max')
+        if min(args.actor_lr, args.critic_lr, args.value_coef, args.max_grad_norm) <= 0:
+            parser.error('PPO learning rates, value coefficient and gradient norm must be positive')
+        if args.entropy_coef < 0 or args.target_kl < 0:
+            parser.error('--entropy_coef and --target_kl must be nonnegative')
     return args
 
 def conjugate_obs(obs, next_obs, args):
@@ -200,12 +232,13 @@ def conjugate_obs(obs, next_obs, args):
 
 
 def evaluate(env, agent, video, num_episodes, L, step, args):
+    episode_rewards = []
     for i in range(num_episodes):
         if args.gym_env == True:
             obs, _ = env.reset()
         else:
             obs = env.reset()
-        video.init(enabled=(i == 1))
+        video.init(enabled=(i == 0))
         done = False
         episode_reward = 0
         # step_in_ep = 0
@@ -228,11 +261,24 @@ def evaluate(env, agent, video, num_episodes, L, step, args):
             episode_reward += reward
 
         video.save('%d.mp4' % step)
-        L.log('eval/episode_reward', episode_reward, step)
+        episode_rewards.append(episode_reward)
+    L.log('eval/episode_reward', float(np.mean(episode_rewards)), step)
     L.dump(step)
 
 
 def make_agent(obs_shape, action_shape, args, device):
+    if args.agent == 'ppo':
+        return PPOAgent(
+            obs_shape=obs_shape, action_shape=action_shape, device=device,
+            hidden_dim=args.hidden_dim, discount=args.discount,
+            actor_lr=args.actor_lr, critic_lr=args.critic_lr,
+            actor_beta=args.actor_beta, critic_beta=args.critic_beta,
+            actor_log_std_min=args.actor_log_std_min,
+            actor_log_std_max=args.actor_log_std_max,
+            batch_size=args.batch_size, gae_lambda=args.gae_lambda,
+            clip_ratio=args.ppo_clip, update_epochs=args.ppo_epochs,
+            entropy_coef=args.entropy_coef, value_coef=args.value_coef,
+            max_grad_norm=args.max_grad_norm, target_kl=args.target_kl)
     if args.agent == 'sac_ae':
         return SacAeAgent(
             obs_shape=obs_shape,
@@ -268,7 +314,66 @@ def make_agent(obs_shape, action_shape, args, device):
             total_timesteps=args.num_train_steps
         )
     else:
-        assert 'agent is not supported: %s' % args.agent
+        raise ValueError('agent is not supported: %s' % args.agent)
+
+
+def train_ppo(env, agent, args, video, model_dir, buffer_dir):
+    # dmc2gym's registration key includes the seed; use a distinct key for eval.
+    eval_env = dmc2gym.make(
+        domain_name=args.domain_name, task_name=args.task_name,
+        seed=args.seed + 10000, visualize_reward=False, from_pixels=False,
+        frame_skip=args.action_repeat, time_rev=False)
+    logger = Logger(args.work_dir, use_tb=args.save_tb, config='ppo')
+    rollout = RolloutBuffer(env.observation_space.shape, env.action_space.shape,
+                           min(args.rollout_steps, args.num_train_steps))
+    episode = episode_steps = 0
+    episode_reward = 0.0
+    start_time = time.time()
+    try:
+        obs = env.reset()
+        evaluate(eval_env, agent, video, args.num_eval_episodes, logger, 0, args)
+        for step in range(1, args.num_train_steps + 1):
+            action, raw_action, log_prob, value = agent.act(obs)
+            next_obs, reward, done, info = env.step(action)
+            # dm_control supplies discount=1 for timeouts and 0 for termination.
+            # The Gym TimeLimit wrapper can also truncate an otherwise live task.
+            env_discount = info.get('discount')
+            if env_discount is None:
+                env_discount = float(not done or info.get('TimeLimit.truncated', False))
+            next_value = agent.value(next_obs) if env_discount else 0.0
+            rollout.add(obs, raw_action, log_prob, reward, value, next_value,
+                        env_discount, done)
+            episode_reward += reward
+            episode_steps += 1
+            obs = next_obs
+            if done:
+                episode += 1
+                logger.log('train/episode', episode, step)
+                logger.log('train/episode_reward', episode_reward, step)
+                logger.log('train/episode_length', episode_steps, step)
+                logger.log('train/duration', time.time() - start_time, step)
+                logger.dump(step)
+                obs = env.reset()
+                episode_reward = 0.0
+                episode_steps = 0
+                start_time = time.time()
+
+            if rollout.size == rollout.capacity or step == args.num_train_steps:
+                agent.update(rollout, logger, step)
+                logger.dump(step)
+                if args.save_buffer:
+                    rollout.save(buffer_dir)
+                rollout.clear()
+
+            if step % args.eval_freq == 0 or step == args.num_train_steps:
+                logger.log('eval/episode', episode, step)
+                evaluate(eval_env, agent, video, args.num_eval_episodes, logger, step, args)
+                if args.save_model:
+                    agent.save(model_dir, step)
+    finally:
+        logger.close()
+        eval_env.close()
+        env.close()
 
 
 def main():
@@ -343,7 +448,7 @@ def main():
         if args.gym_env == True:
             env = FlattenObservation(env)
 
-    utils.make_dir(args.work_dir)
+    os.makedirs(args.work_dir, exist_ok=True)
     video_dir = utils.make_dir(os.path.join(args.work_dir, 'video'))
     model_dir = utils.make_dir(os.path.join(args.work_dir, 'model'))
     buffer_dir = utils.make_dir(os.path.join(args.work_dir, 'buffer'))
@@ -362,11 +467,16 @@ def main():
     print('Using device ', device)
     if torch.cuda.is_available():
         torch.cuda.set_device(args.gpu_choice)
-    print("Using device number", torch.cuda.current_device())
+        print("Using device number", torch.cuda.current_device())
 
     # the dmc2gym wrapper standardizes actions
     assert env.action_space.low.min() >= -1
     assert env.action_space.high.max() <= 1
+
+    if args.agent == 'ppo':
+        agent = make_agent(env.observation_space.shape, env.action_space.shape, args, device)
+        train_ppo(env, agent, args, video, model_dir, buffer_dir)
+        return
 
     # if args.time_rev:
     #     replay_buffer = utils.TsymReplayBuffer(
