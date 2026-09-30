@@ -57,7 +57,7 @@ def parse_args():
     parser.add_argument('--actor_log_std_max', default=2, type=float)
     parser.add_argument('--actor_update_freq', default=1, type=int)
     # PPO (shared actor/critic learning rates, hidden_dim, batch_size, discount)
-    parser.add_argument('--rollout_steps', default=2048, type=int)
+    parser.add_argument('--rollout_steps', default=1000, type=int)
     parser.add_argument('--ppo_epochs', default=10, type=int)
     parser.add_argument('--gae_lambda', default=0.95, type=float)
     parser.add_argument('--ppo_clip', default=0.2, type=float)
