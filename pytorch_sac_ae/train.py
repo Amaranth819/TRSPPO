@@ -19,6 +19,7 @@ from video import VideoRecorder
 
 from sac_ae import SacAeAgent
 from ppo import PPOAgent, RolloutBuffer
+from trsppo import TRSPPOAgent, TRSPPORolloutBuffer, get_time_reversal_spec
 # import custom_env
 
 def parse_args():
@@ -36,7 +37,7 @@ def parse_args():
     # replay buffer
     parser.add_argument('--replay_buffer_capacity', default=1000000, type=int)
     # train
-    parser.add_argument('--agent', default='sac_ae', choices=['sac_ae', 'ppo'])
+    parser.add_argument('--agent', default='sac_ae', choices=['sac_ae', 'ppo', 'trsppo'])
     parser.add_argument('--init_steps', default=1000, type=int)
     parser.add_argument('--num_train_steps', default=1000000, type=int)
     parser.add_argument('--batch_size', default=256, type=int)
@@ -66,6 +67,8 @@ def parse_args():
     parser.add_argument('--max_grad_norm', default=0.5, type=float)
     parser.add_argument('--target_kl', default=0.03, type=float,
                         help='PPO early-stop KL threshold; 0 disables it')
+    parser.add_argument('--tr_policy_coef', default=0.1, type=float,
+                        help='TRSPPO actor consistency weight; 0 recovers vanilla PPO')
     # encoder/decoder
     # parser.add_argument('--encoder_type', default='pixel', type=str)
     parser.add_argument('--encoder_type', default='identity', type=str)
@@ -108,11 +111,11 @@ def parse_args():
     # parser.add_argument('--reset_agent_aftersteps', default=False, action='store_true')
 
     args = parser.parse_args()
-    if args.agent == 'ppo':
+    if args.agent in ('ppo', 'trsppo'):
         if args.encoder_type != 'identity' or args.decoder_type != 'identity':
             parser.error('PPO supports only identity encoder/decoder (state observations).')
         if args.time_rev or args.prioritized_replay or args.gym_env:
-            parser.error('PPO currently supports standard dmc2gym rollouts without time reversal or replay.')
+            parser.error('PPO agents require standard dmc2gym rollouts; --time_rev enables SAC replay augmentation.')
         for name in ('rollout_steps', 'ppo_epochs', 'batch_size', 'hidden_dim',
                      'num_train_steps', 'eval_freq', 'num_eval_episodes', 'action_repeat'):
             if getattr(args, name) <= 0:
@@ -127,6 +130,16 @@ def parse_args():
             parser.error('PPO learning rates, value coefficient and gradient norm must be positive')
         if args.entropy_coef < 0 or args.target_kl < 0:
             parser.error('--entropy_coef and --target_kl must be nonnegative')
+    if args.agent == 'trsppo':
+        try:
+            spec = get_time_reversal_spec(args.domain_name)
+        except ValueError as error:
+            parser.error(str(error))
+        if args.task_name not in spec.tasks:
+            parser.error('TRSPPO supports these {} tasks: {}.'
+                         .format(args.domain_name, ', '.join(spec.tasks)))
+        if not math.isfinite(args.tr_policy_coef) or args.tr_policy_coef < 0:
+            parser.error('--tr_policy_coef must be finite and nonnegative')
     return args
 
 def conjugate_obs(obs, next_obs, args):
@@ -267,8 +280,11 @@ def evaluate(env, agent, video, num_episodes, L, step, args):
 
 
 def make_agent(obs_shape, action_shape, args, device):
-    if args.agent == 'ppo':
-        return PPOAgent(
+    if args.agent in ('ppo', 'trsppo'):
+        agent_class = TRSPPOAgent if args.agent == 'trsppo' else PPOAgent
+        agent_kwargs = ({'tr_policy_coef': args.tr_policy_coef, 'domain_name': args.domain_name}
+                        if args.agent == 'trsppo' else {})
+        return agent_class(
             obs_shape=obs_shape, action_shape=action_shape, device=device,
             hidden_dim=args.hidden_dim, discount=args.discount,
             actor_lr=args.actor_lr, critic_lr=args.critic_lr,
@@ -278,7 +294,7 @@ def make_agent(obs_shape, action_shape, args, device):
             batch_size=args.batch_size, gae_lambda=args.gae_lambda,
             clip_ratio=args.ppo_clip, update_epochs=args.ppo_epochs,
             entropy_coef=args.entropy_coef, value_coef=args.value_coef,
-            max_grad_norm=args.max_grad_norm, target_kl=args.target_kl)
+            max_grad_norm=args.max_grad_norm, target_kl=args.target_kl, **agent_kwargs)
     if args.agent == 'sac_ae':
         return SacAeAgent(
             obs_shape=obs_shape,
@@ -323,8 +339,9 @@ def train_ppo(env, agent, args, video, model_dir, buffer_dir):
         domain_name=args.domain_name, task_name=args.task_name,
         seed=args.seed + 10000, visualize_reward=False, from_pixels=False,
         frame_skip=args.action_repeat, time_rev=False)
-    logger = Logger(args.work_dir, use_tb=args.save_tb, config='ppo')
-    rollout = RolloutBuffer(env.observation_space.shape, env.action_space.shape,
+    logger = Logger(args.work_dir, use_tb=args.save_tb, config=args.agent)
+    buffer_class = TRSPPORolloutBuffer if args.agent == 'trsppo' else RolloutBuffer
+    rollout = buffer_class(env.observation_space.shape, env.action_space.shape,
                            min(args.rollout_steps, args.num_train_steps))
     episode = episode_steps = 0
     episode_reward = 0.0
@@ -341,8 +358,9 @@ def train_ppo(env, agent, args, video, model_dir, buffer_dir):
             if env_discount is None:
                 env_discount = float(not done or info.get('TimeLimit.truncated', False))
             next_value = agent.value(next_obs) if env_discount else 0.0
+            transition_kwargs = {'next_obs': next_obs} if args.agent == 'trsppo' else {}
             rollout.add(obs, raw_action, log_prob, reward, value, next_value,
-                        env_discount, done)
+                        env_discount, done, **transition_kwargs)
             episode_reward += reward
             episode_steps += 1
             obs = next_obs
@@ -473,7 +491,7 @@ def main():
     assert env.action_space.low.min() >= -1
     assert env.action_space.high.max() <= 1
 
-    if args.agent == 'ppo':
+    if args.agent in ('ppo', 'trsppo'):
         agent = make_agent(env.observation_space.shape, env.action_space.shape, args, device)
         train_ppo(env, agent, args, video, model_dir, buffer_dir)
         return

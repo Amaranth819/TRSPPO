@@ -114,6 +114,8 @@ class GaussianActor(nn.Module):
 
 
 class PPOAgent:
+    checkpoint_prefix = 'ppo'
+
     def __init__(self, obs_shape, action_shape, device, hidden_dim=256,
                  discount=0.99, actor_lr=1e-3, critic_lr=1e-3,
                  actor_beta=0.9, critic_beta=0.9,
@@ -171,6 +173,10 @@ class PPOAgent:
     def value(self, obs):
         return self.critic(self._obs_tensor(obs)).item()
 
+    def _auxiliary_actor_loss(self, batch, indices):
+        """Hook for actor regularizers; vanilla PPO has no additional loss."""
+        return batch['obs'].new_zeros(()), {}
+
     def update(self, rollout, logger=None, step=0):
         batch = rollout.batch(self.discount, self.gae_lambda, self.device)
         advantages = batch['advantages']
@@ -202,8 +208,10 @@ class PPOAgent:
                 predicted_values = self.critic(batch['obs'][idx]).squeeze(-1)
                 critic_loss = F.mse_loss(predicted_values, batch['returns'][idx])
 
+                auxiliary_loss, auxiliary_metrics = self._auxiliary_actor_loss(batch, idx)
+                actor_total_loss = actor_loss - self.entropy_coef * entropy + auxiliary_loss
                 self.actor_optimizer.zero_grad(set_to_none=True)
-                (actor_loss - self.entropy_coef * entropy).backward()
+                actor_total_loss.backward()
                 nn.utils.clip_grad_norm_(self.actor.parameters(), self.max_grad_norm)
                 self.actor_optimizer.step()
                 self.critic_optimizer.zero_grad(set_to_none=True)
@@ -215,8 +223,11 @@ class PPOAgent:
                 metrics = dict(actor_loss=actor_loss.item(), critic_loss=critic_loss.item(),
                                entropy=entropy.item(), approx_kl=approx_kl.item(),
                                clip_fraction=((ratio - 1).abs() > self.clip_ratio).float().mean().item())
+                if auxiliary_metrics:
+                    metrics.update(auxiliary_metrics)
+                    metrics['actor_total_loss'] = actor_total_loss.item()
                 for key, value in metrics.items():
-                    totals[key] += count * value
+                    totals[key] = totals.get(key, 0.0) + count * value
                 samples += count
                 updates += 1
             if early_stop:
@@ -240,10 +251,10 @@ class PPOAgent:
         torch.save(dict(step=step, actor=self.actor.state_dict(), critic=self.critic.state_dict(),
                         actor_optimizer=self.actor_optimizer.state_dict(),
                         critic_optimizer=self.critic_optimizer.state_dict()),
-                   os.path.join(model_dir, 'ppo_{}.pt'.format(step)))
+                   os.path.join(model_dir, '{}_{}.pt'.format(self.checkpoint_prefix, step)))
 
     def load(self, model_dir, step):
-        checkpoint = torch.load(os.path.join(model_dir, 'ppo_{}.pt'.format(step)),
+        checkpoint = torch.load(os.path.join(model_dir, '{}_{}.pt'.format(self.checkpoint_prefix, step)),
                                 map_location=self.device)
         self.actor.load_state_dict(checkpoint['actor'])
         self.critic.load_state_dict(checkpoint['critic'])

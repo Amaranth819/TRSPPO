@@ -103,7 +103,7 @@ Shared arguments include `hidden_dim`, `batch_size`, `discount`, `actor_lr`,
 
 | PPO argument | Default | Meaning |
 | --- | --- | --- |
-| `--rollout_steps` | 2048 | Agent steps collected before updating |
+| `--rollout_steps` | 1000 | Agent steps collected before updating |
 | `--ppo_epochs` | 10 | Maximum passes over each rollout |
 | `--gae_lambda` | 0.95 | GAE trace decay |
 | `--ppo_clip` | 0.2 | Policy probability-ratio clipping range |
@@ -114,8 +114,8 @@ Shared arguments include `hidden_dim`, `batch_size`, `discount`, `actor_lr`,
 
 PPO does not use SAC's `init_steps`, replay capacity, target-network settings,
 update-frequency settings, or temperature settings. Pixel encoders/decoders,
-prioritized replay, time reversal, and `gym_env` are rejected for this initial
-PPO implementation. Training starts with policy samples, without random warmup.
+prioritized replay, SAC replay augmentation (`--time_rev`), and `gym_env` are
+rejected by the PPO training path. Training starts with policy samples, without random warmup.
 
 `num_train_steps`, `rollout_steps` and logged steps count agent actions. With
 `action_repeat=4`, each action sums up to four environment rewards. Evaluation
@@ -146,11 +146,105 @@ Checkpoints can be loaded with `PPOAgent.load(model_dir, step)` into an agent
 constructed with the same network settings. This restores networks and
 optimizers; it does not resume environment state or an in-progress rollout.
 
-To run the focused PPO tests from the repository root:
+To run the focused PPO/TRSPPO tests from the repository root:
 
 ```bash
-python -m unittest discover -s pytorch_sac_ae -p test_ppo.py -v
+python -m unittest discover -s pytorch_sac_ae -p test_trsppo.py -v
 ```
+
+## Actor-only TRSPPO
+
+`--agent trsppo` adds time-reversal actor consistency to the existing PPO update.
+The actor and critic use the same two-layer MLPs as vanilla PPO and take one
+state observation per action. Supported tasks and flattened observation mappings:
+
+| Domain / task | Observation dim | Action dim | Preserved features | Negated velocities |
+| --- | --- | --- | --- | --- |
+| `cheetah/run`, `cheetah/bidirectional` | 17 | 6 | `0:8` positions | `8:17` |
+| `acrobot/swingup` | 6 | 1 | `0:4` arm orientations | `4:6` |
+| `cartpole/swingup` | 5 | 1 | `0` cart position, `1:3` pole cosine/sine | `3:5` |
+| `walker/stand`, `walker/walk`, `walker/run` | 24 | 6 | `0:14` body orientations, `14` torso height | `15:24` |
+| `hopper/stand`, `hopper/hop` | 15 | 4 | `0:6` positions, `13:15` touch readings | `6:13` |
+
+Slices use Python's zero-based, end-exclusive convention. All motor controls
+retain their signs and ordering. Orientation sine/cosine features remain
+unchanged; walker does not swap legs. The agent selects a mapping by
+`domain_name` and validates observation/action dimensions.
+
+Cartpole's single action applies force to the cart and is unchanged by the
+mapping. Only the single-pole `swingup` task is currently registered for TRSPPO;
+multi-pole tasks have different observation dimensions and are rejected.
+
+Hopper's actions control waist, hip, knee and ankle torques. Its toe and heel
+touch features are log-transformed force readings. Preserving them is an
+approximation: recomputing contact forces after reversing velocities can change
+these readings. The mapping does not claim exact reversal of the full simulated
+observation or dynamics.
+
+```bash
+python -u train.py --agent trsppo \
+    --domain_name cheetah --task_name bidirectional --action_repeat 4 \
+    --tr_policy_coef 0.1 --num_train_steps 1000000 --seed 1 \
+    --work_dir ./logs/cheetah_bidirectional/trsppo/1 --save_tb --save_video
+```
+
+To use the other supported tasks, set `--domain_name acrobot --task_name swingup`,
+`--domain_name cartpole --task_name swingup`,
+`--domain_name walker` with `--task_name stand`, `walk`, or `run`, or
+`--domain_name hopper` with `--task_name stand` or `hop`. Use a separate
+`--work_dir` for each experiment. The same PPO/TRSPPO hyperparameters and logging
+options apply.
+
+For each real transition `(obs, action, reward, next_obs)`, `T(obs)` uses the
+mapping in the table above. The actor's deterministic action is
+`f(obs) = tanh(actor_mean(obs))`. The auxiliary loss is:
+
+```text
+tr_policy_loss = mean((f(T(next_obs)) - stop_gradient(f(obs))) ** 2)
+actor_total_loss = actor_loss - entropy_coef * entropy + tr_policy_coef * tr_policy_loss
+```
+
+The mean includes valid transitions and all action components (1 for
+acrobot/cartpole, 4 for hopper, 6 for cheetah/walker). The target
+is recomputed by the current actor with gradients detached for each minibatch;
+it is not the stored sampled action. Only the reversed-next-observation branch
+receives the consistency gradient. The critic fits ordinary GAE returns, and
+PPO probabilities/returns/advantages are computed only from the real rollout.
+No value-symmetry loss, observation history, or TR warmup is used.
+
+`TRSPPORolloutBuffer` stores the actual next observation before an environment
+reset and keeps it paired with the original observation during shuffling. Both
+terminal and time-limit transitions are conservatively excluded from the TR
+loss; they remain in PPO training, including timeout bootstrapping. A minibatch
+with no eligible transitions contributes zero TR loss.
+
+`--tr_policy_coef` defaults to **0.1**. Set it to `0` for an ablation that has
+vanilla PPO's parameter updates; the unweighted symmetry error is still logged
+without gradients. All existing PPO settings, including the current
+`rollout_steps=1000` default, apply. Do not pass `--time_rev`: that flag belongs
+to SAC's synthetic replay augmentation.
+
+TRSPPO saves the usual training/evaluation logs, TensorBoard events, videos and
+configuration. Additional training scalars are `tr_policy_loss`,
+`tr_policy_loss_weighted`, `tr_valid_pair_fraction`, and `actor_total_loss`.
+Update logs average minibatch diagnostics, weighted by minibatch size; each
+minibatch's TR loss is averaged over its valid pairs. Checkpoints use
+`model/trsppo_<step>.pt` and restore through `TRSPPOAgent.load(model_dir, step)`.
+Construct the agent with the `domain_name`, network settings and coefficient in
+`args.json`. Omitting `domain_name` retains the original cheetah default.
+The optional `buffer/rollout.npz` snapshot additionally includes `next_obs`.
+
+Use the same observations, PPO hyperparameters, interaction budget and seeds
+for PPO/TRSPPO comparisons. Acrobot swingup, cartpole swingup, walker stand and
+hopper stand have instantaneous rewards invariant to velocity reversal with
+controls held fixed.
+Walker walk/run and hopper hop reward forward speed, so their rewards are not
+invariant to velocity reversal. The local acrobot model has zero joint damping
+and disabled constraints; numerical integration still limits trajectory reversal
+accuracy. Cartpole includes small joint damping and a cart travel limit.
+Walker, cheetah and hopper also include dissipative dynamics, so the
+consistency relation is an experimental inductive bias rather than an exact
+dynamics identity.
 
 ## Results
 Our method demonstrates significantly improved performance over the baseline SAC:pixel. It matches the state-of-the-art performance of model-based algorithms, such as PlaNet (Hafner et al., 2018) and SLAC (Lee et al., 2019), as well

@@ -32,6 +32,17 @@ FORMAT_CONFIG['ppo'] = {
 }
 
 
+FORMAT_CONFIG['trsppo'] = {
+    'train': FORMAT_CONFIG['ppo']['train'] + [
+        ('tr_policy_loss', 'TR', 'float'),
+        ('tr_policy_loss_weighted', 'WTR', 'float'),
+        ('tr_valid_pair_fraction', 'VALID', 'float'),
+        ('actor_total_loss', 'ATOTAL', 'float')
+    ],
+    'eval': FORMAT_CONFIG['ppo']['eval']
+}
+
+
 class AverageMeter(object):
     def __init__(self):
         self._sum = 0
@@ -117,7 +128,7 @@ class Logger(object):
         self._train_mg = MetersGroup(
             os.path.join(log_dir, 'train.log'),
             formating=FORMAT_CONFIG[config]['train'],
-            skip_missing=(config == 'ppo')
+            skip_missing=(config in ('ppo', 'trsppo'))
         )
         self._eval_mg = MetersGroup(
             os.path.join(log_dir, 'eval.log'),
