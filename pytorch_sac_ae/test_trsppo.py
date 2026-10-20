@@ -12,7 +12,24 @@ import numpy as np
 import torch
 
 from ppo import PPOAgent, RolloutBuffer
-from trsppo import TRSPPOAgent, TRSPPORolloutBuffer, reverse_action, reverse_observation
+from trsppo import (TRSPPOAgent, TRSPPORolloutBuffer, get_time_reversal_spec,
+                    reverse_action, reverse_observation)
+
+
+# Expected layouts are independent of the production mapping registry.
+# None exercises the existing domain-only API.
+MAPPING_CASES = (
+    ('cheetah', None, 17, 6, ((8, 17),)),
+    ('acrobot', None, 6, 1, ((4, 6),)),
+    ('cartpole', None, 5, 1, ((3, 5),)),
+    ('walker', None, 24, 6, ((15, 24),)),
+    ('hopper', None, 15, 4, ((6, 13),)),
+    ('pendulum', 'two_poles', 6, 2, ((4, 6),)),
+    ('pendulum', 'three_poles', 9, 3, ((6, 9),)),
+    ('finger', 'spin', 9, 2, ((4, 7),)),
+    ('quadruped', 'walk', 78, 12, ((16, 32), (44, 47), (51, 54))),
+    ('reacher', 'hard', 6, 2, ((4, 6),)),
+)
 
 
 class TRSPPOTests(unittest.TestCase):
@@ -39,28 +56,26 @@ class TRSPPOTests(unittest.TestCase):
         return plain, paired
 
     def test_mapping_preserves_configuration_and_reverses_every_velocity(self):
-        for domain, obs_dim, action_dim, velocity_start, velocity_stop in (
-                ('cheetah', 17, 6, 8, 17), ('acrobot', 6, 1, 4, 6),
-                ('cartpole', 5, 1, 3, 5),
-                ('walker', 24, 6, 15, 24), ('hopper', 15, 4, 6, 13)):
-            with self.subTest(domain=domain):
+        for domain, task, obs_dim, action_dim, velocity_ranges in MAPPING_CASES:
+            with self.subTest(domain=domain, task=task):
                 obs = torch.arange(1., 6 * obs_dim + 1).reshape(2, 3, obs_dim)
                 original = obs.clone()
-                transformed = reverse_observation(obs, domain)
-                torch.testing.assert_close(transformed[..., :velocity_start], original[..., :velocity_start])
-                velocities = slice(velocity_start, velocity_stop)
+                transformed = reverse_observation(obs, domain, task)
+                velocities = torch.zeros(obs_dim, dtype=torch.bool)
+                for start, stop in velocity_ranges:
+                    velocities[start:stop] = True
                 torch.testing.assert_close(transformed[..., velocities], -original[..., velocities])
-                torch.testing.assert_close(transformed[..., velocity_stop:], original[..., velocity_stop:])
-                torch.testing.assert_close(reverse_observation(transformed, domain), original)
+                torch.testing.assert_close(transformed[..., ~velocities], original[..., ~velocities])
+                torch.testing.assert_close(reverse_observation(transformed, domain, task), original)
                 torch.testing.assert_close(obs, original)
                 self.assertNotEqual(obs.data_ptr(), transformed.data_ptr())
                 action = torch.linspace(-1, 1, action_dim)
-                torch.testing.assert_close(reverse_action(action, domain), action)
-                self.assertNotEqual(reverse_action(action, domain).data_ptr(), action.data_ptr())
+                torch.testing.assert_close(reverse_action(action, domain, task), action)
+                self.assertNotEqual(reverse_action(action, domain, task).data_ptr(), action.data_ptr())
                 with self.assertRaises(ValueError):
-                    reverse_observation(torch.zeros(obs_dim + 1), domain)
+                    reverse_observation(torch.zeros(obs_dim + 1), domain, task)
                 with self.assertRaises(ValueError):
-                    reverse_action(torch.zeros(action_dim + 1), domain)
+                    reverse_action(torch.zeros(action_dim + 1), domain, task)
         # Existing callers retain the cheetah mapping without a new argument.
         obs = torch.arange(17.)
         torch.testing.assert_close(reverse_observation(obs), reverse_observation(obs, 'cheetah'))
@@ -74,7 +89,10 @@ class TRSPPOTests(unittest.TestCase):
         for domain, task in (('acrobot', 'swingup'), ('cartpole', 'swingup'),
                              ('walker', 'stand'),
                              ('walker', 'walk'), ('walker', 'run'),
-                             ('hopper', 'stand'), ('hopper', 'hop')):
+                             ('hopper', 'stand'), ('hopper', 'hop'),
+                             ('pendulum', 'two_poles'), ('pendulum', 'three_poles'),
+                             ('finger', 'spin'), ('quadruped', 'walk'),
+                             ('reacher', 'hard')):
             with self.subTest(domain=domain, task=task):
                 env = suite.load(domain, task, task_kwargs={'random': 7})
                 try:
@@ -83,53 +101,85 @@ class TRSPPOTests(unittest.TestCase):
                         physics = env.physics
                         position = physics.data.qpos.copy()
                         velocity = np.linspace(-1.3, 2.1, physics.model.nv)
+                        if domain == 'finger':
+                            # Cross the reward threshold to check asymmetry.
+                            hinge_id = physics.model.name2id('hinge', 'joint')
+                            velocity[physics.model.jnt_dofadr[hinge_id]] = -20.
                         with physics.reset_context():
                             physics.data.qpos[:] = position
                             physics.data.qvel[:] = velocity
-                            # Exercise cartpole's control penalty at nonzero force.
-                            if domain == 'cartpole':
-                                physics.data.ctrl[:] = .3
+                            if domain == 'quadruped':
+                                physics.data.act[:] = .15
+                            # Exercise control penalties at nonzero force/torque.
+                            physics.data.ctrl[:] = .3
                         obs = _flatten_obs(env.task.get_observation(physics))
                         reward = env.task.get_reward(physics)
                         control = physics.data.ctrl.copy()
+                        activation = physics.data.act.copy()
                         with physics.reset_context():
                             physics.data.qpos[:] = position
                             physics.data.qvel[:] = -velocity
                             physics.data.ctrl[:] = control
+                            physics.data.act[:] = activation
                         expected = _flatten_obs(env.task.get_observation(physics))
-                        reversed_obs = reverse_observation(torch.as_tensor(obs), domain).numpy()
-                        if domain == 'hopper':
+                        reversed_obs = reverse_observation(torch.as_tensor(obs), domain, task).numpy()
+                        if domain in ('hopper', 'finger'):
                             # Compare mechanical features with the simulator.
                             # Preserved touch readings are an approximation,
                             # not necessarily the recomputed contact forces.
-                            self.assertEqual(obs.shape, (15,))
-                            self.assertEqual(env.action_spec().shape, (4,))
-                            np.testing.assert_allclose(reversed_obs[:13], expected[:13], rtol=0, atol=1e-12)
-                            np.testing.assert_array_equal(reversed_obs[13:], obs[13:])
+                            obs_dim, action_dim, touch_start = (
+                                (15, 4, 13) if domain == 'hopper' else (9, 2, 7))
+                            self.assertEqual(obs.shape, (obs_dim,))
+                            self.assertEqual(env.action_spec().shape, (action_dim,))
+                            np.testing.assert_allclose(reversed_obs[:touch_start], expected[:touch_start],
+                                                       rtol=0, atol=1e-12)
+                            np.testing.assert_array_equal(reversed_obs[touch_start:], obs[touch_start:])
+                        elif domain == 'quadruped':
+                            self.assertEqual(obs.shape, (78,))
+                            self.assertEqual(env.action_spec().shape, (12,))
+                            mechanical = np.r_[0:48, 51:54]
+                            sensors = np.r_[48:51, 54:78]
+                            np.testing.assert_allclose(reversed_obs[mechanical], expected[mechanical],
+                                                       rtol=0, atol=1e-12)
+                            # These acceleration/force readings are deliberately
+                            # preserved, not recomputed by a dissipative simulator.
+                            np.testing.assert_array_equal(reversed_obs[sensors], obs[sensors])
                         else:
                             np.testing.assert_allclose(reversed_obs, expected, rtol=0, atol=1e-12)
                         if (domain, task) in (('acrobot', 'swingup'), ('cartpole', 'swingup'),
+                                               ('reacher', 'hard'),
                                                ('walker', 'stand'),
-                                               ('hopper', 'stand')):
+                                               ('hopper', 'stand'),
+                                               ('pendulum', 'two_poles'), ('pendulum', 'three_poles')):
                             self.assertAlmostEqual(env.task.get_reward(physics), reward, places=12)
+                        elif domain == 'finger':
+                            self.assertEqual(reward, 1.)
+                            self.assertEqual(env.task.get_reward(physics), 0.)
                 finally:
                     env.close()
 
     def test_loss_uses_next_state_detached_reference_and_action_dimension_mean(self):
-        for domain, obs_dim, action_dim, velocity_start in (
-                ('cheetah', 17, 6, 8), ('acrobot', 6, 1, 4),
-                ('cartpole', 5, 1, 3),
-                ('walker', 24, 6, 15), ('hopper', 15, 4, 6)):
-            with self.subTest(domain=domain):
-                agent = self.agent(obs_dim=obs_dim, action_dim=action_dim, domain_name=domain)
+        for domain, task, obs_dim, action_dim, velocity_ranges in MAPPING_CASES:
+            with self.subTest(domain=domain, task=task):
+                velocity_start, velocity_stop = velocity_ranges[0]
+                agent = self.agent(obs_dim=obs_dim, action_dim=action_dim,
+                                   domain_name=domain, task_name=task)
                 agent.actor.mean = torch.nn.Linear(obs_dim, action_dim, bias=False)
                 with torch.no_grad():
                     agent.actor.mean.weight.zero_()
                     for j in range(action_dim):
                         agent.actor.mean.weight[j, j] = .5
                         agent.actor.mean.weight[j, velocity_start + j] = .25
-                        if domain == 'hopper':
-                            agent.actor.mean.weight[j, 13 + j % 2] = .125
+                        if domain in ('hopper', 'finger'):
+                            agent.actor.mean.weight[j, velocity_stop + j % 2] = .125
+                        if domain == 'finger':
+                            agent.actor.mean.weight[j, 6] = .375
+                        if domain == 'quadruped':
+                            agent.actor.mean.weight[j, 44 + j % 3] = .125
+                            agent.actor.mean.weight[j, 51 + j % 3] = .0625
+                            agent.actor.mean.weight[j, 32 + j] = .125
+                            agent.actor.mean.weight[j, 48 + j % 3] = .0625
+                            agent.actor.mean.weight[j, 54 + j] = .03125
                 obs = torch.arange(3. * obs_dim).reshape(3, obs_dim) / 100
                 next_obs = torch.full((3, obs_dim), .7)
                 # Masked endpoints must not be evaluated: 0 * NaN is still NaN.
@@ -142,10 +192,24 @@ class TRSPPOTests(unittest.TestCase):
                 target = .5 * obs.detach()[valid, :action_dim] + .25 * obs.detach()[valid, velocity]
                 prediction = (.5 * next_obs.detach()[valid, :action_dim] -
                               .25 * next_obs.detach()[valid, velocity])
-                if domain == 'hopper':
-                    touch_indices = [13, 14, 13, 14]
+                if domain in ('hopper', 'finger'):
+                    touch_indices = [velocity_stop + j % 2 for j in range(action_dim)]
                     target += .125 * obs.detach()[valid][:, touch_indices]
                     prediction += .125 * next_obs.detach()[valid][:, touch_indices]
+                if domain == 'finger':
+                    target += .375 * obs.detach()[valid, 6:7]
+                    prediction -= .375 * next_obs.detach()[valid, 6:7]
+                if domain == 'quadruped':
+                    # Exercise all three velocity blocks and interleaved even
+                    # features in the actual actor loss and its gradients.
+                    for indices, weight, sign in (
+                            ([44 + j % 3 for j in range(action_dim)], .125, -1),
+                            ([51 + j % 3 for j in range(action_dim)], .0625, -1),
+                            (list(range(32, 44)), .125, 1),
+                            ([48 + j % 3 for j in range(action_dim)], .0625, 1),
+                            (list(range(54, 66)), .03125, 1)):
+                        target += weight * obs.detach()[valid][:, indices]
+                        prediction += sign * weight * next_obs.detach()[valid][:, indices]
                 target, prediction = target.tanh(), prediction.tanh()
                 expected = (prediction - target).square().sum() / (2 * action_dim)
                 loss = agent.actor_symmetry_loss(obs, next_obs, valid)
@@ -185,13 +249,11 @@ class TRSPPOTests(unittest.TestCase):
             buffer.batch(.9, .95, 'cpu')
 
     def test_zero_coefficient_matches_vanilla_ppo_updates_exactly(self):
-        for domain, obs_dim, action_dim in (('cheetah', 17, 6), ('acrobot', 6, 1),
-                                           ('cartpole', 5, 1),
-                                           ('walker', 24, 6), ('hopper', 15, 4)):
-            with self.subTest(domain=domain):
+        for domain, task, obs_dim, action_dim, _ in MAPPING_CASES:
+            with self.subTest(domain=domain, task=task):
                 plain_agent = self.agent(PPOAgent, obs_dim=obs_dim, action_dim=action_dim, entropy_coef=.01)
                 tr_agent = self.agent(obs_dim=obs_dim, action_dim=action_dim, domain_name=domain,
-                                      tr_policy_coef=0, entropy_coef=.01)
+                                      task_name=task, tr_policy_coef=0, entropy_coef=.01)
                 tr_agent.actor.load_state_dict(plain_agent.actor.state_dict())
                 tr_agent.critic.load_state_dict(plain_agent.critic.state_dict())
                 plain, paired = self.paired_buffers(plain_agent, obs_dim=obs_dim, action_dim=action_dim)
@@ -243,11 +305,10 @@ class TRSPPOTests(unittest.TestCase):
                 self.assertEqual(metrics['tr_policy_loss_weighted'], 0.)
 
     def test_checkpoint_restores_networks_and_optimizers(self):
-        for domain, obs_dim, action_dim in (('cheetah', 17, 6), ('acrobot', 6, 1),
-                                           ('cartpole', 5, 1),
-                                           ('walker', 24, 6), ('hopper', 15, 4)):
-            with self.subTest(domain=domain):
-                settings = dict(obs_dim=obs_dim, action_dim=action_dim, domain_name=domain)
+        for domain, task, obs_dim, action_dim, _ in MAPPING_CASES:
+            with self.subTest(domain=domain, task=task):
+                settings = dict(obs_dim=obs_dim, action_dim=action_dim,
+                                domain_name=domain, task_name=task)
                 agent = self.agent(**settings)
                 _, buffer = self.paired_buffers(agent, obs_dim=obs_dim, action_dim=action_dim)
                 agent.update(buffer)
@@ -272,17 +333,30 @@ class TRSPPOTests(unittest.TestCase):
             TRSPPOAgent((17,), (12,), 'cpu')
 
     def test_agent_rejects_wrong_domain_dimensions(self):
-        for domain, obs_dim, action_dim in (('acrobot', 6, 1), ('cartpole', 5, 1),
-                                           ('walker', 24, 6), ('hopper', 15, 4)):
-            with self.subTest(domain=domain):
+        for domain, task, obs_dim, action_dim, _ in MAPPING_CASES[1:]:
+            with self.subTest(domain=domain, task=task):
+                settings = dict(domain_name=domain, task_name=task)
                 with self.assertRaises(ValueError):
-                    self.agent(obs_dim=obs_dim + 1, action_dim=action_dim, domain_name=domain)
+                    self.agent(obs_dim=obs_dim + 1, action_dim=action_dim, **settings)
                 with self.assertRaises(ValueError):
-                    self.agent(obs_dim=obs_dim, action_dim=action_dim + 1, domain_name=domain)
+                    self.agent(obs_dim=obs_dim, action_dim=action_dim + 1, **settings)
                 with self.assertRaises(ValueError):
-                    self.agent(domain_name=domain)
+                    self.agent(**settings)
         with self.assertRaises(ValueError):
             self.agent(domain_name='unknown')
+
+    def test_pendulum_requires_explicit_supported_task_and_matching_dimensions(self):
+        for task in (None, 'swingup', 'four_poles'):
+            with self.subTest(task=task):
+                with self.assertRaisesRegex(ValueError, 'requires task_name'):
+                    get_time_reversal_spec('pendulum', task)
+                with self.assertRaises(ValueError):
+                    self.agent(obs_dim=6, action_dim=2, domain_name='pendulum', task_name=task)
+        for task, obs_dim, action_dim in (('two_poles', 9, 3), ('three_poles', 6, 2)):
+            with self.subTest(task=task):
+                with self.assertRaises(ValueError):
+                    self.agent(obs_dim=obs_dim, action_dim=action_dim,
+                               domain_name='pendulum', task_name=task)
 
     def test_cli_registers_supported_tasks_and_passes_domain_to_agent(self):
         from train import parse_args, make_agent
@@ -291,6 +365,10 @@ class TRSPPOTests(unittest.TestCase):
                 ('cartpole', 'swingup', 5, 1),
                 ('acrobot', 'swingup', 6, 1), ('walker', 'stand', 24, 6),
                 ('walker', 'walk', 24, 6), ('walker', 'run', 24, 6),
+                ('pendulum', 'two_poles', 6, 2), ('pendulum', 'three_poles', 9, 3),
+                ('finger', 'spin', 9, 2),
+                ('quadruped', 'walk', 78, 12),
+                ('reacher', 'hard', 6, 2),
                 ('hopper', 'stand', 15, 4), ('hopper', 'hop', 15, 4)):
             with self.subTest(domain=domain, task=task):
                 argv = ['train.py', '--agent', 'trsppo', '--domain_name', domain, '--task_name', task]
@@ -303,11 +381,18 @@ class TRSPPOTests(unittest.TestCase):
                 agent = make_agent((obs_dim,), (action_dim,), args, 'cpu')
                 self.assertIsInstance(agent, TRSPPOAgent)
                 self.assertEqual(agent.domain_name, domain)
+                self.assertEqual(agent.task_name, task)
         for extra in (['--domain_name', 'walker', '--task_name', 'unknown'],
                       ['--domain_name', 'hopper', '--task_name', 'run'],
                       ['--domain_name', 'cartpole', '--task_name', 'two_poles'],
                       ['--domain_name', 'cartpole', '--task_name', 'three_poles'],
                       ['--domain_name', 'acrobot', '--task_name', 'swingup_sparse'],
+                      ['--domain_name', 'pendulum'],
+                      ['--domain_name', 'pendulum', '--task_name', 'four_poles'],
+                      ['--domain_name', 'finger', '--task_name', 'turn_easy'],
+                      ['--domain_name', 'quadruped', '--task_name', 'run'],
+                      ['--domain_name', 'quadruped', '--task_name', 'escape'],
+                      ['--domain_name', 'quadruped', '--task_name', 'fetch'],
                       ['--domain_name', 'reacher', '--task_name', 'easy'],
                       ['--task_name', 'unknown'], ['--tr_policy_coef', '-1'],
                       ['--tr_policy_coef', 'nan'], ['--time_rev', 'True']):
@@ -315,6 +400,14 @@ class TRSPPOTests(unittest.TestCase):
                 with contextlib.redirect_stderr(io.StringIO()):
                     with self.assertRaises(SystemExit):
                         parse_args()
+
+    def test_quadruped_requires_explicit_walk_task(self):
+        for task in (None, 'run', 'escape', 'fetch'):
+            with self.subTest(task=task):
+                with self.assertRaisesRegex(ValueError, 'requires task_name'):
+                    get_time_reversal_spec('quadruped', task)
+                with self.assertRaises(ValueError):
+                    self.agent(obs_dim=78, action_dim=12, domain_name='quadruped', task_name=task)
 
 
 if __name__ == '__main__':

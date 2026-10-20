@@ -16,50 +16,81 @@ from torch.nn import functional as F
 from ppo import PPOAgent, RolloutBuffer
 
 
-# Offsets follow dmc2gym's flattened observation order. Explicit velocity bounds
-# preserve trailing sensor features, including hopper's two touch readings.
+# Offsets follow dmc2gym's flattened observation order. Separate velocity ranges
+# preserve interleaved actuator/sensor features as well as trailing touch readings.
 TimeReversalSpec = namedtuple('TimeReversalSpec',
-                             ('obs_dim', 'action_dim', 'velocity_start',
-                              'velocity_stop', 'tasks'))
+                             ('obs_dim', 'action_dim', 'velocity_ranges', 'tasks'))
 TIME_REVERSAL_SPECS = {
-    'cheetah': TimeReversalSpec(17, 6, 8, 17, ('run', 'bidirectional')),
-    'acrobot': TimeReversalSpec(6, 1, 4, 6, ('swingup',)),
+    'cheetah': TimeReversalSpec(17, 6, ((8, 17),), ('run', 'bidirectional')),
+    'acrobot': TimeReversalSpec(6, 1, ((4, 6),), ('swingup',)),
     # Single pole: [cart position, cos(theta), sin(theta), cart/pole velocities].
-    'cartpole': TimeReversalSpec(5, 1, 3, 5, ('swingup',)),
-    'walker': TimeReversalSpec(24, 6, 15, 24, ('stand', 'walk', 'run')),
-    'hopper': TimeReversalSpec(15, 4, 6, 13, ('stand', 'hop')),
+    'cartpole': TimeReversalSpec(5, 1, ((3, 5),), ('swingup',)),
+    # Joint angles, target displacement, then the two joint velocities.
+    'reacher': TimeReversalSpec(6, 2, ((4, 6),), ('hard',)),
+    'walker': TimeReversalSpec(24, 6, ((15, 24),), ('stand', 'walk', 'run')),
+    'hopper': TimeReversalSpec(15, 4, ((6, 13),), ('stand', 'hop')),
+    'finger': TimeReversalSpec(9, 2, ((4, 7),), ('spin',)),
+}
+# These domains require an explicit task because their dimensions vary by task.
+TASK_TIME_REVERSAL_SPECS = {
+    'pendulum': {
+        'two_poles': TimeReversalSpec(6, 2, ((4, 6),), ('two_poles',)),
+        'three_poles': TimeReversalSpec(9, 3, ((6, 9),), ('three_poles',)),
+    },
+    'quadruped': {
+        # Joint velocities, torso linear velocity, and gyro angular velocity.
+        # Keep activations, accelerometer and force/torque readings unchanged.
+        'walk': TimeReversalSpec(78, 12, ((16, 32), (44, 47), (51, 54)), ('walk',)),
+    },
 }
 
 
-def get_time_reversal_spec(domain_name):
-    """Return a domain's explicit mapping rather than guessing from its shape."""
+def get_time_reversal_spec(domain_name, task_name=None):
+    """Select an explicit mapping, requiring a task when dimensions vary."""
+    if domain_name in TASK_TIME_REVERSAL_SPECS:
+        task_specs = TASK_TIME_REVERSAL_SPECS[domain_name]
+        if task_name not in task_specs:
+            raise ValueError('TRSPPO {} requires task_name to be one of: {}.'
+                             .format(domain_name, ', '.join(task_specs)))
+        return task_specs[task_name]
     if domain_name not in TIME_REVERSAL_SPECS:
+        domains = sorted(set(TIME_REVERSAL_SPECS) | set(TASK_TIME_REVERSAL_SPECS))
         raise ValueError('No TRSPPO time-reversal mapping for domain {!r}. Supported domains: {}.'
-                         .format(domain_name, ', '.join(TIME_REVERSAL_SPECS)))
-    return TIME_REVERSAL_SPECS[domain_name]
+                         .format(domain_name, ', '.join(domains)))
+    spec = TIME_REVERSAL_SPECS[domain_name]
+    if task_name is not None and task_name not in spec.tasks:
+        raise ValueError('TRSPPO supports these {} tasks: {}.'
+                         .format(domain_name, ', '.join(spec.tasks)))
+    return spec
 
 
-def reverse_observation(obs, domain_name='cheetah'):
-    """Negate generalized velocities, preserving configuration and sensor features.
+def reverse_observation(obs, domain_name='cheetah', task_name=None):
+    """Negate velocity features, preserving configuration and actuator states.
 
-    Preserving hopper's touch readings is an approximation: the simulator's
-    dissipative contact forces can change when velocities are reversed.
+    Preserving hopper/finger touch readings and quadruped accelerometer/force
+    readings is an approximation: dissipative dynamics can change these sensors
+    when velocities are reversed. Quadruped's gyro is a velocity and is negated.
     """
-    spec = get_time_reversal_spec(domain_name)
+    spec = get_time_reversal_spec(domain_name, task_name)
     if obs.ndim == 0 or obs.shape[-1] != spec.obs_dim:
         raise ValueError('{} time reversal requires {}-dimensional state observations.'
                          .format(domain_name, spec.obs_dim))
     reversed_obs = obs.clone()
-    velocities = slice(spec.velocity_start, spec.velocity_stop)
-    reversed_obs[..., velocities] = -reversed_obs[..., velocities]
+    for start, stop in spec.velocity_ranges:
+        reversed_obs[..., start:stop] = -reversed_obs[..., start:stop]
     return reversed_obs
 
 
-def reverse_action(action, domain_name='cheetah'):
-    """Motor force/torque controls are even under ideal mechanical time reversal."""
-    spec = get_time_reversal_spec(domain_name)
+def reverse_action(action, domain_name='cheetah', task_name=None):
+    """Preserve action signs and ordering.
+
+    Force/torque controls are even under ideal mechanical time reversal.
+    For quadruped's filtered position targets, identity is only a regularization
+    assumption; it does not reverse the actuator filter dynamics.
+    """
+    spec = get_time_reversal_spec(domain_name, task_name)
     if action.ndim == 0 or action.shape[-1] != spec.action_dim:
-        raise ValueError('{} time reversal requires {}-dimensional motor controls.'
+        raise ValueError('{} time reversal requires {}-dimensional controls.'
                          .format(domain_name, spec.action_dim))
     return action.clone()
 
@@ -99,16 +130,18 @@ class TRSPPOAgent(PPOAgent):
     checkpoint_prefix = 'trsppo'
 
     def __init__(self, obs_shape, action_shape, device, tr_policy_coef=0.1,
-                 domain_name='cheetah', **kwargs):
-        spec = get_time_reversal_spec(domain_name)
+                 domain_name='cheetah', task_name=None, **kwargs):
+        spec = get_time_reversal_spec(domain_name, task_name)
         if tuple(obs_shape) != (spec.obs_dim,) or tuple(action_shape) != (spec.action_dim,):
+            environment = domain_name if task_name is None else domain_name + '/' + task_name
             raise ValueError('TRSPPO {} requires state observations ({},) and actions ({},).'
-                             .format(domain_name, spec.obs_dim, spec.action_dim))
+                             .format(environment, spec.obs_dim, spec.action_dim))
         if not math.isfinite(tr_policy_coef) or tr_policy_coef < 0:
             raise ValueError('tr_policy_coef must be finite and nonnegative.')
         super().__init__(obs_shape, action_shape, device, **kwargs)
         self.tr_policy_coef = tr_policy_coef
         self.domain_name = domain_name
+        self.task_name = task_name
 
     def actor_symmetry_loss(self, obs, next_obs, valid):
         """Mean squared error across valid transitions and all action components.
@@ -122,8 +155,10 @@ class TRSPPOAgent(PPOAgent):
         # Select before evaluating the networks so masked endpoints cannot affect
         # the loss even if they contain invalid or automatically reset observations.
         with torch.no_grad():
-            target = reverse_action(self.actor(obs[valid]).mean.tanh(), self.domain_name)
-        prediction = self.actor(reverse_observation(next_obs[valid], self.domain_name)).mean.tanh()
+            target = reverse_action(self.actor(obs[valid]).mean.tanh(),
+                                    self.domain_name, self.task_name)
+        reversed_obs = reverse_observation(next_obs[valid], self.domain_name, self.task_name)
+        prediction = self.actor(reversed_obs).mean.tanh()
         return F.mse_loss(prediction, target)
 
     def _auxiliary_actor_loss(self, batch, indices):

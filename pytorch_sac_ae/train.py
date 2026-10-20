@@ -22,8 +22,50 @@ from ppo import PPOAgent, RolloutBuffer
 from trsppo import TRSPPOAgent, TRSPPORolloutBuffer, get_time_reversal_spec
 # import custom_env
 
-def parse_args():
+def _parse_bool(value):
+    if value.lower() in ('true', '1', 'yes'):
+        return True
+    if value.lower() in ('false', '0', 'no'):
+        return False
+    raise argparse.ArgumentTypeError('expected true or false')
+
+
+def _load_config(parser, path):
+    try:
+        with open(path, encoding='utf-8') as config_file:
+            config = json.load(config_file)
+    except (OSError, ValueError) as error:
+        parser.error('cannot load --cfg {}: {}'.format(path, error))
+    if not isinstance(config, dict):
+        parser.error('--cfg must contain a JSON object of argument names and values')
+
+    # Saved args.json files may include the source config path as metadata.
+    # Reload the saved settings without following that path recursively.
+    config.pop('cfg', None)
+    # Output paths are derived from the final run settings, not archived paths.
+    config.pop('work_dir', None)
+    actions = {action.dest: action for action in parser._actions
+               if action.dest not in ('help', 'cfg')}
+    unknown = sorted(set(config) - set(actions))
+    if unknown:
+        parser.error('unknown --cfg arguments: {}'.format(', '.join(unknown)))
+    for name, value in config.items():
+        action = actions[name]
+        value_type = action.type if action.type in (int, float, str, bool) else type(action.default)
+        allowed_types = (int, float) if value_type is float else (value_type,)
+        # Check JSON types explicitly: bool is an int subclass, and argparse
+        # does not validate non-string defaults loaded from a config file.
+        if type(value) not in allowed_types:
+            parser.error('--cfg argument {} must have type {}'.format(name, value_type.__name__))
+        if action.choices is not None and value not in action.choices:
+            parser.error('--cfg argument {} must be one of {}'.format(name, ', '.join(action.choices)))
+    return config
+
+
+def parse_args(argv=None):
     parser = argparse.ArgumentParser()
+    parser.add_argument('--cfg', type=str,
+                        help='JSON argument file; explicit command-line arguments override its settings')
     # environment
     parser.add_argument('--domain_name', default='cheetah')
     # parser.add_argument('--task_name', default='two_pole_balance')
@@ -91,8 +133,6 @@ def parse_args():
     parser.add_argument('--alpha_beta', default=0.5, type=float)
     # misc
     parser.add_argument('--seed', default=1, type=int)
-    # parser.add_argument('--work_dir', default='./hand_log/gripper_sparse2', type=str)
-    parser.add_argument('--work_dir', default='./cheetah', type=str)
 
     parser.add_argument('--save_tb', default=True, action='store_true')
     parser.add_argument('--save_model', default=True, action='store_true')
@@ -102,15 +142,22 @@ def parse_args():
         parser.add_argument('--no_save_' + output, dest='save_' + output, action='store_false')
     parser.add_argument('--gpu_choice', default=0, type=int)
     parser.add_argument('--gym_env', default=False, action='store_true')
-    parser.add_argument('--time_rev', default=False, type=bool)
+    parser.add_argument('--no_gym_env', dest='gym_env', action='store_false')
+    parser.add_argument('--time_rev', default=False, type=_parse_bool)
     parser.add_argument('--percent_tsym', default=20, type=int)
     parser.add_argument('--percent_sampling', default='phase_in', type=str)
     parser.add_argument('--phase_percent', default=10, type=int)
     parser.add_argument('--prioritized_replay', default=False, action='store_true')
+    parser.add_argument('--no_prioritized_replay', dest='prioritized_replay', action='store_false')
 
     # parser.add_argument('--reset_agent_aftersteps', default=False, action='store_true')
 
-    args = parser.parse_args()
+    # First find the config path, then use its values as parser defaults so
+    # explicit CLI options win regardless of their position relative to --cfg.
+    config_args, _ = parser.parse_known_args(argv)
+    if config_args.cfg is not None:
+        parser.set_defaults(**_load_config(parser, config_args.cfg))
+    args = parser.parse_args(argv)
     if args.agent in ('ppo', 'trsppo'):
         if args.encoder_type != 'identity' or args.decoder_type != 'identity':
             parser.error('PPO supports only identity encoder/decoder (state observations).')
@@ -132,14 +179,13 @@ def parse_args():
             parser.error('--entropy_coef and --target_kl must be nonnegative')
     if args.agent == 'trsppo':
         try:
-            spec = get_time_reversal_spec(args.domain_name)
+            get_time_reversal_spec(args.domain_name, args.task_name)
         except ValueError as error:
             parser.error(str(error))
-        if args.task_name not in spec.tasks:
-            parser.error('TRSPPO supports these {} tasks: {}.'
-                         .format(args.domain_name, ', '.join(spec.tasks)))
         if not math.isfinite(args.tr_policy_coef) or args.tr_policy_coef < 0:
             parser.error('--tr_policy_coef must be finite and nonnegative')
+    args.work_dir = os.path.join('logs', '{}_{}'.format(args.domain_name, args.task_name),
+                                args.agent, str(args.seed))
     return args
 
 def conjugate_obs(obs, next_obs, args):
@@ -282,7 +328,8 @@ def evaluate(env, agent, video, num_episodes, L, step, args):
 def make_agent(obs_shape, action_shape, args, device):
     if args.agent in ('ppo', 'trsppo'):
         agent_class = TRSPPOAgent if args.agent == 'trsppo' else PPOAgent
-        agent_kwargs = ({'tr_policy_coef': args.tr_policy_coef, 'domain_name': args.domain_name}
+        agent_kwargs = ({'tr_policy_coef': args.tr_policy_coef, 'domain_name': args.domain_name,
+                         'task_name': args.task_name}
                         if args.agent == 'trsppo' else {})
         return agent_class(
             obs_shape=obs_shape, action_shape=action_shape, device=device,
