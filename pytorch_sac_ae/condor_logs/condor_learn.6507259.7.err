@@ -1,0 +1,6 @@
+/home/xchen168/miniconda3/envs/tsda/lib/python3.7/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: /home/xchen168/miniconda3/envs/tsda/lib/python3.7/site-packages/torchvision/image.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+  warn(f"Failed to load image Python extension: {e}")
+/home/xchen168/miniconda3/envs/tsda/lib/python3.7/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: The DISPLAY environment variable is missing'
+  warnings.warn(message, GLFWError)
+OMP: Warning #96: Cannot form a team with 6 threads, using 1 instead.
+OMP: Hint Consider unsetting KMP_DEVICE_THREAD_LIMIT (KMP_ALL_THREADS), KMP_TEAMS_THREAD_LIMIT, and OMP_THREAD_LIMIT (if any are set).

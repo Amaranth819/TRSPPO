@@ -1,0 +1,46 @@
+013 (6507259.012.000) 2026-10-22 17:04:10 Job was released.
+	via condor_release (by user xchen168)
+...
+001 (6507259.012.000) 2026-10-22 17:04:26 Job executing on host: <10.5.206.64:9618?addrs=10.5.206.64-9618&alias=OG-NODE-10-5-206-64&noUDP&sock=startd_1495_062d>
+...
+006 (6507259.012.000) 2026-10-22 17:04:35 Image size of job updated: 58420
+	18  -  MemoryUsage of job (MB)
+	17700  -  ResidentSetSize of job (KB)
+...
+006 (6507259.012.000) 2026-10-22 17:09:36 Image size of job updated: 2701060
+	211  -  MemoryUsage of job (MB)
+	215516  -  ResidentSetSize of job (KB)
+...
+006 (6507259.012.000) 2026-10-22 17:14:36 Image size of job updated: 2701060
+	211  -  MemoryUsage of job (MB)
+	215648  -  ResidentSetSize of job (KB)
+...
+006 (6507259.012.000) 2026-10-22 17:24:37 Image size of job updated: 2701312
+	211  -  MemoryUsage of job (MB)
+	215912  -  ResidentSetSize of job (KB)
+...
+006 (6507259.012.000) 2026-10-22 17:49:39 Image size of job updated: 2701560
+	212  -  MemoryUsage of job (MB)
+	216176  -  ResidentSetSize of job (KB)
+...
+006 (6507259.012.000) 2026-10-23 01:45:30 Image size of job updated: 2701812
+	212  -  MemoryUsage of job (MB)
+	216440  -  ResidentSetSize of job (KB)
+...
+005 (6507259.012.000) 2026-10-23 05:35:52 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 12:15:41, Sys 0 00:02:44  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 12:15:41, Sys 0 00:02:44  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     0.98        1         1 
+	   Disk (KB)            :     1           1      9622 
+	   Memory (MB)          :   212        8192      8192 
+
+	Job terminated of its own accord at 2026-10-23T09:35:52Z with exit-code 0.
+...

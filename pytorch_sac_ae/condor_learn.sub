@@ -1,0 +1,55 @@
+# Submit from pytorch_sac_ae/: mkdir -p condor_logs && condor_submit condor_learn.sub
+universe = vanilla
+executable = ./condor_learn.sh
+arguments = "--agent $(agent) --cfg '$(cfg)' --seed $(seed) --no_save_video"
+
+# The repository, configs, and tsda environment must be on a shared filesystem.
+should_transfer_files = NO
+
+error  = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).err
+output = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).out
+log    = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).log
+
+notification = Complete
+# notify_user = xchen168@syr.edu
+
+request_cpus = 1
+# request_gpus = 1
+request_memory = 8GB
+
+# Optional GPU memory constraint:
+# requirements = (CUDAGlobalMemoryMb >= 22699) && (CUDAGlobalMemoryMb < 40000)
+
+# One job per row: agent, JSON config path relative to pytorch_sac_ae/, seed.
+queue agent, cfg, seed from (
+ppo     args/walker/run/ppo.json                 23
+ppo     args/walker/run/ppo.json                 42
+ppo     args/walker/run/ppo.json                 233
+trsppo  args/walker/run/trsppo.json              23
+trsppo  args/walker/run/trsppo.json              42
+trsppo  args/walker/run/trsppo.json              233
+ppo     args/cheetah/run/ppo.json                23
+ppo     args/cheetah/run/ppo.json                42
+ppo     args/cheetah/run/ppo.json                233
+trsppo  args/cheetah/run/trsppo.json             23
+trsppo  args/cheetah/run/trsppo.json             42
+trsppo  args/cheetah/run/trsppo.json             233
+ppo     args/cheetah/bidirectional/ppo.json      23
+ppo     args/cheetah/bidirectional/ppo.json      42
+ppo     args/cheetah/bidirectional/ppo.json      233
+trsppo  args/cheetah/bidirectional/trsppo.json   23
+trsppo  args/cheetah/bidirectional/trsppo.json   42
+trsppo  args/cheetah/bidirectional/trsppo.json   233
+ppo     args/pendulum/three_poles/ppo.json       23
+ppo     args/pendulum/three_poles/ppo.json       42
+ppo     args/pendulum/three_poles/ppo.json       233
+trsppo  args/pendulum/three_poles/trsppo.json    23
+trsppo  args/pendulum/three_poles/trsppo.json    42
+trsppo  args/pendulum/three_poles/trsppo.json    233
+ppo     args/finger/spin/ppo.json                23
+ppo     args/finger/spin/ppo.json                42
+ppo     args/finger/spin/ppo.json                233
+trsppo  args/finger/spin/trsppo.json             23
+trsppo  args/finger/spin/trsppo.json             42
+trsppo  args/finger/spin/trsppo.json             233
+)

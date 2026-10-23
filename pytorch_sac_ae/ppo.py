@@ -177,6 +177,10 @@ class PPOAgent:
         """Hook for actor regularizers; vanilla PPO has no additional loss."""
         return batch['obs'].new_zeros(()), {}
 
+    def _auxiliary_critic_loss(self, batch, indices, predicted_values):
+        """Hook for critic regularizers; vanilla PPO has no additional loss."""
+        return predicted_values.new_zeros(()), {}
+
     def update(self, rollout, logger=None, step=0):
         batch = rollout.batch(self.discount, self.gae_lambda, self.device)
         advantages = batch['advantages']
@@ -207,6 +211,9 @@ class PPOAgent:
                 entropy = -self.actor.log_prob(distribution, distribution.rsample()).mean()
                 predicted_values = self.critic(batch['obs'][idx]).squeeze(-1)
                 critic_loss = F.mse_loss(predicted_values, batch['returns'][idx])
+                critic_auxiliary_loss, critic_auxiliary_metrics = self._auxiliary_critic_loss(
+                    batch, idx, predicted_values)
+                critic_total_loss = self.value_coef * critic_loss + critic_auxiliary_loss
 
                 auxiliary_loss, auxiliary_metrics = self._auxiliary_actor_loss(batch, idx)
                 actor_total_loss = actor_loss - self.entropy_coef * entropy + auxiliary_loss
@@ -215,7 +222,7 @@ class PPOAgent:
                 nn.utils.clip_grad_norm_(self.actor.parameters(), self.max_grad_norm)
                 self.actor_optimizer.step()
                 self.critic_optimizer.zero_grad(set_to_none=True)
-                (self.value_coef * critic_loss).backward()
+                critic_total_loss.backward()
                 nn.utils.clip_grad_norm_(self.critic.parameters(), self.max_grad_norm)
                 self.critic_optimizer.step()
 
@@ -226,6 +233,9 @@ class PPOAgent:
                 if auxiliary_metrics:
                     metrics.update(auxiliary_metrics)
                     metrics['actor_total_loss'] = actor_total_loss.item()
+                if critic_auxiliary_metrics:
+                    metrics.update(critic_auxiliary_metrics)
+                    metrics['critic_total_loss'] = critic_total_loss.item()
                 for key, value in metrics.items():
                     totals[key] = totals.get(key, 0.0) + count * value
                 samples += count

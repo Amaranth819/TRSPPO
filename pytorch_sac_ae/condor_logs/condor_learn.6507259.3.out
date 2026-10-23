@@ -1,0 +1,2556 @@
+Running with following configs
+Time sym boolean is  False
+Num of steps is  500000
+Work dir is  logs/pendulum_three_poles/trsppo_policy_0.25_value_0/1
+Using device  cpu
+| eval  | S: 0 | ER: 2.6322
+| train | E: 1 | S: 250 | R: 143.5456
+| train | E: 2 | S: 500 | R: 178.7432
+| train | E: 3 | S: 750 | R: 173.6594
+| train | E: 4 | S: 1000 | R: 173.4473
+| train | S: 1000 | ALOSS: -0.0079 | VLOSS: 126.0236 | ENT: 2.0029 | KL: 0.0036 | CLIP: 0.0249 | TR: 0.0109 | WTR: 0.0027 | VALID: 0.9960 | ATOTAL: -0.0052 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 63.0118
+| train | E: 5 | S: 1250 | R: 175.1807
+| train | E: 6 | S: 1500 | R: 198.3670
+| train | E: 7 | S: 1750 | R: 144.1226
+| train | E: 8 | S: 2000 | R: 206.7286
+| train | S: 2000 | ALOSS: -0.0083 | VLOSS: 129.7253 | ENT: 2.0080 | KL: 0.0042 | CLIP: 0.0429 | TR: 0.0036 | WTR: 0.0009 | VALID: 0.9960 | ATOTAL: -0.0074 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 64.8627
+| train | E: 9 | S: 2250 | R: 167.8661
+| train | E: 10 | S: 2500 | R: 201.1625
+| train | E: 11 | S: 2750 | R: 144.2565
+| train | E: 12 | S: 3000 | R: 173.6444
+| train | S: 3000 | ALOSS: -0.0115 | VLOSS: 107.3049 | ENT: 1.9946 | KL: 0.0031 | CLIP: 0.0264 | TR: 0.0141 | WTR: 0.0035 | VALID: 0.9960 | ATOTAL: -0.0080 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 53.6524
+| train | E: 13 | S: 3250 | R: 197.4819
+| train | E: 14 | S: 3500 | R: 164.2248
+| train | E: 15 | S: 3750 | R: 192.8081
+| train | E: 16 | S: 4000 | R: 175.2496
+| train | S: 4000 | ALOSS: -0.0130 | VLOSS: 109.5621 | ENT: 1.9960 | KL: 0.0049 | CLIP: 0.0560 | TR: 0.0102 | WTR: 0.0026 | VALID: 0.9960 | ATOTAL: -0.0105 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 54.7811
+| train | E: 17 | S: 4250 | R: 171.7215
+| train | E: 18 | S: 4500 | R: 213.4955
+| train | E: 19 | S: 4750 | R: 183.2357
+| train | E: 20 | S: 5000 | R: 211.5026
+| train | S: 5000 | ALOSS: -0.0141 | VLOSS: 120.7753 | ENT: 2.0011 | KL: 0.0044 | CLIP: 0.0477 | TR: 0.0162 | WTR: 0.0040 | VALID: 0.9960 | ATOTAL: -0.0101 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 60.3877
+| train | E: 21 | S: 5250 | R: 192.6312
+| train | E: 22 | S: 5500 | R: 156.4931
+| train | E: 23 | S: 5750 | R: 196.2719
+| train | E: 24 | S: 6000 | R: 182.9146
+| train | S: 6000 | ALOSS: -0.0143 | VLOSS: 76.6788 | ENT: 1.9951 | KL: 0.0047 | CLIP: 0.0560 | TR: 0.0184 | WTR: 0.0046 | VALID: 0.9960 | ATOTAL: -0.0097 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 38.3394
+| train | E: 25 | S: 6250 | R: 184.5476
+| train | E: 26 | S: 6500 | R: 177.9259
+| train | E: 27 | S: 6750 | R: 131.4487
+| train | E: 28 | S: 7000 | R: 160.2534
+| train | S: 7000 | ALOSS: -0.0131 | VLOSS: 45.0096 | ENT: 1.9880 | KL: 0.0044 | CLIP: 0.0469 | TR: 0.0213 | WTR: 0.0053 | VALID: 0.9960 | ATOTAL: -0.0077 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.5048
+| train | E: 29 | S: 7250 | R: 203.0217
+| train | E: 30 | S: 7500 | R: 187.4637
+| train | E: 31 | S: 7750 | R: 172.3193
+| train | E: 32 | S: 8000 | R: 183.0921
+| train | S: 8000 | ALOSS: -0.0172 | VLOSS: 50.3515 | ENT: 1.9929 | KL: 0.0044 | CLIP: 0.0455 | TR: 0.0297 | WTR: 0.0074 | VALID: 0.9960 | ATOTAL: -0.0097 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 25.1758
+| train | E: 33 | S: 8250 | R: 190.9146
+| train | E: 34 | S: 8500 | R: 194.7980
+| train | E: 35 | S: 8750 | R: 194.6143
+| train | E: 36 | S: 9000 | R: 193.4851
+| train | S: 9000 | ALOSS: -0.0131 | VLOSS: 45.2788 | ENT: 1.9872 | KL: 0.0036 | CLIP: 0.0364 | TR: 0.0369 | WTR: 0.0092 | VALID: 0.9960 | ATOTAL: -0.0039 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.6394
+| train | E: 37 | S: 9250 | R: 216.5371
+| train | E: 38 | S: 9500 | R: 209.3511
+| train | E: 39 | S: 9750 | R: 169.2910
+| train | E: 40 | S: 10000 | R: 194.7626
+| train | S: 10000 | ALOSS: -0.0136 | VLOSS: 42.4346 | ENT: 1.9747 | KL: 0.0041 | CLIP: 0.0409 | TR: 0.0317 | WTR: 0.0079 | VALID: 0.9960 | ATOTAL: -0.0057 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 21.2173
+| eval  | S: 10000 | ER: 220.8232
+| train | E: 41 | S: 10250 | R: 206.3259
+| train | E: 42 | S: 10500 | R: 181.5306
+| train | E: 43 | S: 10750 | R: 208.2466
+| train | E: 44 | S: 11000 | R: 184.5195
+| train | S: 11000 | ALOSS: -0.0158 | VLOSS: 36.1942 | ENT: 1.9796 | KL: 0.0046 | CLIP: 0.0555 | TR: 0.0277 | WTR: 0.0069 | VALID: 0.9960 | ATOTAL: -0.0088 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.0971
+| train | E: 45 | S: 11250 | R: 218.3871
+| train | E: 46 | S: 11500 | R: 205.6708
+| train | E: 47 | S: 11750 | R: 176.7797
+| train | E: 48 | S: 12000 | R: 199.7030
+| train | S: 12000 | ALOSS: -0.0187 | VLOSS: 27.2976 | ENT: 1.9623 | KL: 0.0050 | CLIP: 0.0596 | TR: 0.0432 | WTR: 0.0108 | VALID: 0.9960 | ATOTAL: -0.0079 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 13.6488
+| train | E: 49 | S: 12250 | R: 186.1402
+| train | E: 50 | S: 12500 | R: 193.3155
+| train | E: 51 | S: 12750 | R: 195.4696
+| train | E: 52 | S: 13000 | R: 199.1665
+| train | S: 13000 | ALOSS: -0.0113 | VLOSS: 19.6733 | ENT: 1.9814 | KL: 0.0031 | CLIP: 0.0246 | TR: 0.0393 | WTR: 0.0098 | VALID: 0.9960 | ATOTAL: -0.0015 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 9.8367
+| train | E: 53 | S: 13250 | R: 185.2903
+| train | E: 54 | S: 13500 | R: 192.1997
+| train | E: 55 | S: 13750 | R: 202.9017
+| train | E: 56 | S: 14000 | R: 175.6967
+| train | S: 14000 | ALOSS: -0.0186 | VLOSS: 14.6595 | ENT: 1.9739 | KL: 0.0048 | CLIP: 0.0595 | TR: 0.0429 | WTR: 0.0107 | VALID: 0.9960 | ATOTAL: -0.0079 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 7.3298
+| train | E: 57 | S: 14250 | R: 181.0838
+| train | E: 58 | S: 14500 | R: 190.2473
+| train | E: 59 | S: 14750 | R: 192.3226
+| train | E: 60 | S: 15000 | R: 179.6873
+| train | S: 15000 | ALOSS: -0.0168 | VLOSS: 13.4363 | ENT: 1.9691 | KL: 0.0059 | CLIP: 0.0723 | TR: 0.0352 | WTR: 0.0088 | VALID: 0.9960 | ATOTAL: -0.0080 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 6.7181
+| train | E: 61 | S: 15250 | R: 184.6387
+| train | E: 62 | S: 15500 | R: 201.9548
+| train | E: 63 | S: 15750 | R: 186.5335
+| train | E: 64 | S: 16000 | R: 202.2534
+| train | S: 16000 | ALOSS: -0.0173 | VLOSS: 12.3057 | ENT: 1.9691 | KL: 0.0045 | CLIP: 0.0526 | TR: 0.0346 | WTR: 0.0087 | VALID: 0.9960 | ATOTAL: -0.0087 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 6.1529
+| train | E: 65 | S: 16250 | R: 195.7544
+| train | E: 66 | S: 16500 | R: 187.8418
+| train | E: 67 | S: 16750 | R: 204.3655
+| train | E: 68 | S: 17000 | R: 200.8290
+| train | S: 17000 | ALOSS: -0.0222 | VLOSS: 11.0372 | ENT: 1.9676 | KL: 0.0067 | CLIP: 0.0868 | TR: 0.0360 | WTR: 0.0090 | VALID: 0.9960 | ATOTAL: -0.0132 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.5186
+| train | E: 69 | S: 17250 | R: 180.0356
+| train | E: 70 | S: 17500 | R: 173.8667
+| train | E: 71 | S: 17750 | R: 192.0338
+| train | E: 72 | S: 18000 | R: 185.0579
+| train | S: 18000 | ALOSS: -0.0181 | VLOSS: 6.3704 | ENT: 1.9464 | KL: 0.0057 | CLIP: 0.0660 | TR: 0.0386 | WTR: 0.0096 | VALID: 0.9960 | ATOTAL: -0.0085 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.1852
+| train | E: 73 | S: 18250 | R: 195.6237
+| train | E: 74 | S: 18500 | R: 184.4788
+| train | E: 75 | S: 18750 | R: 186.4417
+| train | E: 76 | S: 19000 | R: 199.1023
+| train | S: 19000 | ALOSS: -0.0189 | VLOSS: 5.3531 | ENT: 1.9540 | KL: 0.0063 | CLIP: 0.0803 | TR: 0.0456 | WTR: 0.0114 | VALID: 0.9960 | ATOTAL: -0.0075 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.6765
+| train | E: 77 | S: 19250 | R: 196.1968
+| train | E: 78 | S: 19500 | R: 208.9146
+| train | E: 79 | S: 19750 | R: 197.8041
+| train | E: 80 | S: 20000 | R: 185.2109
+| train | S: 20000 | ALOSS: -0.0182 | VLOSS: 8.3452 | ENT: 1.9292 | KL: 0.0061 | CLIP: 0.0785 | TR: 0.0366 | WTR: 0.0091 | VALID: 0.9960 | ATOTAL: -0.0091 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.1726
+| eval  | S: 20000 | ER: 233.7403
+| train | E: 81 | S: 20250 | R: 209.9472
+| train | E: 82 | S: 20500 | R: 187.5193
+| train | E: 83 | S: 20750 | R: 165.6156
+| train | E: 84 | S: 21000 | R: 180.5946
+| train | S: 21000 | ALOSS: -0.0221 | VLOSS: 6.2881 | ENT: 1.8995 | KL: 0.0072 | CLIP: 0.0986 | TR: 0.0348 | WTR: 0.0087 | VALID: 0.9960 | ATOTAL: -0.0134 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.1441
+| train | E: 85 | S: 21250 | R: 186.0529
+| train | E: 86 | S: 21500 | R: 215.8908
+| train | E: 87 | S: 21750 | R: 185.2486
+| train | E: 88 | S: 22000 | R: 207.3335
+| train | S: 22000 | ALOSS: -0.0172 | VLOSS: 6.6752 | ENT: 1.9509 | KL: 0.0065 | CLIP: 0.0818 | TR: 0.0304 | WTR: 0.0076 | VALID: 0.9960 | ATOTAL: -0.0096 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.3376
+| train | E: 89 | S: 22250 | R: 201.4511
+| train | E: 90 | S: 22500 | R: 203.0678
+| train | E: 91 | S: 22750 | R: 202.7976
+| train | E: 92 | S: 23000 | R: 188.6364
+| train | S: 23000 | ALOSS: -0.0223 | VLOSS: 6.9141 | ENT: 1.8948 | KL: 0.0066 | CLIP: 0.0882 | TR: 0.0387 | WTR: 0.0097 | VALID: 0.9960 | ATOTAL: -0.0127 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.4570
+| train | E: 93 | S: 23250 | R: 201.4897
+| train | E: 94 | S: 23500 | R: 202.5549
+| train | E: 95 | S: 23750 | R: 218.5011
+| train | E: 96 | S: 24000 | R: 195.8986
+| train | S: 24000 | ALOSS: -0.0228 | VLOSS: 4.7487 | ENT: 1.9087 | KL: 0.0080 | CLIP: 0.1085 | TR: 0.0414 | WTR: 0.0104 | VALID: 0.9960 | ATOTAL: -0.0124 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.3744
+| train | E: 97 | S: 24250 | R: 177.6318
+| train | E: 98 | S: 24500 | R: 180.5831
+| train | E: 99 | S: 24750 | R: 199.8730
+| train | E: 100 | S: 25000 | R: 183.6814
+| train | S: 25000 | ALOSS: -0.0184 | VLOSS: 5.2263 | ENT: 1.8447 | KL: 0.0062 | CLIP: 0.0768 | TR: 0.0484 | WTR: 0.0121 | VALID: 0.9960 | ATOTAL: -0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.6132
+| train | E: 101 | S: 25250 | R: 195.6960
+| train | E: 102 | S: 25500 | R: 201.4276
+| train | E: 103 | S: 25750 | R: 219.4647
+| train | E: 104 | S: 26000 | R: 187.5195
+| train | S: 26000 | ALOSS: -0.0205 | VLOSS: 6.4182 | ENT: 1.8734 | KL: 0.0063 | CLIP: 0.0838 | TR: 0.0396 | WTR: 0.0099 | VALID: 0.9960 | ATOTAL: -0.0105 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.2091
+| train | E: 105 | S: 26250 | R: 203.1635
+| train | E: 106 | S: 26500 | R: 195.3641
+| train | E: 107 | S: 26750 | R: 218.3931
+| train | E: 108 | S: 27000 | R: 212.8013
+| train | S: 27000 | ALOSS: -0.0165 | VLOSS: 4.7729 | ENT: 1.8987 | KL: 0.0055 | CLIP: 0.0663 | TR: 0.0447 | WTR: 0.0112 | VALID: 0.9960 | ATOTAL: -0.0053 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.3864
+| train | E: 109 | S: 27250 | R: 182.6396
+| train | E: 110 | S: 27500 | R: 189.0180
+| train | E: 111 | S: 27750 | R: 185.9564
+| train | E: 112 | S: 28000 | R: 200.7499
+| train | S: 28000 | ALOSS: -0.0219 | VLOSS: 5.3499 | ENT: 1.8238 | KL: 0.0073 | CLIP: 0.0996 | TR: 0.0454 | WTR: 0.0113 | VALID: 0.9960 | ATOTAL: -0.0106 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.6750
+| train | E: 113 | S: 28250 | R: 200.3099
+| train | E: 114 | S: 28500 | R: 188.8440
+| train | E: 115 | S: 28750 | R: 203.1037
+| train | E: 116 | S: 29000 | R: 210.9290
+| train | S: 29000 | ALOSS: -0.0206 | VLOSS: 4.0635 | ENT: 1.8216 | KL: 0.0056 | CLIP: 0.0702 | TR: 0.0503 | WTR: 0.0126 | VALID: 0.9960 | ATOTAL: -0.0080 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.0317
+| train | E: 117 | S: 29250 | R: 189.5814
+| train | E: 118 | S: 29500 | R: 210.2176
+| train | E: 119 | S: 29750 | R: 192.3925
+| train | E: 120 | S: 30000 | R: 210.4623
+| train | S: 30000 | ALOSS: -0.0202 | VLOSS: 2.9543 | ENT: 1.8666 | KL: 0.0065 | CLIP: 0.0886 | TR: 0.0533 | WTR: 0.0133 | VALID: 0.9960 | ATOTAL: -0.0069 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4771
+| eval  | S: 30000 | ER: 229.5089
+| train | E: 121 | S: 30250 | R: 216.8733
+| train | E: 122 | S: 30500 | R: 221.5017
+| train | E: 123 | S: 30750 | R: 209.0266
+| train | E: 124 | S: 31000 | R: 224.6800
+| train | S: 31000 | ALOSS: -0.0251 | VLOSS: 3.8727 | ENT: 1.8041 | KL: 0.0069 | CLIP: 0.0911 | TR: 0.0550 | WTR: 0.0138 | VALID: 0.9960 | ATOTAL: -0.0113 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.9363
+| train | E: 125 | S: 31250 | R: 200.6681
+| train | E: 126 | S: 31500 | R: 207.2811
+| train | E: 127 | S: 31750 | R: 196.9317
+| train | E: 128 | S: 32000 | R: 195.7660
+| train | S: 32000 | ALOSS: -0.0225 | VLOSS: 3.6237 | ENT: 1.7855 | KL: 0.0068 | CLIP: 0.0882 | TR: 0.0614 | WTR: 0.0153 | VALID: 0.9960 | ATOTAL: -0.0072 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.8118
+| train | E: 129 | S: 32250 | R: 195.7943
+| train | E: 130 | S: 32500 | R: 208.1335
+| train | E: 131 | S: 32750 | R: 219.5688
+| train | E: 132 | S: 33000 | R: 216.4100
+| train | S: 33000 | ALOSS: -0.0210 | VLOSS: 4.0350 | ENT: 1.7864 | KL: 0.0064 | CLIP: 0.0883 | TR: 0.0516 | WTR: 0.0129 | VALID: 0.9960 | ATOTAL: -0.0081 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.0175
+| train | E: 133 | S: 33250 | R: 195.7093
+| train | E: 134 | S: 33500 | R: 176.4056
+| train | E: 135 | S: 33750 | R: 200.1348
+| train | E: 136 | S: 34000 | R: 212.9884
+| train | S: 34000 | ALOSS: -0.0239 | VLOSS: 3.9143 | ENT: 1.8162 | KL: 0.0075 | CLIP: 0.0996 | TR: 0.0560 | WTR: 0.0140 | VALID: 0.9960 | ATOTAL: -0.0099 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.9572
+| train | E: 137 | S: 34250 | R: 202.3470
+| train | E: 138 | S: 34500 | R: 178.2920
+| train | E: 139 | S: 34750 | R: 207.5576
+| train | E: 140 | S: 35000 | R: 199.6895
+| train | S: 35000 | ALOSS: -0.0222 | VLOSS: 3.1344 | ENT: 1.8004 | KL: 0.0063 | CLIP: 0.0832 | TR: 0.0671 | WTR: 0.0168 | VALID: 0.9960 | ATOTAL: -0.0055 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5672
+| train | E: 141 | S: 35250 | R: 215.2962
+| train | E: 142 | S: 35500 | R: 208.8516
+| train | E: 143 | S: 35750 | R: 215.5886
+| train | E: 144 | S: 36000 | R: 214.9272
+| train | S: 36000 | ALOSS: -0.0266 | VLOSS: 2.8639 | ENT: 1.8067 | KL: 0.0080 | CLIP: 0.1090 | TR: 0.0652 | WTR: 0.0163 | VALID: 0.9960 | ATOTAL: -0.0103 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4320
+| train | E: 145 | S: 36250 | R: 209.1634
+| train | E: 146 | S: 36500 | R: 203.0351
+| train | E: 147 | S: 36750 | R: 192.1737
+| train | E: 148 | S: 37000 | R: 171.1366
+| train | S: 37000 | ALOSS: -0.0186 | VLOSS: 3.7813 | ENT: 1.8152 | KL: 0.0067 | CLIP: 0.0898 | TR: 0.0459 | WTR: 0.0115 | VALID: 0.9960 | ATOTAL: -0.0071 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.8907
+| train | E: 149 | S: 37250 | R: 200.5870
+| train | E: 150 | S: 37500 | R: 193.9031
+| train | E: 151 | S: 37750 | R: 206.3436
+| train | E: 152 | S: 38000 | R: 218.4737
+| train | S: 38000 | ALOSS: -0.0241 | VLOSS: 3.3163 | ENT: 1.7822 | KL: 0.0085 | CLIP: 0.1191 | TR: 0.0501 | WTR: 0.0125 | VALID: 0.9960 | ATOTAL: -0.0116 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6582
+| train | E: 153 | S: 38250 | R: 231.8936
+| train | E: 154 | S: 38500 | R: 216.3748
+| train | E: 155 | S: 38750 | R: 201.6224
+| train | E: 156 | S: 39000 | R: 208.3161
+| train | S: 39000 | ALOSS: -0.0257 | VLOSS: 2.8474 | ENT: 1.8527 | KL: 0.0094 | CLIP: 0.1359 | TR: 0.0453 | WTR: 0.0113 | VALID: 0.9960 | ATOTAL: -0.0143 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4237
+| train | E: 157 | S: 39250 | R: 203.8437
+| train | E: 158 | S: 39500 | R: 213.8451
+| train | E: 159 | S: 39750 | R: 210.6234
+| train | E: 160 | S: 40000 | R: 204.3015
+| train | S: 40000 | ALOSS: -0.0268 | VLOSS: 2.1897 | ENT: 1.8144 | KL: 0.0093 | CLIP: 0.1288 | TR: 0.0573 | WTR: 0.0143 | VALID: 0.9960 | ATOTAL: -0.0125 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.0948
+| eval  | S: 40000 | ER: 230.1962
+| train | E: 161 | S: 40250 | R: 211.4418
+| train | E: 162 | S: 40500 | R: 209.8096
+| train | E: 163 | S: 40750 | R: 215.8862
+| train | E: 164 | S: 41000 | R: 204.4032
+| train | S: 41000 | ALOSS: -0.0234 | VLOSS: 3.6049 | ENT: 1.8042 | KL: 0.0077 | CLIP: 0.1076 | TR: 0.0624 | WTR: 0.0156 | VALID: 0.9960 | ATOTAL: -0.0078 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.8024
+| train | E: 165 | S: 41250 | R: 210.7424
+| train | E: 166 | S: 41500 | R: 217.7956
+| train | E: 167 | S: 41750 | R: 209.3591
+| train | E: 168 | S: 42000 | R: 209.6245
+| train | S: 42000 | ALOSS: -0.0223 | VLOSS: 2.9004 | ENT: 1.8171 | KL: 0.0067 | CLIP: 0.0885 | TR: 0.0568 | WTR: 0.0142 | VALID: 0.9960 | ATOTAL: -0.0081 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4502
+| train | E: 169 | S: 42250 | R: 197.7007
+| train | E: 170 | S: 42500 | R: 230.5712
+| train | E: 171 | S: 42750 | R: 217.4192
+| train | E: 172 | S: 43000 | R: 190.1012
+| train | S: 43000 | ALOSS: -0.0211 | VLOSS: 3.1655 | ENT: 1.8060 | KL: 0.0061 | CLIP: 0.0817 | TR: 0.0606 | WTR: 0.0152 | VALID: 0.9960 | ATOTAL: -0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5827
+| train | E: 173 | S: 43250 | R: 232.3378
+| train | E: 174 | S: 43500 | R: 216.3113
+| train | E: 175 | S: 43750 | R: 204.8139
+| train | E: 176 | S: 44000 | R: 218.0147
+| train | S: 44000 | ALOSS: -0.0178 | VLOSS: 4.1096 | ENT: 1.8067 | KL: 0.0063 | CLIP: 0.0822 | TR: 0.0537 | WTR: 0.0134 | VALID: 0.9960 | ATOTAL: -0.0044 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.0548
+| train | E: 177 | S: 44250 | R: 178.1720
+| train | E: 178 | S: 44500 | R: 210.2619
+| train | E: 179 | S: 44750 | R: 199.8555
+| train | E: 180 | S: 45000 | R: 205.9909
+| train | S: 45000 | ALOSS: -0.0242 | VLOSS: 3.2659 | ENT: 1.7753 | KL: 0.0068 | CLIP: 0.0853 | TR: 0.0510 | WTR: 0.0127 | VALID: 0.9960 | ATOTAL: -0.0115 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6330
+| train | E: 181 | S: 45250 | R: 223.1267
+| train | E: 182 | S: 45500 | R: 207.5716
+| train | E: 183 | S: 45750 | R: 216.6224
+| train | E: 184 | S: 46000 | R: 207.1885
+| train | S: 46000 | ALOSS: -0.0230 | VLOSS: 2.6301 | ENT: 1.7507 | KL: 0.0084 | CLIP: 0.1126 | TR: 0.0540 | WTR: 0.0135 | VALID: 0.9960 | ATOTAL: -0.0095 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.3151
+| train | E: 185 | S: 46250 | R: 200.2447
+| train | E: 186 | S: 46500 | R: 202.1670
+| train | E: 187 | S: 46750 | R: 205.8357
+| train | E: 188 | S: 47000 | R: 202.0503
+| train | S: 47000 | ALOSS: -0.0263 | VLOSS: 2.9158 | ENT: 1.7528 | KL: 0.0081 | CLIP: 0.1088 | TR: 0.0514 | WTR: 0.0128 | VALID: 0.9960 | ATOTAL: -0.0135 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4579
+| train | E: 189 | S: 47250 | R: 231.1164
+| train | E: 190 | S: 47500 | R: 181.3348
+| train | E: 191 | S: 47750 | R: 226.4935
+| train | E: 192 | S: 48000 | R: 208.8377
+| train | S: 48000 | ALOSS: -0.0253 | VLOSS: 5.1031 | ENT: 1.6324 | KL: 0.0064 | CLIP: 0.0847 | TR: 0.0475 | WTR: 0.0119 | VALID: 0.9960 | ATOTAL: -0.0134 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.5515
+| train | E: 193 | S: 48250 | R: 211.0251
+| train | E: 194 | S: 48500 | R: 204.5800
+| train | E: 195 | S: 48750 | R: 183.4922
+| train | E: 196 | S: 49000 | R: 203.0983
+| train | S: 49000 | ALOSS: -0.0245 | VLOSS: 4.6444 | ENT: 1.6732 | KL: 0.0080 | CLIP: 0.1102 | TR: 0.0512 | WTR: 0.0128 | VALID: 0.9960 | ATOTAL: -0.0117 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.3222
+| train | E: 197 | S: 49250 | R: 205.3819
+| train | E: 198 | S: 49500 | R: 206.5984
+| train | E: 199 | S: 49750 | R: 199.6506
+| train | E: 200 | S: 50000 | R: 214.2777
+| train | S: 50000 | ALOSS: -0.0244 | VLOSS: 3.0612 | ENT: 1.7599 | KL: 0.0070 | CLIP: 0.0984 | TR: 0.0608 | WTR: 0.0152 | VALID: 0.9960 | ATOTAL: -0.0092 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5306
+| eval  | S: 50000 | ER: 242.7923
+| train | E: 201 | S: 50250 | R: 214.5883
+| train | E: 202 | S: 50500 | R: 220.7937
+| train | E: 203 | S: 50750 | R: 248.8841
+| train | E: 204 | S: 51000 | R: 216.0188
+| train | S: 51000 | ALOSS: -0.0208 | VLOSS: 7.1972 | ENT: 1.6668 | KL: 0.0066 | CLIP: 0.0880 | TR: 0.0596 | WTR: 0.0149 | VALID: 0.9960 | ATOTAL: -0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.5986
+| train | E: 205 | S: 51250 | R: 230.9798
+| train | E: 206 | S: 51500 | R: 225.7661
+| train | E: 207 | S: 51750 | R: 212.5343
+| train | E: 208 | S: 52000 | R: 196.2947
+| train | S: 52000 | ALOSS: -0.0216 | VLOSS: 4.4902 | ENT: 1.6749 | KL: 0.0085 | CLIP: 0.1168 | TR: 0.0609 | WTR: 0.0152 | VALID: 0.9960 | ATOTAL: -0.0064 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.2451
+| train | E: 209 | S: 52250 | R: 207.8102
+| train | E: 210 | S: 52500 | R: 209.4051
+| train | E: 211 | S: 52750 | R: 196.4899
+| train | E: 212 | S: 53000 | R: 200.4842
+| train | S: 53000 | ALOSS: -0.0269 | VLOSS: 3.5699 | ENT: 1.7106 | KL: 0.0074 | CLIP: 0.1025 | TR: 0.0625 | WTR: 0.0156 | VALID: 0.9960 | ATOTAL: -0.0113 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7850
+| train | E: 213 | S: 53250 | R: 214.3567
+| train | E: 214 | S: 53500 | R: 212.7694
+| train | E: 215 | S: 53750 | R: 204.7401
+| train | E: 216 | S: 54000 | R: 198.4219
+| train | S: 54000 | ALOSS: -0.0264 | VLOSS: 3.2534 | ENT: 1.6668 | KL: 0.0076 | CLIP: 0.1013 | TR: 0.0642 | WTR: 0.0161 | VALID: 0.9960 | ATOTAL: -0.0103 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6267
+| train | E: 217 | S: 54250 | R: 225.2104
+| train | E: 218 | S: 54500 | R: 211.1369
+| train | E: 219 | S: 54750 | R: 229.8300
+| train | E: 220 | S: 55000 | R: 225.5687
+| train | S: 55000 | ALOSS: -0.0237 | VLOSS: 3.0531 | ENT: 1.7166 | KL: 0.0079 | CLIP: 0.1037 | TR: 0.0688 | WTR: 0.0172 | VALID: 0.9960 | ATOTAL: -0.0065 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5266
+| train | E: 221 | S: 55250 | R: 218.8903
+| train | E: 222 | S: 55500 | R: 199.5706
+| train | E: 223 | S: 55750 | R: 207.9548
+| train | E: 224 | S: 56000 | R: 237.5816
+| train | S: 56000 | ALOSS: -0.0228 | VLOSS: 3.4211 | ENT: 1.6992 | KL: 0.0086 | CLIP: 0.1150 | TR: 0.0624 | WTR: 0.0156 | VALID: 0.9960 | ATOTAL: -0.0072 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7106
+| train | E: 225 | S: 56250 | R: 240.8894
+| train | E: 226 | S: 56500 | R: 210.7554
+| train | E: 227 | S: 56750 | R: 210.9768
+| train | E: 228 | S: 57000 | R: 221.4364
+| train | S: 57000 | ALOSS: -0.0253 | VLOSS: 4.4462 | ENT: 1.7071 | KL: 0.0094 | CLIP: 0.1240 | TR: 0.0627 | WTR: 0.0157 | VALID: 0.9960 | ATOTAL: -0.0096 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.2231
+| train | E: 229 | S: 57250 | R: 207.2398
+| train | E: 230 | S: 57500 | R: 229.2604
+| train | E: 231 | S: 57750 | R: 197.1936
+| train | E: 232 | S: 58000 | R: 201.1865
+| train | S: 58000 | ALOSS: -0.0280 | VLOSS: 3.5132 | ENT: 1.5917 | KL: 0.0083 | CLIP: 0.1189 | TR: 0.0646 | WTR: 0.0161 | VALID: 0.9960 | ATOTAL: -0.0119 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7566
+| train | E: 233 | S: 58250 | R: 221.4205
+| train | E: 234 | S: 58500 | R: 208.0358
+| train | E: 235 | S: 58750 | R: 193.3568
+| train | E: 236 | S: 59000 | R: 206.3360
+| train | S: 59000 | ALOSS: -0.0299 | VLOSS: 3.2272 | ENT: 1.5580 | KL: 0.0105 | CLIP: 0.1520 | TR: 0.0684 | WTR: 0.0171 | VALID: 0.9960 | ATOTAL: -0.0128 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6136
+| train | E: 237 | S: 59250 | R: 208.1279
+| train | E: 238 | S: 59500 | R: 208.6155
+| train | E: 239 | S: 59750 | R: 214.4953
+| train | E: 240 | S: 60000 | R: 218.7033
+| train | S: 60000 | ALOSS: -0.0237 | VLOSS: 4.8084 | ENT: 1.5149 | KL: 0.0074 | CLIP: 0.1011 | TR: 0.0612 | WTR: 0.0153 | VALID: 0.9960 | ATOTAL: -0.0084 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.4042
+| eval  | S: 60000 | ER: 244.3980
+| train | E: 241 | S: 60250 | R: 231.2142
+| train | E: 242 | S: 60500 | R: 265.0139
+| train | E: 243 | S: 60750 | R: 228.3062
+| train | E: 244 | S: 61000 | R: 221.1221
+| train | S: 61000 | ALOSS: -0.0255 | VLOSS: 11.5401 | ENT: 1.5101 | KL: 0.0099 | CLIP: 0.1415 | TR: 0.0640 | WTR: 0.0160 | VALID: 0.9960 | ATOTAL: -0.0095 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.7701
+| train | E: 245 | S: 61250 | R: 183.0931
+| train | E: 246 | S: 61500 | R: 214.9450
+| train | E: 247 | S: 61750 | R: 248.4969
+| train | E: 248 | S: 62000 | R: 217.8997
+| train | S: 62000 | ALOSS: -0.0281 | VLOSS: 7.3872 | ENT: 1.6023 | KL: 0.0087 | CLIP: 0.1207 | TR: 0.0753 | WTR: 0.0188 | VALID: 0.9960 | ATOTAL: -0.0092 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.6936
+| train | E: 249 | S: 62250 | R: 228.1630
+| train | E: 250 | S: 62500 | R: 228.3958
+| train | E: 251 | S: 62750 | R: 217.4773
+| train | E: 252 | S: 63000 | R: 224.0755
+| train | S: 63000 | ALOSS: -0.0293 | VLOSS: 3.2616 | ENT: 1.5583 | KL: 0.0094 | CLIP: 0.1327 | TR: 0.0781 | WTR: 0.0195 | VALID: 0.9960 | ATOTAL: -0.0098 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6308
+| train | E: 253 | S: 63250 | R: 247.0645
+| train | E: 254 | S: 63500 | R: 218.7248
+| train | E: 255 | S: 63750 | R: 249.4878
+| train | E: 256 | S: 64000 | R: 209.0446
+| train | S: 64000 | ALOSS: -0.0252 | VLOSS: 8.0024 | ENT: 1.4435 | KL: 0.0091 | CLIP: 0.1246 | TR: 0.0798 | WTR: 0.0199 | VALID: 0.9960 | ATOTAL: -0.0052 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.0012
+| train | E: 257 | S: 64250 | R: 237.2392
+| train | E: 258 | S: 64500 | R: 216.7001
+| train | E: 259 | S: 64750 | R: 207.4493
+| train | E: 260 | S: 65000 | R: 208.1604
+| train | S: 65000 | ALOSS: -0.0268 | VLOSS: 6.1721 | ENT: 1.3933 | KL: 0.0096 | CLIP: 0.1343 | TR: 0.0657 | WTR: 0.0164 | VALID: 0.9960 | ATOTAL: -0.0103 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.0861
+| train | E: 261 | S: 65250 | R: 215.8266
+| train | E: 262 | S: 65500 | R: 227.8703
+| train | E: 263 | S: 65750 | R: 222.0113
+| train | E: 264 | S: 66000 | R: 273.1239
+| train | S: 66000 | ALOSS: -0.0273 | VLOSS: 8.9222 | ENT: 1.3624 | KL: 0.0108 | CLIP: 0.1562 | TR: 0.0788 | WTR: 0.0197 | VALID: 0.9960 | ATOTAL: -0.0076 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.4611
+| train | E: 265 | S: 66250 | R: 229.7451
+| train | E: 266 | S: 66500 | R: 235.3792
+| train | E: 267 | S: 66750 | R: 214.0856
+| train | E: 268 | S: 67000 | R: 217.1778
+| train | S: 67000 | ALOSS: -0.0283 | VLOSS: 5.6186 | ENT: 1.3151 | KL: 0.0106 | CLIP: 0.1448 | TR: 0.0881 | WTR: 0.0220 | VALID: 0.9960 | ATOTAL: -0.0062 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.8093
+| train | E: 269 | S: 67250 | R: 244.0215
+| train | E: 270 | S: 67500 | R: 218.7715
+| train | E: 271 | S: 67750 | R: 223.2179
+| train | E: 272 | S: 68000 | R: 223.5217
+| train | S: 68000 | ALOSS: -0.0270 | VLOSS: 5.9510 | ENT: 1.5841 | KL: 0.0106 | CLIP: 0.1436 | TR: 0.0765 | WTR: 0.0191 | VALID: 0.9960 | ATOTAL: -0.0079 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.9755
+| train | E: 273 | S: 68250 | R: 265.4003
+| train | E: 274 | S: 68500 | R: 223.6971
+| train | E: 275 | S: 68750 | R: 217.5271
+| train | E: 276 | S: 69000 | R: 212.3367
+| train | S: 69000 | ALOSS: -0.0210 | VLOSS: 8.7501 | ENT: 1.4611 | KL: 0.0075 | CLIP: 0.0986 | TR: 0.0808 | WTR: 0.0202 | VALID: 0.9960 | ATOTAL: -0.0008 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.3751
+| train | E: 277 | S: 69250 | R: 270.2065
+| train | E: 278 | S: 69500 | R: 242.8595
+| train | E: 279 | S: 69750 | R: 226.7464
+| train | E: 280 | S: 70000 | R: 278.8235
+| train | S: 70000 | ALOSS: -0.0259 | VLOSS: 10.3557 | ENT: 1.3980 | KL: 0.0092 | CLIP: 0.1294 | TR: 0.0803 | WTR: 0.0201 | VALID: 0.9960 | ATOTAL: -0.0058 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.1778
+| eval  | S: 70000 | ER: 371.9863
+| train | E: 281 | S: 70250 | R: 234.2252
+| train | E: 282 | S: 70500 | R: 222.9416
+| train | E: 283 | S: 70750 | R: 241.9089
+| train | E: 284 | S: 71000 | R: 241.4581
+| train | S: 71000 | ALOSS: -0.0261 | VLOSS: 4.5014 | ENT: 1.5589 | KL: 0.0085 | CLIP: 0.1148 | TR: 0.0670 | WTR: 0.0168 | VALID: 0.9960 | ATOTAL: -0.0093 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.2507
+| train | E: 285 | S: 71250 | R: 232.8157
+| train | E: 286 | S: 71500 | R: 268.3706
+| train | E: 287 | S: 71750 | R: 201.9999
+| train | E: 288 | S: 72000 | R: 229.1873
+| train | S: 72000 | ALOSS: -0.0205 | VLOSS: 8.2363 | ENT: 1.3364 | KL: 0.0076 | CLIP: 0.0952 | TR: 0.0869 | WTR: 0.0217 | VALID: 0.9960 | ATOTAL: 0.0012 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.1182
+| train | E: 289 | S: 72250 | R: 234.0256
+| train | E: 290 | S: 72500 | R: 205.7402
+| train | E: 291 | S: 72750 | R: 342.8694
+| train | E: 292 | S: 73000 | R: 251.6072
+| train | S: 73000 | ALOSS: -0.0281 | VLOSS: 17.4102 | ENT: 1.2097 | KL: 0.0117 | CLIP: 0.1659 | TR: 0.1186 | WTR: 0.0297 | VALID: 0.9960 | ATOTAL: 0.0015 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 8.7051
+| train | E: 293 | S: 73250 | R: 234.1399
+| train | E: 294 | S: 73500 | R: 229.3436
+| train | E: 295 | S: 73750 | R: 279.9471
+| train | E: 296 | S: 74000 | R: 299.7946
+| train | S: 74000 | ALOSS: -0.0261 | VLOSS: 14.7728 | ENT: 1.1611 | KL: 0.0094 | CLIP: 0.1356 | TR: 0.1224 | WTR: 0.0306 | VALID: 0.9960 | ATOTAL: 0.0045 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 7.3864
+| train | E: 297 | S: 74250 | R: 243.1723
+| train | E: 298 | S: 74500 | R: 220.0274
+| train | E: 299 | S: 74750 | R: 345.6456
+| train | E: 300 | S: 75000 | R: 202.8333
+| train | S: 75000 | ALOSS: -0.0197 | VLOSS: 16.0706 | ENT: 1.3988 | KL: 0.0093 | CLIP: 0.1329 | TR: 0.1003 | WTR: 0.0251 | VALID: 0.9960 | ATOTAL: 0.0054 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 8.0353
+| train | E: 301 | S: 75250 | R: 270.0671
+| train | E: 302 | S: 75500 | R: 221.9782
+| train | E: 303 | S: 75750 | R: 230.3991
+| train | E: 304 | S: 76000 | R: 286.5823
+| train | S: 76000 | ALOSS: -0.0304 | VLOSS: 13.2325 | ENT: 1.1614 | KL: 0.0107 | CLIP: 0.1535 | TR: 0.1133 | WTR: 0.0283 | VALID: 0.9960 | ATOTAL: -0.0020 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 6.6163
+| train | E: 305 | S: 76250 | R: 278.6588
+| train | E: 306 | S: 76500 | R: 278.8085
+| train | E: 307 | S: 76750 | R: 318.7190
+| train | E: 308 | S: 77000 | R: 327.4037
+| train | S: 77000 | ALOSS: -0.0321 | VLOSS: 23.6730 | ENT: 1.2250 | KL: 0.0133 | CLIP: 0.1795 | TR: 0.1365 | WTR: 0.0341 | VALID: 0.9959 | ATOTAL: 0.0021 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 11.8365
+| train | E: 309 | S: 77250 | R: 307.1616
+| train | E: 310 | S: 77500 | R: 333.5638
+| train | E: 311 | S: 77750 | R: 299.2487
+| train | E: 312 | S: 78000 | R: 309.1865
+| train | S: 78000 | ALOSS: -0.0183 | VLOSS: 20.3141 | ENT: 1.2514 | KL: 0.0074 | CLIP: 0.1000 | TR: 0.1362 | WTR: 0.0341 | VALID: 0.9960 | ATOTAL: 0.0158 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 10.1571
+| train | E: 313 | S: 78250 | R: 361.8724
+| train | E: 314 | S: 78500 | R: 353.1048
+| train | E: 315 | S: 78750 | R: 245.3464
+| train | E: 316 | S: 79000 | R: 246.8639
+| train | S: 79000 | ALOSS: -0.0242 | VLOSS: 30.5523 | ENT: 1.0998 | KL: 0.0090 | CLIP: 0.1274 | TR: 0.1488 | WTR: 0.0372 | VALID: 0.9960 | ATOTAL: 0.0130 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.2762
+| train | E: 317 | S: 79250 | R: 339.0332
+| train | E: 318 | S: 79500 | R: 363.9973
+| train | E: 319 | S: 79750 | R: 303.0465
+| train | E: 320 | S: 80000 | R: 269.6075
+| train | S: 80000 | ALOSS: -0.0210 | VLOSS: 18.3603 | ENT: 1.1604 | KL: 0.0076 | CLIP: 0.1028 | TR: 0.1572 | WTR: 0.0393 | VALID: 0.9960 | ATOTAL: 0.0183 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 9.1802
+| eval  | S: 80000 | ER: 403.7183
+| train | E: 321 | S: 80250 | R: 263.1128
+| train | E: 322 | S: 80500 | R: 317.9220
+| train | E: 323 | S: 80750 | R: 302.3480
+| train | E: 324 | S: 81000 | R: 256.8995
+| train | S: 81000 | ALOSS: -0.0244 | VLOSS: 15.0600 | ENT: 1.0510 | KL: 0.0093 | CLIP: 0.1333 | TR: 0.1505 | WTR: 0.0376 | VALID: 0.9960 | ATOTAL: 0.0132 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 7.5300
+| train | E: 325 | S: 81250 | R: 295.7663
+| train | E: 326 | S: 81500 | R: 334.0690
+| train | E: 327 | S: 81750 | R: 274.7355
+| train | E: 328 | S: 82000 | R: 306.8450
+| train | S: 82000 | ALOSS: -0.0264 | VLOSS: 13.5024 | ENT: 1.1459 | KL: 0.0104 | CLIP: 0.1490 | TR: 0.1441 | WTR: 0.0360 | VALID: 0.9960 | ATOTAL: 0.0097 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 6.7512
+| train | E: 329 | S: 82250 | R: 336.1946
+| train | E: 330 | S: 82500 | R: 295.5312
+| train | E: 331 | S: 82750 | R: 271.1001
+| train | E: 332 | S: 83000 | R: 254.4048
+| train | S: 83000 | ALOSS: -0.0229 | VLOSS: 16.7063 | ENT: 0.9793 | KL: 0.0097 | CLIP: 0.1374 | TR: 0.1410 | WTR: 0.0353 | VALID: 0.9960 | ATOTAL: 0.0124 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 8.3532
+| train | E: 333 | S: 83250 | R: 310.8189
+| train | E: 334 | S: 83500 | R: 258.5655
+| train | E: 335 | S: 83750 | R: 228.8264
+| train | E: 336 | S: 84000 | R: 328.9843
+| train | S: 84000 | ALOSS: -0.0307 | VLOSS: 18.6587 | ENT: 1.0990 | KL: 0.0111 | CLIP: 0.1592 | TR: 0.1517 | WTR: 0.0379 | VALID: 0.9960 | ATOTAL: 0.0072 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 9.3293
+| train | E: 337 | S: 84250 | R: 356.4133
+| train | E: 338 | S: 84500 | R: 410.4322
+| train | E: 339 | S: 84750 | R: 330.1008
+| train | E: 340 | S: 85000 | R: 394.5393
+| train | S: 85000 | ALOSS: -0.0182 | VLOSS: 40.8105 | ENT: 1.1245 | KL: 0.0085 | CLIP: 0.1257 | TR: 0.1398 | WTR: 0.0349 | VALID: 0.9960 | ATOTAL: 0.0167 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 20.4053
+| train | E: 341 | S: 85250 | R: 340.8961
+| train | E: 342 | S: 85500 | R: 408.0984
+| train | E: 343 | S: 85750 | R: 390.3218
+| train | E: 344 | S: 86000 | R: 328.4529
+| train | S: 86000 | ALOSS: -0.0209 | VLOSS: 38.7982 | ENT: 0.8988 | KL: 0.0088 | CLIP: 0.1195 | TR: 0.1517 | WTR: 0.0379 | VALID: 0.9960 | ATOTAL: 0.0171 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 19.3991
+| train | E: 345 | S: 86250 | R: 405.5550
+| train | E: 346 | S: 86500 | R: 423.4338
+| train | E: 347 | S: 86750 | R: 288.7721
+| train | E: 348 | S: 87000 | R: 359.1008
+| train | S: 87000 | ALOSS: -0.0202 | VLOSS: 32.5618 | ENT: 1.0178 | KL: 0.0111 | CLIP: 0.1478 | TR: 0.1447 | WTR: 0.0362 | VALID: 0.9960 | ATOTAL: 0.0160 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 16.2809
+| train | E: 349 | S: 87250 | R: 309.2974
+| train | E: 350 | S: 87500 | R: 367.1801
+| train | E: 351 | S: 87750 | R: 360.0903
+| train | E: 352 | S: 88000 | R: 341.6581
+| train | S: 88000 | ALOSS: -0.0262 | VLOSS: 24.2172 | ENT: 1.0733 | KL: 0.0105 | CLIP: 0.1481 | TR: 0.1538 | WTR: 0.0385 | VALID: 0.9960 | ATOTAL: 0.0123 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.1086
+| train | E: 353 | S: 88250 | R: 358.0988
+| train | E: 354 | S: 88500 | R: 395.9064
+| train | E: 355 | S: 88750 | R: 270.7730
+| train | E: 356 | S: 89000 | R: 258.9741
+| train | S: 89000 | ALOSS: -0.0266 | VLOSS: 29.4418 | ENT: 0.9424 | KL: 0.0116 | CLIP: 0.1622 | TR: 0.1480 | WTR: 0.0370 | VALID: 0.9960 | ATOTAL: 0.0104 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 14.7209
+| train | E: 357 | S: 89250 | R: 265.1557
+| train | E: 358 | S: 89500 | R: 348.9653
+| train | E: 359 | S: 89750 | R: 293.2622
+| train | E: 360 | S: 90000 | R: 304.8479
+| train | S: 90000 | ALOSS: -0.0189 | VLOSS: 36.9770 | ENT: 0.9614 | KL: 0.0080 | CLIP: 0.1046 | TR: 0.1373 | WTR: 0.0343 | VALID: 0.9960 | ATOTAL: 0.0154 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.4885
+| eval  | S: 90000 | ER: 453.3716
+| train | E: 361 | S: 90250 | R: 391.7059
+| train | E: 362 | S: 90500 | R: 361.7394
+| train | E: 363 | S: 90750 | R: 343.8374
+| train | E: 364 | S: 91000 | R: 348.3354
+| train | S: 91000 | ALOSS: -0.0221 | VLOSS: 23.2263 | ENT: 1.1074 | KL: 0.0105 | CLIP: 0.1546 | TR: 0.1438 | WTR: 0.0359 | VALID: 0.9960 | ATOTAL: 0.0138 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 11.6132
+| train | E: 365 | S: 91250 | R: 371.9801
+| train | E: 366 | S: 91500 | R: 402.1686
+| train | E: 367 | S: 91750 | R: 352.6023
+| train | E: 368 | S: 92000 | R: 422.8001
+| train | S: 92000 | ALOSS: -0.0227 | VLOSS: 20.9550 | ENT: 1.0857 | KL: 0.0112 | CLIP: 0.1610 | TR: 0.1407 | WTR: 0.0352 | VALID: 0.9960 | ATOTAL: 0.0125 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 10.4775
+| train | E: 369 | S: 92250 | R: 261.4274
+| train | E: 370 | S: 92500 | R: 366.6831
+| train | E: 371 | S: 92750 | R: 364.4192
+| train | E: 372 | S: 93000 | R: 223.4880
+| train | S: 93000 | ALOSS: -0.0275 | VLOSS: 32.9570 | ENT: 1.0930 | KL: 0.0109 | CLIP: 0.1515 | TR: 0.1368 | WTR: 0.0342 | VALID: 0.9960 | ATOTAL: 0.0067 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 16.4785
+| train | E: 373 | S: 93250 | R: 372.6592
+| train | E: 374 | S: 93500 | R: 402.7111
+| train | E: 375 | S: 93750 | R: 299.2649
+| train | E: 376 | S: 94000 | R: 423.8791
+| train | S: 94000 | ALOSS: -0.0201 | VLOSS: 30.0981 | ENT: 0.9822 | KL: 0.0078 | CLIP: 0.1065 | TR: 0.1464 | WTR: 0.0366 | VALID: 0.9960 | ATOTAL: 0.0165 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.0491
+| train | E: 377 | S: 94250 | R: 360.1433
+| train | E: 378 | S: 94500 | R: 310.2877
+| train | E: 379 | S: 94750 | R: 308.9882
+| train | E: 380 | S: 95000 | R: 348.3517
+| train | S: 95000 | ALOSS: -0.0234 | VLOSS: 17.0540 | ENT: 0.9698 | KL: 0.0104 | CLIP: 0.1414 | TR: 0.1348 | WTR: 0.0337 | VALID: 0.9960 | ATOTAL: 0.0103 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 8.5270
+| train | E: 381 | S: 95250 | R: 350.3890
+| train | E: 382 | S: 95500 | R: 270.2319
+| train | E: 383 | S: 95750 | R: 375.8742
+| train | E: 384 | S: 96000 | R: 392.9038
+| train | S: 96000 | ALOSS: -0.0246 | VLOSS: 24.5882 | ENT: 0.9275 | KL: 0.0108 | CLIP: 0.1507 | TR: 0.1332 | WTR: 0.0333 | VALID: 0.9960 | ATOTAL: 0.0087 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.2941
+| train | E: 385 | S: 96250 | R: 406.8256
+| train | E: 386 | S: 96500 | R: 383.5722
+| train | E: 387 | S: 96750 | R: 279.2871
+| train | E: 388 | S: 97000 | R: 380.4922
+| train | S: 97000 | ALOSS: -0.0242 | VLOSS: 33.4357 | ENT: 0.9128 | KL: 0.0094 | CLIP: 0.1278 | TR: 0.1216 | WTR: 0.0304 | VALID: 0.9960 | ATOTAL: 0.0062 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 16.7179
+| train | E: 389 | S: 97250 | R: 392.6237
+| train | E: 390 | S: 97500 | R: 270.4248
+| train | E: 391 | S: 97750 | R: 411.0526
+| train | E: 392 | S: 98000 | R: 380.0617
+| train | S: 98000 | ALOSS: -0.0264 | VLOSS: 31.0626 | ENT: 0.7506 | KL: 0.0103 | CLIP: 0.1415 | TR: 0.1301 | WTR: 0.0325 | VALID: 0.9960 | ATOTAL: 0.0061 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.5313
+| train | E: 393 | S: 98250 | R: 452.0551
+| train | E: 394 | S: 98500 | R: 514.2836
+| train | E: 395 | S: 98750 | R: 378.3006
+| train | E: 396 | S: 99000 | R: 357.6472
+| train | S: 99000 | ALOSS: -0.0228 | VLOSS: 44.9468 | ENT: 0.8721 | KL: 0.0097 | CLIP: 0.1356 | TR: 0.1308 | WTR: 0.0327 | VALID: 0.9960 | ATOTAL: 0.0099 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.4734
+| train | E: 397 | S: 99250 | R: 376.5912
+| train | E: 398 | S: 99500 | R: 330.9836
+| train | E: 399 | S: 99750 | R: 428.4134
+| train | E: 400 | S: 100000 | R: 393.9126
+| train | S: 100000 | ALOSS: -0.0200 | VLOSS: 40.8131 | ENT: 0.8174 | KL: 0.0092 | CLIP: 0.1318 | TR: 0.1402 | WTR: 0.0350 | VALID: 0.9960 | ATOTAL: 0.0151 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 20.4066
+| eval  | S: 100000 | ER: 594.8676
+| train | E: 401 | S: 100250 | R: 360.3497
+| train | E: 402 | S: 100500 | R: 315.4018
+| train | E: 403 | S: 100750 | R: 389.5227
+| train | E: 404 | S: 101000 | R: 263.8022
+| train | S: 101000 | ALOSS: -0.0212 | VLOSS: 33.1645 | ENT: 0.5504 | KL: 0.0107 | CLIP: 0.1515 | TR: 0.1344 | WTR: 0.0336 | VALID: 0.9960 | ATOTAL: 0.0124 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 16.5823
+| train | E: 405 | S: 101250 | R: 378.2985
+| train | E: 406 | S: 101500 | R: 402.6423
+| train | E: 407 | S: 101750 | R: 443.0803
+| train | E: 408 | S: 102000 | R: 428.1104
+| train | S: 102000 | ALOSS: -0.0222 | VLOSS: 61.5984 | ENT: 0.7825 | KL: 0.0109 | CLIP: 0.1478 | TR: 0.1332 | WTR: 0.0333 | VALID: 0.9960 | ATOTAL: 0.0111 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 30.7992
+| train | E: 409 | S: 102250 | R: 428.2260
+| train | E: 410 | S: 102500 | R: 244.3294
+| train | E: 411 | S: 102750 | R: 424.3784
+| train | E: 412 | S: 103000 | R: 460.7106
+| train | S: 103000 | ALOSS: -0.0150 | VLOSS: 28.8266 | ENT: 0.7456 | KL: 0.0099 | CLIP: 0.1378 | TR: 0.1370 | WTR: 0.0343 | VALID: 0.9960 | ATOTAL: 0.0193 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 14.4133
+| train | E: 413 | S: 103250 | R: 335.7056
+| train | E: 414 | S: 103500 | R: 426.9148
+| train | E: 415 | S: 103750 | R: 380.8499
+| train | E: 416 | S: 104000 | R: 514.0744
+| train | S: 104000 | ALOSS: -0.0236 | VLOSS: 45.6979 | ENT: 0.7478 | KL: 0.0107 | CLIP: 0.1577 | TR: 0.1245 | WTR: 0.0311 | VALID: 0.9960 | ATOTAL: 0.0075 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.8490
+| train | E: 417 | S: 104250 | R: 381.6999
+| train | E: 418 | S: 104500 | R: 404.4227
+| train | E: 419 | S: 104750 | R: 480.7898
+| train | E: 420 | S: 105000 | R: 283.2816
+| train | S: 105000 | ALOSS: -0.0301 | VLOSS: 40.2000 | ENT: 0.7334 | KL: 0.0124 | CLIP: 0.1712 | TR: 0.1338 | WTR: 0.0335 | VALID: 0.9960 | ATOTAL: 0.0034 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 20.1000
+| train | E: 421 | S: 105250 | R: 442.3268
+| train | E: 422 | S: 105500 | R: 440.8937
+| train | E: 423 | S: 105750 | R: 335.3691
+| train | E: 424 | S: 106000 | R: 448.7029
+| train | S: 106000 | ALOSS: -0.0200 | VLOSS: 35.3495 | ENT: 0.7900 | KL: 0.0119 | CLIP: 0.1637 | TR: 0.1197 | WTR: 0.0299 | VALID: 0.9960 | ATOTAL: 0.0099 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 17.6747
+| train | E: 425 | S: 106250 | R: 433.0876
+| train | E: 426 | S: 106500 | R: 451.8625
+| train | E: 427 | S: 106750 | R: 393.0440
+| train | E: 428 | S: 107000 | R: 441.4319
+| train | S: 107000 | ALOSS: -0.0233 | VLOSS: 21.1129 | ENT: 0.8586 | KL: 0.0106 | CLIP: 0.1475 | TR: 0.1016 | WTR: 0.0254 | VALID: 0.9960 | ATOTAL: 0.0021 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 10.5565
+| train | E: 429 | S: 107250 | R: 381.7070
+| train | E: 430 | S: 107500 | R: 334.4565
+| train | E: 431 | S: 107750 | R: 470.6398
+| train | E: 432 | S: 108000 | R: 451.7001
+| train | S: 108000 | ALOSS: -0.0245 | VLOSS: 42.4522 | ENT: 0.8118 | KL: 0.0098 | CLIP: 0.1406 | TR: 0.1174 | WTR: 0.0293 | VALID: 0.9960 | ATOTAL: 0.0049 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 21.2261
+| train | E: 433 | S: 108250 | R: 438.8847
+| train | E: 434 | S: 108500 | R: 446.1531
+| train | E: 435 | S: 108750 | R: 390.3357
+| train | E: 436 | S: 109000 | R: 375.3634
+| train | S: 109000 | ALOSS: -0.0249 | VLOSS: 24.8890 | ENT: 0.8250 | KL: 0.0111 | CLIP: 0.1547 | TR: 0.1191 | WTR: 0.0298 | VALID: 0.9960 | ATOTAL: 0.0049 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.4445
+| train | E: 437 | S: 109250 | R: 382.1956
+| train | E: 438 | S: 109500 | R: 383.3460
+| train | E: 439 | S: 109750 | R: 363.6450
+| train | E: 440 | S: 110000 | R: 354.0809
+| train | S: 110000 | ALOSS: -0.0271 | VLOSS: 42.2467 | ENT: 0.7400 | KL: 0.0132 | CLIP: 0.1836 | TR: 0.1203 | WTR: 0.0301 | VALID: 0.9961 | ATOTAL: 0.0030 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 21.1234
+| eval  | S: 110000 | ER: 597.1842
+| train | E: 441 | S: 110250 | R: 475.8697
+| train | E: 442 | S: 110500 | R: 425.4181
+| train | E: 443 | S: 110750 | R: 455.7836
+| train | E: 444 | S: 111000 | R: 456.4278
+| train | S: 111000 | ALOSS: -0.0268 | VLOSS: 48.6865 | ENT: 0.7849 | KL: 0.0113 | CLIP: 0.1613 | TR: 0.1181 | WTR: 0.0295 | VALID: 0.9960 | ATOTAL: 0.0027 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 24.3432
+| train | E: 445 | S: 111250 | R: 354.2864
+| train | E: 446 | S: 111500 | R: 271.2617
+| train | E: 447 | S: 111750 | R: 404.1726
+| train | E: 448 | S: 112000 | R: 473.2802
+| train | S: 112000 | ALOSS: -0.0134 | VLOSS: 76.9558 | ENT: 0.6796 | KL: 0.0046 | CLIP: 0.0536 | TR: 0.1041 | WTR: 0.0260 | VALID: 0.9962 | ATOTAL: 0.0126 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 38.4779
+| train | E: 449 | S: 112250 | R: 445.6169
+| train | E: 450 | S: 112500 | R: 395.7390
+| train | E: 451 | S: 112750 | R: 356.8268
+| train | E: 452 | S: 113000 | R: 440.3883
+| train | S: 113000 | ALOSS: -0.0264 | VLOSS: 30.7359 | ENT: 0.5870 | KL: 0.0105 | CLIP: 0.1374 | TR: 0.1092 | WTR: 0.0273 | VALID: 0.9960 | ATOTAL: 0.0009 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.3679
+| train | E: 453 | S: 113250 | R: 389.4126
+| train | E: 454 | S: 113500 | R: 413.1996
+| train | E: 455 | S: 113750 | R: 482.3527
+| train | E: 456 | S: 114000 | R: 442.7570
+| train | S: 114000 | ALOSS: -0.0269 | VLOSS: 36.7780 | ENT: 0.6073 | KL: 0.0121 | CLIP: 0.1803 | TR: 0.1190 | WTR: 0.0298 | VALID: 0.9960 | ATOTAL: 0.0029 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.3890
+| train | E: 457 | S: 114250 | R: 338.6058
+| train | E: 458 | S: 114500 | R: 523.3034
+| train | E: 459 | S: 114750 | R: 399.1772
+| train | E: 460 | S: 115000 | R: 485.0479
+| train | S: 115000 | ALOSS: -0.0182 | VLOSS: 41.5056 | ENT: 0.4473 | KL: 0.0108 | CLIP: 0.1458 | TR: 0.1238 | WTR: 0.0309 | VALID: 0.9961 | ATOTAL: 0.0128 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 20.7528
+| train | E: 461 | S: 115250 | R: 396.0593
+| train | E: 462 | S: 115500 | R: 491.3262
+| train | E: 463 | S: 115750 | R: 419.8881
+| train | E: 464 | S: 116000 | R: 430.0096
+| train | S: 116000 | ALOSS: -0.0252 | VLOSS: 19.6171 | ENT: 0.4560 | KL: 0.0134 | CLIP: 0.1856 | TR: 0.1161 | WTR: 0.0290 | VALID: 0.9960 | ATOTAL: 0.0038 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 9.8086
+| train | E: 465 | S: 116250 | R: 388.0837
+| train | E: 466 | S: 116500 | R: 463.4393
+| train | E: 467 | S: 116750 | R: 513.0734
+| train | E: 468 | S: 117000 | R: 462.3273
+| train | S: 117000 | ALOSS: -0.0238 | VLOSS: 37.6492 | ENT: 0.5700 | KL: 0.0141 | CLIP: 0.2035 | TR: 0.1196 | WTR: 0.0299 | VALID: 0.9960 | ATOTAL: 0.0061 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.8246
+| train | E: 469 | S: 117250 | R: 443.8577
+| train | E: 470 | S: 117500 | R: 479.5851
+| train | E: 471 | S: 117750 | R: 505.2523
+| train | E: 472 | S: 118000 | R: 450.1947
+| train | S: 118000 | ALOSS: -0.0198 | VLOSS: 24.7998 | ENT: 0.5059 | KL: 0.0115 | CLIP: 0.1645 | TR: 0.1032 | WTR: 0.0258 | VALID: 0.9960 | ATOTAL: 0.0060 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.3999
+| train | E: 473 | S: 118250 | R: 445.0417
+| train | E: 474 | S: 118500 | R: 414.0884
+| train | E: 475 | S: 118750 | R: 472.3358
+| train | E: 476 | S: 119000 | R: 443.5842
+| train | S: 119000 | ALOSS: -0.0255 | VLOSS: 38.1575 | ENT: 0.3944 | KL: 0.0110 | CLIP: 0.1564 | TR: 0.1140 | WTR: 0.0285 | VALID: 0.9960 | ATOTAL: 0.0030 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 19.0787
+| train | E: 477 | S: 119250 | R: 354.1073
+| train | E: 478 | S: 119500 | R: 366.9540
+| train | E: 479 | S: 119750 | R: 415.0544
+| train | E: 480 | S: 120000 | R: 518.5439
+| train | S: 120000 | ALOSS: -0.0261 | VLOSS: 31.8267 | ENT: 0.3326 | KL: 0.0128 | CLIP: 0.1797 | TR: 0.1281 | WTR: 0.0320 | VALID: 0.9960 | ATOTAL: 0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.9134
+| eval  | S: 120000 | ER: 528.1448
+| train | E: 481 | S: 120250 | R: 484.9473
+| train | E: 482 | S: 120500 | R: 503.1160
+| train | E: 483 | S: 120750 | R: 615.7529
+| train | E: 484 | S: 121000 | R: 538.4898
+| train | S: 121000 | ALOSS: -0.0146 | VLOSS: 27.6463 | ENT: 0.3832 | KL: 0.0098 | CLIP: 0.1354 | TR: 0.1076 | WTR: 0.0269 | VALID: 0.9960 | ATOTAL: 0.0124 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 13.8232
+| train | E: 485 | S: 121250 | R: 471.1433
+| train | E: 486 | S: 121500 | R: 588.0842
+| train | E: 487 | S: 121750 | R: 567.4424
+| train | E: 488 | S: 122000 | R: 462.3337
+| train | S: 122000 | ALOSS: -0.0178 | VLOSS: 36.7155 | ENT: 0.3789 | KL: 0.0093 | CLIP: 0.1221 | TR: 0.1200 | WTR: 0.0300 | VALID: 0.9960 | ATOTAL: 0.0121 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.3578
+| train | E: 489 | S: 122250 | R: 550.3084
+| train | E: 490 | S: 122500 | R: 591.6964
+| train | E: 491 | S: 122750 | R: 581.5757
+| train | E: 492 | S: 123000 | R: 508.8650
+| train | S: 123000 | ALOSS: -0.0189 | VLOSS: 46.3580 | ENT: 0.4183 | KL: 0.0131 | CLIP: 0.1732 | TR: 0.1356 | WTR: 0.0339 | VALID: 0.9960 | ATOTAL: 0.0150 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 23.1790
+| train | E: 493 | S: 123250 | R: 435.3366
+| train | E: 494 | S: 123500 | R: 515.7875
+| train | E: 495 | S: 123750 | R: 639.6019
+| train | E: 496 | S: 124000 | R: 398.2885
+| train | S: 124000 | ALOSS: -0.0234 | VLOSS: 61.9829 | ENT: 0.3236 | KL: 0.0118 | CLIP: 0.1590 | TR: 0.1308 | WTR: 0.0327 | VALID: 0.9960 | ATOTAL: 0.0093 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 30.9915
+| train | E: 497 | S: 124250 | R: 505.7018
+| train | E: 498 | S: 124500 | R: 505.6563
+| train | E: 499 | S: 124750 | R: 514.4732
+| train | E: 500 | S: 125000 | R: 506.0678
+| train | S: 125000 | ALOSS: -0.0114 | VLOSS: 45.6723 | ENT: 0.2646 | KL: 0.0136 | CLIP: 0.1729 | TR: 0.1189 | WTR: 0.0297 | VALID: 0.9958 | ATOTAL: 0.0183 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.8361
+| train | E: 501 | S: 125250 | R: 584.1111
+| train | E: 502 | S: 125500 | R: 502.3194
+| train | E: 503 | S: 125750 | R: 681.8736
+| train | E: 504 | S: 126000 | R: 658.7409
+| train | S: 126000 | ALOSS: -0.0209 | VLOSS: 56.6047 | ENT: 0.4463 | KL: 0.0098 | CLIP: 0.1256 | TR: 0.1186 | WTR: 0.0297 | VALID: 0.9960 | ATOTAL: 0.0088 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 28.3023
+| train | E: 505 | S: 126250 | R: 663.2535
+| train | E: 506 | S: 126500 | R: 676.3073
+| train | E: 507 | S: 126750 | R: 538.6360
+| train | E: 508 | S: 127000 | R: 585.5068
+| train | S: 127000 | ALOSS: -0.0227 | VLOSS: 69.1047 | ENT: 0.3845 | KL: 0.0115 | CLIP: 0.1523 | TR: 0.1131 | WTR: 0.0283 | VALID: 0.9960 | ATOTAL: 0.0056 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 34.5524
+| train | E: 509 | S: 127250 | R: 589.1492
+| train | E: 510 | S: 127500 | R: 615.4095
+| train | E: 511 | S: 127750 | R: 680.5375
+| train | E: 512 | S: 128000 | R: 581.1288
+| train | S: 128000 | ALOSS: -0.0131 | VLOSS: 37.6051 | ENT: 0.3437 | KL: 0.0106 | CLIP: 0.1482 | TR: 0.1132 | WTR: 0.0283 | VALID: 0.9960 | ATOTAL: 0.0152 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 18.8025
+| train | E: 513 | S: 128250 | R: 695.6446
+| train | E: 514 | S: 128500 | R: 587.3962
+| train | E: 515 | S: 128750 | R: 548.6790
+| train | E: 516 | S: 129000 | R: 682.5134
+| train | S: 129000 | ALOSS: -0.0132 | VLOSS: 45.8016 | ENT: 0.4148 | KL: 0.0099 | CLIP: 0.1291 | TR: 0.1136 | WTR: 0.0284 | VALID: 0.9960 | ATOTAL: 0.0152 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 22.9008
+| train | E: 517 | S: 129250 | R: 710.0078
+| train | E: 518 | S: 129500 | R: 695.5301
+| train | E: 519 | S: 129750 | R: 604.8410
+| train | E: 520 | S: 130000 | R: 696.6771
+| train | S: 130000 | ALOSS: -0.0204 | VLOSS: 51.6828 | ENT: 0.5905 | KL: 0.0122 | CLIP: 0.1659 | TR: 0.1182 | WTR: 0.0295 | VALID: 0.9960 | ATOTAL: 0.0091 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 25.8414
+| eval  | S: 130000 | ER: 837.3263
+| train | E: 521 | S: 130250 | R: 718.9459
+| train | E: 522 | S: 130500 | R: 706.3293
+| train | E: 523 | S: 130750 | R: 701.0149
+| train | E: 524 | S: 131000 | R: 700.0394
+| train | S: 131000 | ALOSS: -0.0035 | VLOSS: 76.2786 | ENT: 0.7434 | KL: 0.0077 | CLIP: 0.0829 | TR: 0.1314 | WTR: 0.0328 | VALID: 0.9960 | ATOTAL: 0.0293 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 38.1393
+| train | E: 525 | S: 131250 | R: 701.2087
+| train | E: 526 | S: 131500 | R: 696.7041
+| train | E: 527 | S: 131750 | R: 518.9392
+| train | E: 528 | S: 132000 | R: 523.4330
+| train | S: 132000 | ALOSS: -0.0168 | VLOSS: 55.5331 | ENT: 0.3908 | KL: 0.0137 | CLIP: 0.1726 | TR: 0.1224 | WTR: 0.0306 | VALID: 0.9960 | ATOTAL: 0.0138 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 27.7666
+| train | E: 529 | S: 132250 | R: 691.6100
+| train | E: 530 | S: 132500 | R: 707.3364
+| train | E: 531 | S: 132750 | R: 707.7885
+| train | E: 532 | S: 133000 | R: 703.5668
+| train | S: 133000 | ALOSS: -0.0033 | VLOSS: 72.2928 | ENT: 0.6543 | KL: 0.0072 | CLIP: 0.1219 | TR: 0.1278 | WTR: 0.0319 | VALID: 0.9969 | ATOTAL: 0.0287 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 36.1464
+| train | E: 533 | S: 133250 | R: 719.7455
+| train | E: 534 | S: 133500 | R: 704.9882
+| train | E: 535 | S: 133750 | R: 711.5388
+| train | E: 536 | S: 134000 | R: 495.7713
+| train | S: 134000 | ALOSS: -0.0204 | VLOSS: 82.5592 | ENT: 0.5623 | KL: 0.0115 | CLIP: 0.1552 | TR: 0.1439 | WTR: 0.0360 | VALID: 0.9960 | ATOTAL: 0.0156 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 41.2796
+| train | E: 537 | S: 134250 | R: 702.1784
+| train | E: 538 | S: 134500 | R: 702.3977
+| train | E: 539 | S: 134750 | R: 719.8316
+| train | E: 540 | S: 135000 | R: 709.8097
+| train | S: 135000 | ALOSS: -0.0109 | VLOSS: 55.7024 | ENT: 0.6243 | KL: 0.0093 | CLIP: 0.1236 | TR: 0.1496 | WTR: 0.0374 | VALID: 0.9962 | ATOTAL: 0.0265 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 27.8512
+| train | E: 541 | S: 135250 | R: 714.8521
+| train | E: 542 | S: 135500 | R: 730.1943
+| train | E: 543 | S: 135750 | R: 722.3245
+| train | E: 544 | S: 136000 | R: 704.6617
+| train | S: 136000 | ALOSS: -0.0052 | VLOSS: 65.8579 | ENT: 0.6627 | KL: 0.0077 | CLIP: 0.1005 | TR: 0.1380 | WTR: 0.0345 | VALID: 0.9962 | ATOTAL: 0.0293 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 32.9289
+| train | E: 545 | S: 136250 | R: 698.8097
+| train | E: 546 | S: 136500 | R: 700.4265
+| train | E: 547 | S: 136750 | R: 709.9412
+| train | E: 548 | S: 137000 | R: 714.3431
+| train | S: 137000 | ALOSS: -0.0136 | VLOSS: 38.3194 | ENT: 0.6029 | KL: 0.0110 | CLIP: 0.1514 | TR: 0.1480 | WTR: 0.0370 | VALID: 0.9960 | ATOTAL: 0.0234 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 19.1597
+| train | E: 549 | S: 137250 | R: 730.5600
+| train | E: 550 | S: 137500 | R: 727.9632
+| train | E: 551 | S: 137750 | R: 729.5712
+| train | E: 552 | S: 138000 | R: 725.7199
+| train | S: 138000 | ALOSS: -0.0119 | VLOSS: 48.8513 | ENT: 0.6809 | KL: 0.0111 | CLIP: 0.1281 | TR: 0.1304 | WTR: 0.0326 | VALID: 0.9961 | ATOTAL: 0.0207 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 24.4256
+| train | E: 553 | S: 138250 | R: 740.9663
+| train | E: 554 | S: 138500 | R: 718.0655
+| train | E: 555 | S: 138750 | R: 734.6876
+| train | E: 556 | S: 139000 | R: 629.0762
+| train | S: 139000 | ALOSS: -0.0123 | VLOSS: 40.2933 | ENT: 0.5399 | KL: 0.0098 | CLIP: 0.1356 | TR: 0.1363 | WTR: 0.0341 | VALID: 0.9960 | ATOTAL: 0.0218 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 20.1466
+| train | E: 557 | S: 139250 | R: 732.7422
+| train | E: 558 | S: 139500 | R: 709.2384
+| train | E: 559 | S: 139750 | R: 735.4869
+| train | E: 560 | S: 140000 | R: 731.3066
+| train | S: 140000 | ALOSS: -0.0067 | VLOSS: 55.5506 | ENT: 0.6688 | KL: 0.0094 | CLIP: 0.1306 | TR: 0.1309 | WTR: 0.0327 | VALID: 0.9962 | ATOTAL: 0.0260 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 27.7753
+| eval  | S: 140000 | ER: 857.6928
+| train | E: 561 | S: 140250 | R: 631.8855
+| train | E: 562 | S: 140500 | R: 738.3904
+| train | E: 563 | S: 140750 | R: 586.7082
+| train | E: 564 | S: 141000 | R: 626.0235
+| train | S: 141000 | ALOSS: -0.0196 | VLOSS: 26.5824 | ENT: 0.2908 | KL: 0.0138 | CLIP: 0.1958 | TR: 0.1488 | WTR: 0.0372 | VALID: 0.9960 | ATOTAL: 0.0176 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 13.2912
+| train | E: 565 | S: 141250 | R: 731.5504
+| train | E: 566 | S: 141500 | R: 740.3246
+| train | E: 567 | S: 141750 | R: 735.2489
+| train | E: 568 | S: 142000 | R: 720.7280
+| train | S: 142000 | ALOSS: -0.0162 | VLOSS: 31.5895 | ENT: 0.5561 | KL: 0.0130 | CLIP: 0.1595 | TR: 0.1301 | WTR: 0.0325 | VALID: 0.9960 | ATOTAL: 0.0164 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 15.7947
+| train | E: 569 | S: 142250 | R: 735.7864
+| train | E: 570 | S: 142500 | R: 721.1507
+| train | E: 571 | S: 142750 | R: 732.6686
+| train | E: 572 | S: 143000 | R: 742.8677
+| train | S: 143000 | ALOSS: -0.0182 | VLOSS: 25.7201 | ENT: 0.4502 | KL: 0.0124 | CLIP: 0.1682 | TR: 0.1391 | WTR: 0.0348 | VALID: 0.9960 | ATOTAL: 0.0166 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.8601
+| train | E: 573 | S: 143250 | R: 734.6197
+| train | E: 574 | S: 143500 | R: 742.7324
+| train | E: 575 | S: 143750 | R: 749.7309
+| train | E: 576 | S: 144000 | R: 735.8787
+| train | S: 144000 | ALOSS: -0.0120 | VLOSS: 27.0786 | ENT: 0.4498 | KL: 0.0105 | CLIP: 0.1305 | TR: 0.1353 | WTR: 0.0338 | VALID: 0.9960 | ATOTAL: 0.0218 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 13.5393
+| train | E: 577 | S: 144250 | R: 762.0567
+| train | E: 578 | S: 144500 | R: 747.5481
+| train | E: 579 | S: 144750 | R: 750.5547
+| train | E: 580 | S: 145000 | R: 504.6082
+| train | S: 145000 | ALOSS: -0.0147 | VLOSS: 57.0249 | ENT: 0.3876 | KL: 0.0116 | CLIP: 0.1563 | TR: 0.1384 | WTR: 0.0346 | VALID: 0.9958 | ATOTAL: 0.0199 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 28.5124
+| train | E: 581 | S: 145250 | R: 756.8984
+| train | E: 582 | S: 145500 | R: 742.9910
+| train | E: 583 | S: 145750 | R: 741.0364
+| train | E: 584 | S: 146000 | R: 742.1592
+| train | S: 146000 | ALOSS: -0.0094 | VLOSS: 34.8118 | ENT: 0.5465 | KL: 0.0099 | CLIP: 0.1424 | TR: 0.1356 | WTR: 0.0339 | VALID: 0.9965 | ATOTAL: 0.0245 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 17.4059
+| train | E: 585 | S: 146250 | R: 755.3059
+| train | E: 586 | S: 146500 | R: 758.1108
+| train | E: 587 | S: 146750 | R: 749.8991
+| train | E: 588 | S: 147000 | R: 743.8233
+| train | S: 147000 | ALOSS: -0.0160 | VLOSS: 24.7784 | ENT: 0.5118 | KL: 0.0094 | CLIP: 0.1189 | TR: 0.1378 | WTR: 0.0344 | VALID: 0.9960 | ATOTAL: 0.0184 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.3892
+| train | E: 589 | S: 147250 | R: 750.7920
+| train | E: 590 | S: 147500 | R: 742.2391
+| train | E: 591 | S: 147750 | R: 762.1071
+| train | E: 592 | S: 148000 | R: 746.2524
+| train | S: 148000 | ALOSS: -0.0110 | VLOSS: 18.9166 | ENT: 0.4333 | KL: 0.0121 | CLIP: 0.1622 | TR: 0.1271 | WTR: 0.0318 | VALID: 0.9960 | ATOTAL: 0.0207 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 9.4583
+| train | E: 593 | S: 148250 | R: 747.6372
+| train | E: 594 | S: 148500 | R: 747.8443
+| train | E: 595 | S: 148750 | R: 758.6380
+| train | E: 596 | S: 149000 | R: 776.1106
+| train | S: 149000 | ALOSS: -0.0159 | VLOSS: 24.4870 | ENT: 0.4108 | KL: 0.0094 | CLIP: 0.0993 | TR: 0.1175 | WTR: 0.0294 | VALID: 0.9961 | ATOTAL: 0.0134 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.2435
+| train | E: 597 | S: 149250 | R: 763.3316
+| train | E: 598 | S: 149500 | R: 756.2091
+| train | E: 599 | S: 149750 | R: 769.7519
+| train | E: 600 | S: 150000 | R: 760.7209
+| train | S: 150000 | ALOSS: -0.0115 | VLOSS: 17.2520 | ENT: 0.4180 | KL: 0.0116 | CLIP: 0.1588 | TR: 0.1356 | WTR: 0.0339 | VALID: 0.9960 | ATOTAL: 0.0224 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 8.6260
+| eval  | S: 150000 | ER: 871.6812
+| train | E: 601 | S: 150250 | R: 760.1267
+| train | E: 602 | S: 150500 | R: 272.8270
+| train | E: 603 | S: 150750 | R: 765.2200
+| train | E: 604 | S: 151000 | R: 759.8581
+| train | S: 151000 | ALOSS: -0.0176 | VLOSS: 141.4637 | ENT: 0.1489 | KL: 0.0118 | CLIP: 0.1499 | TR: 0.1522 | WTR: 0.0381 | VALID: 0.9962 | ATOTAL: 0.0204 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 70.7318
+| train | E: 605 | S: 151250 | R: 761.2237
+| train | E: 606 | S: 151500 | R: 758.9753
+| train | E: 607 | S: 151750 | R: 538.9097
+| train | E: 608 | S: 152000 | R: 767.1443
+| train | S: 152000 | ALOSS: -0.0135 | VLOSS: 38.4017 | ENT: 0.2440 | KL: 0.0092 | CLIP: 0.1135 | TR: 0.1207 | WTR: 0.0302 | VALID: 0.9961 | ATOTAL: 0.0167 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 19.2009
+| train | E: 609 | S: 152250 | R: 762.1784
+| train | E: 610 | S: 152500 | R: 456.1180
+| train | E: 611 | S: 152750 | R: 747.3962
+| train | E: 612 | S: 153000 | R: 764.9147
+| train | S: 153000 | ALOSS: -0.0172 | VLOSS: 82.1050 | ENT: 0.0283 | KL: 0.0136 | CLIP: 0.1761 | TR: 0.1209 | WTR: 0.0302 | VALID: 0.9959 | ATOTAL: 0.0130 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 41.0525
+| train | E: 613 | S: 153250 | R: 752.5637
+| train | E: 614 | S: 153500 | R: 562.0576
+| train | E: 615 | S: 153750 | R: 758.6732
+| train | E: 616 | S: 154000 | R: 758.8533
+| train | S: 154000 | ALOSS: -0.0134 | VLOSS: 33.0553 | ENT: 0.1690 | KL: 0.0120 | CLIP: 0.1458 | TR: 0.1123 | WTR: 0.0281 | VALID: 0.9961 | ATOTAL: 0.0147 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 16.5277
+| train | E: 617 | S: 154250 | R: 750.3941
+| train | E: 618 | S: 154500 | R: 755.1577
+| train | E: 619 | S: 154750 | R: 765.4805
+| train | E: 620 | S: 155000 | R: 761.1182
+| train | S: 155000 | ALOSS: -0.0094 | VLOSS: 12.8679 | ENT: 0.4518 | KL: 0.0094 | CLIP: 0.1113 | TR: 0.1132 | WTR: 0.0283 | VALID: 0.9960 | ATOTAL: 0.0189 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 6.4339
+| train | E: 621 | S: 155250 | R: 760.2414
+| train | E: 622 | S: 155500 | R: 753.5102
+| train | E: 623 | S: 155750 | R: 752.8795
+| train | E: 624 | S: 156000 | R: 760.9687
+| train | S: 156000 | ALOSS: -0.0125 | VLOSS: 6.8682 | ENT: 0.3069 | KL: 0.0106 | CLIP: 0.1458 | TR: 0.1107 | WTR: 0.0277 | VALID: 0.9960 | ATOTAL: 0.0152 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.4341
+| train | E: 625 | S: 156250 | R: 763.4181
+| train | E: 626 | S: 156500 | R: 756.4157
+| train | E: 627 | S: 156750 | R: 760.9671
+| train | E: 628 | S: 157000 | R: 759.3076
+| train | S: 157000 | ALOSS: -0.0092 | VLOSS: 10.4434 | ENT: 0.2725 | KL: 0.0119 | CLIP: 0.1500 | TR: 0.1107 | WTR: 0.0277 | VALID: 0.9959 | ATOTAL: 0.0184 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.2217
+| train | E: 629 | S: 157250 | R: 764.1968
+| train | E: 630 | S: 157500 | R: 760.8050
+| train | E: 631 | S: 157750 | R: 762.1200
+| train | E: 632 | S: 158000 | R: 750.5749
+| train | S: 158000 | ALOSS: -0.0092 | VLOSS: 6.3291 | ENT: 0.2484 | KL: 0.0120 | CLIP: 0.1564 | TR: 0.1026 | WTR: 0.0256 | VALID: 0.9960 | ATOTAL: 0.0164 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.1645
+| train | E: 633 | S: 158250 | R: 765.8289
+| train | E: 634 | S: 158500 | R: 765.7430
+| train | E: 635 | S: 158750 | R: 781.7391
+| train | E: 636 | S: 159000 | R: 778.9814
+| train | S: 159000 | ALOSS: -0.0033 | VLOSS: 11.4159 | ENT: 0.3088 | KL: 0.0084 | CLIP: 0.1042 | TR: 0.1056 | WTR: 0.0264 | VALID: 0.9962 | ATOTAL: 0.0231 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.7080
+| train | E: 637 | S: 159250 | R: 645.5686
+| train | E: 638 | S: 159500 | R: 767.1258
+| train | E: 639 | S: 159750 | R: 769.0001
+| train | E: 640 | S: 160000 | R: 773.9109
+| train | S: 160000 | ALOSS: -0.0059 | VLOSS: 83.5880 | ENT: 0.1878 | KL: 0.0130 | CLIP: 0.1835 | TR: 0.1057 | WTR: 0.0264 | VALID: 0.9971 | ATOTAL: 0.0205 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 41.7940
+| eval  | S: 160000 | ER: 873.6869
+| train | E: 641 | S: 160250 | R: 776.2378
+| train | E: 642 | S: 160500 | R: 770.6666
+| train | E: 643 | S: 160750 | R: 761.9008
+| train | E: 644 | S: 161000 | R: 763.4667
+| train | S: 161000 | ALOSS: -0.0132 | VLOSS: 4.9745 | ENT: 0.1315 | KL: 0.0119 | CLIP: 0.1617 | TR: 0.1050 | WTR: 0.0263 | VALID: 0.9960 | ATOTAL: 0.0131 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.4873
+| train | E: 645 | S: 161250 | R: 780.6773
+| train | E: 646 | S: 161500 | R: 782.7771
+| train | E: 647 | S: 161750 | R: 787.3998
+| train | E: 648 | S: 162000 | R: 765.5041
+| train | S: 162000 | ALOSS: -0.0046 | VLOSS: 9.8012 | ENT: 0.1453 | KL: 0.0109 | CLIP: 0.1451 | TR: 0.0954 | WTR: 0.0238 | VALID: 0.9962 | ATOTAL: 0.0192 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.9006
+| train | E: 649 | S: 162250 | R: 768.8449
+| train | E: 650 | S: 162500 | R: 781.0669
+| train | E: 651 | S: 162750 | R: 780.6850
+| train | E: 652 | S: 163000 | R: 772.7346
+| train | S: 163000 | ALOSS: -0.0104 | VLOSS: 8.1545 | ENT: 0.1246 | KL: 0.0088 | CLIP: 0.1185 | TR: 0.1017 | WTR: 0.0254 | VALID: 0.9959 | ATOTAL: 0.0150 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.0772
+| train | E: 653 | S: 163250 | R: 677.3110
+| train | E: 654 | S: 163500 | R: 519.9842
+| train | E: 655 | S: 163750 | R: 554.1836
+| train | E: 656 | S: 164000 | R: 773.5718
+| train | S: 164000 | ALOSS: -0.0132 | VLOSS: 276.4006 | ENT: -0.0813 | KL: 0.0129 | CLIP: 0.1462 | TR: 0.1558 | WTR: 0.0390 | VALID: 0.9960 | ATOTAL: 0.0257 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 138.2003
+| train | E: 657 | S: 164250 | R: 778.8512
+| train | E: 658 | S: 164500 | R: 767.3932
+| train | E: 659 | S: 164750 | R: 767.4116
+| train | E: 660 | S: 165000 | R: 754.5242
+| train | S: 165000 | ALOSS: -0.0131 | VLOSS: 4.1223 | ENT: 0.0829 | KL: 0.0110 | CLIP: 0.1419 | TR: 0.1010 | WTR: 0.0253 | VALID: 0.9960 | ATOTAL: 0.0121 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.0611
+| train | E: 661 | S: 165250 | R: 779.0742
+| train | E: 662 | S: 165500 | R: 779.0222
+| train | E: 663 | S: 165750 | R: 774.6064
+| train | E: 664 | S: 166000 | R: 771.1228
+| train | S: 166000 | ALOSS: -0.0100 | VLOSS: 5.6615 | ENT: 0.0657 | KL: 0.0101 | CLIP: 0.1375 | TR: 0.0886 | WTR: 0.0222 | VALID: 0.9961 | ATOTAL: 0.0122 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.8307
+| train | E: 665 | S: 166250 | R: 790.6826
+| train | E: 666 | S: 166500 | R: 778.1538
+| train | E: 667 | S: 166750 | R: 775.6103
+| train | E: 668 | S: 167000 | R: 651.0383
+| train | S: 167000 | ALOSS: -0.0062 | VLOSS: 50.8022 | ENT: -0.0574 | KL: 0.0066 | CLIP: 0.0854 | TR: 0.0949 | WTR: 0.0237 | VALID: 0.9958 | ATOTAL: 0.0175 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 25.4011
+| train | E: 669 | S: 167250 | R: 790.2033
+| train | E: 670 | S: 167500 | R: 769.5182
+| train | E: 671 | S: 167750 | R: 792.2874
+| train | E: 672 | S: 168000 | R: 782.9520
+| train | S: 168000 | ALOSS: 0.0247 | VLOSS: 9.5170 | ENT: 0.0967 | KL: 0.0075 | CLIP: 0.0996 | TR: 0.0902 | WTR: 0.0225 | VALID: 0.9980 | ATOTAL: 0.0473 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.7585
+| train | E: 673 | S: 168250 | R: 777.0243
+| train | E: 674 | S: 168500 | R: 781.2543
+| train | E: 675 | S: 168750 | R: 772.3770
+| train | E: 676 | S: 169000 | R: 780.7024
+| train | S: 169000 | ALOSS: -0.0092 | VLOSS: 3.1445 | ENT: 0.0510 | KL: 0.0122 | CLIP: 0.1629 | TR: 0.0974 | WTR: 0.0243 | VALID: 0.9960 | ATOTAL: 0.0151 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5723
+| train | E: 677 | S: 169250 | R: 787.5028
+| train | E: 678 | S: 169500 | R: 787.7195
+| train | E: 679 | S: 169750 | R: 652.5915
+| train | E: 680 | S: 170000 | R: 785.4317
+| train | S: 170000 | ALOSS: -0.0176 | VLOSS: 29.9890 | ENT: -0.0615 | KL: 0.0082 | CLIP: 0.1161 | TR: 0.0906 | WTR: 0.0226 | VALID: 0.9965 | ATOTAL: 0.0051 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 14.9945
+| eval  | S: 170000 | ER: 891.4068
+| train | E: 681 | S: 170250 | R: 791.2090
+| train | E: 682 | S: 170500 | R: 804.0340
+| train | E: 683 | S: 170750 | R: 780.6192
+| train | E: 684 | S: 171000 | R: 786.0878
+| train | S: 171000 | ALOSS: -0.0018 | VLOSS: 7.6518 | ENT: 0.0889 | KL: 0.0119 | CLIP: 0.1438 | TR: 0.0970 | WTR: 0.0242 | VALID: 0.9963 | ATOTAL: 0.0225 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.8259
+| train | E: 685 | S: 171250 | R: 780.8095
+| train | E: 686 | S: 171500 | R: 791.3371
+| train | E: 687 | S: 171750 | R: 778.6939
+| train | E: 688 | S: 172000 | R: 801.6322
+| train | S: 172000 | ALOSS: -0.0051 | VLOSS: 3.7958 | ENT: -0.0034 | KL: 0.0112 | CLIP: 0.1398 | TR: 0.0900 | WTR: 0.0225 | VALID: 0.9959 | ATOTAL: 0.0174 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.8979
+| train | E: 689 | S: 172250 | R: 793.2615
+| train | E: 690 | S: 172500 | R: 801.3346
+| train | E: 691 | S: 172750 | R: 791.0273
+| train | E: 692 | S: 173000 | R: 803.0560
+| train | S: 173000 | ALOSS: -0.0122 | VLOSS: 3.2025 | ENT: 0.0137 | KL: 0.0122 | CLIP: 0.1641 | TR: 0.0958 | WTR: 0.0239 | VALID: 0.9959 | ATOTAL: 0.0117 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6012
+| train | E: 693 | S: 173250 | R: 803.1386
+| train | E: 694 | S: 173500 | R: 505.7073
+| train | E: 695 | S: 173750 | R: 795.9513
+| train | E: 696 | S: 174000 | R: 802.8382
+| train | S: 174000 | ALOSS: -0.0023 | VLOSS: 108.0582 | ENT: -0.1772 | KL: 0.0129 | CLIP: 0.1572 | TR: 0.1196 | WTR: 0.0299 | VALID: 0.9961 | ATOTAL: 0.0277 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 54.0291
+| train | E: 697 | S: 174250 | R: 235.6772
+| train | E: 698 | S: 174500 | R: 385.5123
+| train | E: 699 | S: 174750 | R: 801.3377
+| train | E: 700 | S: 175000 | R: 798.2821
+| train | S: 175000 | ALOSS: -0.0215 | VLOSS: 427.2298 | ENT: -0.2356 | KL: 0.0082 | CLIP: 0.0886 | TR: 0.1663 | WTR: 0.0416 | VALID: 0.9971 | ATOTAL: 0.0201 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 213.6149
+| train | E: 701 | S: 175250 | R: 799.4077
+| train | E: 702 | S: 175500 | R: 640.0043
+| train | E: 703 | S: 175750 | R: 806.5670
+| train | E: 704 | S: 176000 | R: 229.5304
+| train | S: 176000 | ALOSS: -0.0053 | VLOSS: 354.0149 | ENT: -0.1406 | KL: 0.0100 | CLIP: 0.1125 | TR: 0.1793 | WTR: 0.0448 | VALID: 0.9963 | ATOTAL: 0.0396 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 177.0074
+| train | E: 705 | S: 176250 | R: 797.0785
+| train | E: 706 | S: 176500 | R: 790.8497
+| train | E: 707 | S: 176750 | R: 803.6906
+| train | E: 708 | S: 177000 | R: 793.0858
+| train | S: 177000 | ALOSS: -0.0041 | VLOSS: 5.2290 | ENT: -0.0307 | KL: 0.0108 | CLIP: 0.1503 | TR: 0.0828 | WTR: 0.0207 | VALID: 0.9960 | ATOTAL: 0.0166 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.6145
+| train | E: 709 | S: 177250 | R: 800.1711
+| train | E: 710 | S: 177500 | R: 796.9756
+| train | E: 711 | S: 177750 | R: 797.7606
+| train | E: 712 | S: 178000 | R: 796.7696
+| train | S: 178000 | ALOSS: -0.0129 | VLOSS: 4.2585 | ENT: 0.0032 | KL: 0.0125 | CLIP: 0.1646 | TR: 0.0841 | WTR: 0.0210 | VALID: 0.9961 | ATOTAL: 0.0082 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.1292
+| train | E: 713 | S: 178250 | R: 802.4956
+| train | E: 714 | S: 178500 | R: 785.0388
+| train | E: 715 | S: 178750 | R: 806.6430
+| train | E: 716 | S: 179000 | R: 802.7640
+| train | S: 179000 | ALOSS: 0.0100 | VLOSS: 4.1022 | ENT: -0.0157 | KL: 0.0108 | CLIP: 0.1451 | TR: 0.0736 | WTR: 0.0184 | VALID: 0.9966 | ATOTAL: 0.0284 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.0511
+| train | E: 717 | S: 179250 | R: 797.8683
+| train | E: 718 | S: 179500 | R: 807.6516
+| train | E: 719 | S: 179750 | R: 793.3826
+| train | E: 720 | S: 180000 | R: 799.2799
+| train | S: 180000 | ALOSS: -0.0131 | VLOSS: 1.3576 | ENT: -0.0643 | KL: 0.0127 | CLIP: 0.1814 | TR: 0.0807 | WTR: 0.0202 | VALID: 0.9960 | ATOTAL: 0.0070 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.6788
+| eval  | S: 180000 | ER: 888.1750
+| train | E: 721 | S: 180250 | R: 812.5007
+| train | E: 722 | S: 180500 | R: 799.5605
+| train | E: 723 | S: 180750 | R: 809.6557
+| train | E: 724 | S: 181000 | R: 807.6391
+| train | S: 181000 | ALOSS: -0.0174 | VLOSS: 4.3582 | ENT: -0.0954 | KL: 0.0097 | CLIP: 0.1258 | TR: 0.0790 | WTR: 0.0197 | VALID: 0.9962 | ATOTAL: 0.0024 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.1791
+| train | E: 725 | S: 181250 | R: 284.8039
+| train | E: 726 | S: 181500 | R: 792.6518
+| train | E: 727 | S: 181750 | R: 806.3422
+| train | E: 728 | S: 182000 | R: 568.9035
+| train | S: 182000 | ALOSS: 0.0033 | VLOSS: 649.1950 | ENT: -0.5207 | KL: 0.0102 | CLIP: 0.1272 | TR: 0.1430 | WTR: 0.0358 | VALID: 0.9955 | ATOTAL: 0.0390 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 324.5975
+| train | E: 729 | S: 182250 | R: 769.4100
+| train | E: 730 | S: 182500 | R: 804.2557
+| train | E: 731 | S: 182750 | R: 808.2618
+| train | E: 732 | S: 183000 | R: 812.7254
+| train | S: 183000 | ALOSS: -0.0151 | VLOSS: 6.3551 | ENT: -0.2067 | KL: 0.0112 | CLIP: 0.1318 | TR: 0.0855 | WTR: 0.0214 | VALID: 0.9962 | ATOTAL: 0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.1775
+| train | E: 733 | S: 183250 | R: 388.0644
+| train | E: 734 | S: 183500 | R: 655.8488
+| train | E: 735 | S: 183750 | R: 323.0793
+| train | E: 736 | S: 184000 | R: 813.8697
+| train | S: 184000 | ALOSS: 0.0001 | VLOSS: 477.0289 | ENT: -0.5154 | KL: 0.0071 | CLIP: 0.0848 | TR: 0.1526 | WTR: 0.0381 | VALID: 0.9962 | ATOTAL: 0.0382 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 238.5145
+| train | E: 737 | S: 184250 | R: 805.6998
+| train | E: 738 | S: 184500 | R: 812.9917
+| train | E: 739 | S: 184750 | R: 814.1185
+| train | E: 740 | S: 185000 | R: 814.3922
+| train | S: 185000 | ALOSS: -0.0083 | VLOSS: 3.0330 | ENT: -0.1107 | KL: 0.0121 | CLIP: 0.1586 | TR: 0.0798 | WTR: 0.0200 | VALID: 0.9957 | ATOTAL: 0.0117 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.5165
+| train | E: 741 | S: 185250 | R: 805.0370
+| train | E: 742 | S: 185500 | R: 812.2205
+| train | E: 743 | S: 185750 | R: 813.1291
+| train | E: 744 | S: 186000 | R: 808.7768
+| train | S: 186000 | ALOSS: -0.0171 | VLOSS: 2.7965 | ENT: -0.1391 | KL: 0.0143 | CLIP: 0.2075 | TR: 0.0788 | WTR: 0.0197 | VALID: 0.9960 | ATOTAL: 0.0026 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.3983
+| train | E: 745 | S: 186250 | R: 816.2324
+| train | E: 746 | S: 186500 | R: 812.8545
+| train | E: 747 | S: 186750 | R: 808.5913
+| train | E: 748 | S: 187000 | R: 808.9128
+| train | S: 187000 | ALOSS: -0.0156 | VLOSS: 1.4929 | ENT: -0.1901 | KL: 0.0140 | CLIP: 0.1837 | TR: 0.0859 | WTR: 0.0215 | VALID: 0.9959 | ATOTAL: 0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.7464
+| train | E: 749 | S: 187250 | R: 812.8460
+| train | E: 750 | S: 187500 | R: 812.3966
+| train | E: 751 | S: 187750 | R: 813.2401
+| train | E: 752 | S: 188000 | R: 813.5866
+| train | S: 188000 | ALOSS: 0.0092 | VLOSS: 2.8515 | ENT: -0.1586 | KL: 0.0120 | CLIP: 0.1780 | TR: 0.0821 | WTR: 0.0205 | VALID: 0.9960 | ATOTAL: 0.0297 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4257
+| train | E: 753 | S: 188250 | R: 811.8275
+| train | E: 754 | S: 188500 | R: 803.1395
+| train | E: 755 | S: 188750 | R: 818.0380
+| train | E: 756 | S: 189000 | R: 802.3997
+| train | S: 189000 | ALOSS: -0.0135 | VLOSS: 1.0631 | ENT: -0.2214 | KL: 0.0125 | CLIP: 0.1490 | TR: 0.0811 | WTR: 0.0203 | VALID: 0.9961 | ATOTAL: 0.0068 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5315
+| train | E: 757 | S: 189250 | R: 816.5051
+| train | E: 758 | S: 189500 | R: 827.6107
+| train | E: 759 | S: 189750 | R: 814.7250
+| train | E: 760 | S: 190000 | R: 812.1203
+| train | S: 190000 | ALOSS: -0.0034 | VLOSS: 2.8853 | ENT: -0.2079 | KL: 0.0138 | CLIP: 0.1756 | TR: 0.0733 | WTR: 0.0183 | VALID: 0.9959 | ATOTAL: 0.0149 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4427
+| eval  | S: 190000 | ER: 891.1747
+| train | E: 761 | S: 190250 | R: 820.2662
+| train | E: 762 | S: 190500 | R: 818.2674
+| train | E: 763 | S: 190750 | R: 813.8065
+| train | E: 764 | S: 191000 | R: 810.8688
+| train | S: 191000 | ALOSS: -0.0126 | VLOSS: 1.0002 | ENT: -0.2484 | KL: 0.0118 | CLIP: 0.1502 | TR: 0.0749 | WTR: 0.0187 | VALID: 0.9961 | ATOTAL: 0.0061 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5001
+| train | E: 765 | S: 191250 | R: 819.7542
+| train | E: 766 | S: 191500 | R: 821.9455
+| train | E: 767 | S: 191750 | R: 814.6544
+| train | E: 768 | S: 192000 | R: 817.2903
+| train | S: 192000 | ALOSS: -0.0050 | VLOSS: 1.3343 | ENT: -0.3071 | KL: 0.0103 | CLIP: 0.1333 | TR: 0.0701 | WTR: 0.0175 | VALID: 0.9959 | ATOTAL: 0.0125 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.6671
+| train | E: 769 | S: 192250 | R: 819.9351
+| train | E: 770 | S: 192500 | R: 812.9124
+| train | E: 771 | S: 192750 | R: 815.0478
+| train | E: 772 | S: 193000 | R: 805.3610
+| train | S: 193000 | ALOSS: 0.0005 | VLOSS: 1.6981 | ENT: -0.3640 | KL: 0.0102 | CLIP: 0.1219 | TR: 0.0754 | WTR: 0.0189 | VALID: 0.9958 | ATOTAL: 0.0193 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.8491
+| train | E: 773 | S: 193250 | R: 814.6487
+| train | E: 774 | S: 193500 | R: 818.4556
+| train | E: 775 | S: 193750 | R: 821.0472
+| train | E: 776 | S: 194000 | R: 821.3110
+| train | S: 194000 | ALOSS: -0.0107 | VLOSS: 1.7788 | ENT: -0.3451 | KL: 0.0129 | CLIP: 0.1818 | TR: 0.0722 | WTR: 0.0181 | VALID: 0.9970 | ATOTAL: 0.0074 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.8894
+| train | E: 777 | S: 194250 | R: 641.1233
+| train | E: 778 | S: 194500 | R: 816.4495
+| train | E: 779 | S: 194750 | R: 815.8259
+| train | E: 780 | S: 195000 | R: 812.1378
+| train | S: 195000 | ALOSS: 0.0041 | VLOSS: 47.6224 | ENT: -0.6048 | KL: 0.0116 | CLIP: 0.1607 | TR: 0.0868 | WTR: 0.0217 | VALID: 0.9955 | ATOTAL: 0.0258 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 23.8112
+| train | E: 781 | S: 195250 | R: 805.4399
+| train | E: 782 | S: 195500 | R: 794.2573
+| train | E: 783 | S: 195750 | R: 816.7280
+| train | E: 784 | S: 196000 | R: 812.5195
+| train | S: 196000 | ALOSS: -0.0184 | VLOSS: 3.5769 | ENT: -0.4837 | KL: 0.0122 | CLIP: 0.1714 | TR: 0.0770 | WTR: 0.0193 | VALID: 0.9960 | ATOTAL: 0.0008 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7884
+| train | E: 785 | S: 196250 | R: 821.4915
+| train | E: 786 | S: 196500 | R: 816.5503
+| train | E: 787 | S: 196750 | R: 818.6321
+| train | E: 788 | S: 197000 | R: 823.1834
+| train | S: 197000 | ALOSS: 0.0171 | VLOSS: 2.1408 | ENT: -0.3464 | KL: 0.0099 | CLIP: 0.1384 | TR: 0.0855 | WTR: 0.0214 | VALID: 0.9955 | ATOTAL: 0.0384 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.0704
+| train | E: 789 | S: 197250 | R: 827.5226
+| train | E: 790 | S: 197500 | R: 826.9675
+| train | E: 791 | S: 197750 | R: 821.4102
+| train | E: 792 | S: 198000 | R: 819.0529
+| train | S: 198000 | ALOSS: -0.0090 | VLOSS: 0.9117 | ENT: -0.3749 | KL: 0.0139 | CLIP: 0.1842 | TR: 0.0808 | WTR: 0.0202 | VALID: 0.9960 | ATOTAL: 0.0112 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4558
+| train | E: 793 | S: 198250 | R: 828.3166
+| train | E: 794 | S: 198500 | R: 823.4783
+| train | E: 795 | S: 198750 | R: 449.0574
+| train | E: 796 | S: 199000 | R: 826.8058
+| train | S: 199000 | ALOSS: -0.0244 | VLOSS: 108.8086 | ENT: -0.7788 | KL: 0.0137 | CLIP: 0.2072 | TR: 0.0924 | WTR: 0.0231 | VALID: 0.9950 | ATOTAL: -0.0013 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 54.4043
+| train | E: 797 | S: 199250 | R: 823.8591
+| train | E: 798 | S: 199500 | R: 823.3993
+| train | E: 799 | S: 199750 | R: 820.3619
+| train | E: 800 | S: 200000 | R: 817.5318
+| train | S: 200000 | ALOSS: -0.0154 | VLOSS: 0.6688 | ENT: -0.4453 | KL: 0.0117 | CLIP: 0.1441 | TR: 0.0728 | WTR: 0.0182 | VALID: 0.9960 | ATOTAL: 0.0028 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3344
+| eval  | S: 200000 | ER: 889.3052
+| train | E: 801 | S: 200250 | R: 812.4144
+| train | E: 802 | S: 200500 | R: 824.7507
+| train | E: 803 | S: 200750 | R: 827.8066
+| train | E: 804 | S: 201000 | R: 821.5034
+| train | S: 201000 | ALOSS: -0.0123 | VLOSS: 1.4706 | ENT: -0.5185 | KL: 0.0129 | CLIP: 0.1820 | TR: 0.0713 | WTR: 0.0178 | VALID: 0.9959 | ATOTAL: 0.0056 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.7353
+| train | E: 805 | S: 201250 | R: 819.7404
+| train | E: 806 | S: 201500 | R: 826.3051
+| train | E: 807 | S: 201750 | R: 825.2494
+| train | E: 808 | S: 202000 | R: 830.3675
+| train | S: 202000 | ALOSS: 0.0040 | VLOSS: 1.1162 | ENT: -0.4950 | KL: 0.0089 | CLIP: 0.1170 | TR: 0.0687 | WTR: 0.0172 | VALID: 0.9960 | ATOTAL: 0.0211 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5581
+| train | E: 809 | S: 202250 | R: 828.1557
+| train | E: 810 | S: 202500 | R: 830.0503
+| train | E: 811 | S: 202750 | R: 829.8731
+| train | E: 812 | S: 203000 | R: 831.4754
+| train | S: 203000 | ALOSS: 0.0004 | VLOSS: 0.9472 | ENT: -0.5100 | KL: 0.0133 | CLIP: 0.1720 | TR: 0.0723 | WTR: 0.0181 | VALID: 0.9960 | ATOTAL: 0.0185 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4736
+| train | E: 813 | S: 203250 | R: 828.8317
+| train | E: 814 | S: 203500 | R: 835.3120
+| train | E: 815 | S: 203750 | R: 691.8507
+| train | E: 816 | S: 204000 | R: 828.4266
+| train | S: 204000 | ALOSS: -0.0121 | VLOSS: 83.4268 | ENT: -0.5015 | KL: 0.0069 | CLIP: 0.0799 | TR: 0.0734 | WTR: 0.0183 | VALID: 0.9965 | ATOTAL: 0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 41.7134
+| train | E: 817 | S: 204250 | R: 832.4812
+| train | E: 818 | S: 204500 | R: 825.9694
+| train | E: 819 | S: 204750 | R: 829.9291
+| train | E: 820 | S: 205000 | R: 829.5282
+| train | S: 205000 | ALOSS: -0.0039 | VLOSS: 0.6848 | ENT: -0.5180 | KL: 0.0113 | CLIP: 0.1513 | TR: 0.0682 | WTR: 0.0170 | VALID: 0.9955 | ATOTAL: 0.0131 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3424
+| train | E: 821 | S: 205250 | R: 835.4892
+| train | E: 822 | S: 205500 | R: 827.3360
+| train | E: 823 | S: 205750 | R: 832.1608
+| train | E: 824 | S: 206000 | R: 831.6966
+| train | S: 206000 | ALOSS: -0.0021 | VLOSS: 0.8582 | ENT: -0.5941 | KL: 0.0095 | CLIP: 0.1255 | TR: 0.0608 | WTR: 0.0152 | VALID: 0.9961 | ATOTAL: 0.0131 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4291
+| train | E: 825 | S: 206250 | R: 832.8223
+| train | E: 826 | S: 206500 | R: 828.7927
+| train | E: 827 | S: 206750 | R: 830.6987
+| train | E: 828 | S: 207000 | R: 841.2266
+| train | S: 207000 | ALOSS: -0.0052 | VLOSS: 0.8389 | ENT: -0.5926 | KL: 0.0131 | CLIP: 0.1590 | TR: 0.0606 | WTR: 0.0151 | VALID: 0.9960 | ATOTAL: 0.0099 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4195
+| train | E: 829 | S: 207250 | R: 832.3259
+| train | E: 830 | S: 207500 | R: 835.8737
+| train | E: 831 | S: 207750 | R: 663.8466
+| train | E: 832 | S: 208000 | R: 833.9378
+| train | S: 208000 | ALOSS: 0.0020 | VLOSS: 68.0369 | ENT: -0.6787 | KL: 0.0162 | CLIP: 0.1667 | TR: 0.0671 | WTR: 0.0168 | VALID: 0.9965 | ATOTAL: 0.0187 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 34.0184
+| train | E: 833 | S: 208250 | R: 830.5832
+| train | E: 834 | S: 208500 | R: 836.9453
+| train | E: 835 | S: 208750 | R: 840.5026
+| train | E: 836 | S: 209000 | R: 832.3484
+| train | S: 209000 | ALOSS: -0.0004 | VLOSS: 0.9829 | ENT: -0.6012 | KL: 0.0144 | CLIP: 0.2015 | TR: 0.0583 | WTR: 0.0146 | VALID: 0.9958 | ATOTAL: 0.0142 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4915
+| train | E: 837 | S: 209250 | R: 830.1250
+| train | E: 838 | S: 209500 | R: 831.1330
+| train | E: 839 | S: 209750 | R: 841.2804
+| train | E: 840 | S: 210000 | R: 832.4224
+| train | S: 210000 | ALOSS: -0.0083 | VLOSS: 0.5352 | ENT: -0.6295 | KL: 0.0115 | CLIP: 0.1431 | TR: 0.0655 | WTR: 0.0164 | VALID: 0.9956 | ATOTAL: 0.0081 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2676
+| eval  | S: 210000 | ER: 904.0194
+| train | E: 841 | S: 210250 | R: 837.8102
+| train | E: 842 | S: 210500 | R: 839.2250
+| train | E: 843 | S: 210750 | R: 838.9129
+| train | E: 844 | S: 211000 | R: 389.5087
+| train | S: 211000 | ALOSS: -0.0002 | VLOSS: 157.2636 | ENT: -0.9669 | KL: 0.0151 | CLIP: 0.1837 | TR: 0.0909 | WTR: 0.0227 | VALID: 0.9953 | ATOTAL: 0.0225 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 78.6318
+| train | E: 845 | S: 211250 | R: 834.4929
+| train | E: 846 | S: 211500 | R: 828.6934
+| train | E: 847 | S: 211750 | R: 828.8861
+| train | E: 848 | S: 212000 | R: 844.4730
+| train | S: 212000 | ALOSS: 0.0034 | VLOSS: 1.3969 | ENT: -0.6002 | KL: 0.0119 | CLIP: 0.1757 | TR: 0.0649 | WTR: 0.0162 | VALID: 0.9960 | ATOTAL: 0.0196 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.6984
+| train | E: 849 | S: 212250 | R: 831.6566
+| train | E: 850 | S: 212500 | R: 833.7694
+| train | E: 851 | S: 212750 | R: 833.2213
+| train | E: 852 | S: 213000 | R: 831.9847
+| train | S: 213000 | ALOSS: 0.0234 | VLOSS: 0.6093 | ENT: -0.6550 | KL: 0.0130 | CLIP: 0.1833 | TR: 0.0618 | WTR: 0.0154 | VALID: 0.9958 | ATOTAL: 0.0388 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3047
+| train | E: 853 | S: 213250 | R: 836.0122
+| train | E: 854 | S: 213500 | R: 837.9640
+| train | E: 855 | S: 213750 | R: 833.1702
+| train | E: 856 | S: 214000 | R: 837.0955
+| train | S: 214000 | ALOSS: -0.0159 | VLOSS: 1.0113 | ENT: -0.6387 | KL: 0.0065 | CLIP: 0.0871 | TR: 0.0652 | WTR: 0.0163 | VALID: 0.9978 | ATOTAL: 0.0004 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5057
+| train | E: 857 | S: 214250 | R: 836.2415
+| train | E: 858 | S: 214500 | R: 837.1358
+| train | E: 859 | S: 214750 | R: 839.9805
+| train | E: 860 | S: 215000 | R: 837.8109
+| train | S: 215000 | ALOSS: 0.0496 | VLOSS: 1.4658 | ENT: -0.6889 | KL: 0.0075 | CLIP: 0.1211 | TR: 0.0663 | WTR: 0.0166 | VALID: 0.9844 | ATOTAL: 0.0662 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.7329
+| train | E: 861 | S: 215250 | R: 838.5723
+| train | E: 862 | S: 215500 | R: 833.0334
+| train | E: 863 | S: 215750 | R: 838.3300
+| train | E: 864 | S: 216000 | R: 834.0228
+| train | S: 216000 | ALOSS: 0.0050 | VLOSS: 0.8154 | ENT: -0.6444 | KL: 0.0107 | CLIP: 0.1398 | TR: 0.0715 | WTR: 0.0179 | VALID: 0.9963 | ATOTAL: 0.0229 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4077
+| train | E: 865 | S: 216250 | R: 829.9743
+| train | E: 866 | S: 216500 | R: 835.6838
+| train | E: 867 | S: 216750 | R: 837.1431
+| train | E: 868 | S: 217000 | R: 832.1668
+| train | S: 217000 | ALOSS: -0.0024 | VLOSS: 0.6255 | ENT: -0.7664 | KL: 0.0132 | CLIP: 0.1728 | TR: 0.0718 | WTR: 0.0179 | VALID: 0.9960 | ATOTAL: 0.0156 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3127
+| train | E: 869 | S: 217250 | R: 843.7255
+| train | E: 870 | S: 217500 | R: 841.1018
+| train | E: 871 | S: 217750 | R: 331.3099
+| train | E: 872 | S: 218000 | R: 843.8641
+| train | S: 218000 | ALOSS: -0.0548 | VLOSS: 245.6561 | ENT: -1.1071 | KL: 0.0068 | CLIP: 0.0911 | TR: 0.1118 | WTR: 0.0279 | VALID: 0.9948 | ATOTAL: -0.0268 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 122.8281
+| train | E: 873 | S: 218250 | R: 842.0843
+| train | E: 874 | S: 218500 | R: 839.6464
+| train | E: 875 | S: 218750 | R: 838.2840
+| train | E: 876 | S: 219000 | R: 842.0819
+| train | S: 219000 | ALOSS: -0.0064 | VLOSS: 0.7425 | ENT: -0.7750 | KL: 0.0106 | CLIP: 0.1195 | TR: 0.0700 | WTR: 0.0175 | VALID: 0.9965 | ATOTAL: 0.0111 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3712
+| train | E: 877 | S: 219250 | R: 841.0317
+| train | E: 878 | S: 219500 | R: 851.4257
+| train | E: 879 | S: 219750 | R: 842.3869
+| train | E: 880 | S: 220000 | R: 838.7658
+| train | S: 220000 | ALOSS: 0.0239 | VLOSS: 1.3431 | ENT: -0.7275 | KL: 0.0101 | CLIP: 0.1226 | TR: 0.0630 | WTR: 0.0157 | VALID: 0.9964 | ATOTAL: 0.0397 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.6716
+| eval  | S: 220000 | ER: 899.9259
+| train | E: 881 | S: 220250 | R: 839.5798
+| train | E: 882 | S: 220500 | R: 838.6632
+| train | E: 883 | S: 220750 | R: 837.9472
+| train | E: 884 | S: 221000 | R: 849.1202
+| train | S: 221000 | ALOSS: 0.0748 | VLOSS: 1.1752 | ENT: -0.7269 | KL: 0.0074 | CLIP: 0.0938 | TR: 0.0686 | WTR: 0.0172 | VALID: 0.9931 | ATOTAL: 0.0920 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5876
+| train | E: 885 | S: 221250 | R: 845.0321
+| train | E: 886 | S: 221500 | R: 846.6439
+| train | E: 887 | S: 221750 | R: 294.3391
+| train | E: 888 | S: 222000 | R: 839.3146
+| train | S: 222000 | ALOSS: 0.0026 | VLOSS: 180.9997 | ENT: -1.0594 | KL: 0.0108 | CLIP: 0.1126 | TR: 0.1153 | WTR: 0.0288 | VALID: 0.9965 | ATOTAL: 0.0314 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 90.4998
+| train | E: 889 | S: 222250 | R: 840.3040
+| train | E: 890 | S: 222500 | R: 841.3161
+| train | E: 891 | S: 222750 | R: 849.1340
+| train | E: 892 | S: 223000 | R: 840.6586
+| train | S: 223000 | ALOSS: -0.0040 | VLOSS: 3.4861 | ENT: -0.7548 | KL: 0.0103 | CLIP: 0.1467 | TR: 0.0649 | WTR: 0.0162 | VALID: 0.9955 | ATOTAL: 0.0122 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7431
+| train | E: 893 | S: 223250 | R: 850.2590
+| train | E: 894 | S: 223500 | R: 844.6123
+| train | E: 895 | S: 223750 | R: 840.0624
+| train | E: 896 | S: 224000 | R: 843.2093
+| train | S: 224000 | ALOSS: 0.0047 | VLOSS: 1.1707 | ENT: -0.8058 | KL: 0.0131 | CLIP: 0.1623 | TR: 0.0639 | WTR: 0.0160 | VALID: 0.9963 | ATOTAL: 0.0207 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.5854
+| train | E: 897 | S: 224250 | R: 843.5863
+| train | E: 898 | S: 224500 | R: 844.5326
+| train | E: 899 | S: 224750 | R: 845.2687
+| train | E: 900 | S: 225000 | R: 835.7225
+| train | S: 225000 | ALOSS: -0.0303 | VLOSS: 0.7628 | ENT: -0.8358 | KL: 0.0104 | CLIP: 0.1458 | TR: 0.0618 | WTR: 0.0155 | VALID: 0.9896 | ATOTAL: -0.0149 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3814
+| train | E: 901 | S: 225250 | R: 842.8363
+| train | E: 902 | S: 225500 | R: 844.4324
+| train | E: 903 | S: 225750 | R: 838.0378
+| train | E: 904 | S: 226000 | R: 843.5812
+| train | S: 226000 | ALOSS: 0.0342 | VLOSS: 0.8896 | ENT: -0.7723 | KL: 0.0143 | CLIP: 0.2045 | TR: 0.0716 | WTR: 0.0179 | VALID: 0.9986 | ATOTAL: 0.0521 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4448
+| train | E: 905 | S: 226250 | R: 843.0052
+| train | E: 906 | S: 226500 | R: 837.3880
+| train | E: 907 | S: 226750 | R: 840.8515
+| train | E: 908 | S: 227000 | R: 843.7933
+| train | S: 227000 | ALOSS: 0.0040 | VLOSS: 0.3858 | ENT: -0.7769 | KL: 0.0115 | CLIP: 0.1491 | TR: 0.0666 | WTR: 0.0166 | VALID: 0.9959 | ATOTAL: 0.0206 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1929
+| train | E: 909 | S: 227250 | R: 844.3288
+| train | E: 910 | S: 227500 | R: 844.2238
+| train | E: 911 | S: 227750 | R: 840.2174
+| train | E: 912 | S: 228000 | R: 845.9126
+| train | S: 228000 | ALOSS: 0.0574 | VLOSS: 0.6119 | ENT: -0.8024 | KL: 0.0070 | CLIP: 0.1094 | TR: 0.0638 | WTR: 0.0159 | VALID: 0.9948 | ATOTAL: 0.0733 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3059
+| train | E: 913 | S: 228250 | R: 847.5917
+| train | E: 914 | S: 228500 | R: 849.5446
+| train | E: 915 | S: 228750 | R: 845.1920
+| train | E: 916 | S: 229000 | R: 850.9636
+| train | S: 229000 | ALOSS: 0.0092 | VLOSS: 0.7206 | ENT: -0.8632 | KL: 0.0095 | CLIP: 0.1181 | TR: 0.0645 | WTR: 0.0161 | VALID: 0.9965 | ATOTAL: 0.0253 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3603
+| train | E: 917 | S: 229250 | R: 849.8615
+| train | E: 918 | S: 229500 | R: 848.0925
+| train | E: 919 | S: 229750 | R: 848.5442
+| train | E: 920 | S: 230000 | R: 228.2938
+| train | S: 230000 | ALOSS: -0.0129 | VLOSS: 1114.9597 | ENT: -0.9838 | KL: 0.0143 | CLIP: 0.1185 | TR: 0.1893 | WTR: 0.0473 | VALID: 0.9959 | ATOTAL: 0.0344 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 557.4798
+| eval  | S: 230000 | ER: 876.4118
+| train | E: 921 | S: 230250 | R: 848.7365
+| train | E: 922 | S: 230500 | R: 851.2249
+| train | E: 923 | S: 230750 | R: 835.4917
+| train | E: 924 | S: 231000 | R: 845.6473
+| train | S: 231000 | ALOSS: -0.0020 | VLOSS: 1.9512 | ENT: -0.8651 | KL: 0.0129 | CLIP: 0.1586 | TR: 0.0579 | WTR: 0.0145 | VALID: 0.9960 | ATOTAL: 0.0125 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.9756
+| train | E: 925 | S: 231250 | R: 842.8095
+| train | E: 926 | S: 231500 | R: 828.1600
+| train | E: 927 | S: 231750 | R: 847.3949
+| train | E: 928 | S: 232000 | R: 851.8844
+| train | S: 232000 | ALOSS: -0.0038 | VLOSS: 3.4540 | ENT: -0.8343 | KL: 0.0110 | CLIP: 0.1292 | TR: 0.0632 | WTR: 0.0158 | VALID: 0.9965 | ATOTAL: 0.0120 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.7270
+| train | E: 929 | S: 232250 | R: 605.9661
+| train | E: 930 | S: 232500 | R: 851.8777
+| train | E: 931 | S: 232750 | R: 852.8534
+| train | E: 932 | S: 233000 | R: 838.7824
+| train | S: 233000 | ALOSS: 0.0462 | VLOSS: 102.4980 | ENT: -1.0411 | KL: 0.0068 | CLIP: 0.0848 | TR: 0.0712 | WTR: 0.0178 | VALID: 1.0000 | ATOTAL: 0.0640 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 51.2490
+| train | E: 933 | S: 233250 | R: 850.9387
+| train | E: 934 | S: 233500 | R: 824.1881
+| train | E: 935 | S: 233750 | R: 852.1036
+| train | E: 936 | S: 234000 | R: 851.0609
+| train | S: 234000 | ALOSS: 0.0100 | VLOSS: 5.1762 | ENT: -0.8907 | KL: 0.0135 | CLIP: 0.1932 | TR: 0.0564 | WTR: 0.0141 | VALID: 0.9957 | ATOTAL: 0.0241 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.5881
+| train | E: 937 | S: 234250 | R: 850.2166
+| train | E: 938 | S: 234500 | R: 845.4044
+| train | E: 939 | S: 234750 | R: 846.1470
+| train | E: 940 | S: 235000 | R: 848.6596
+| train | S: 235000 | ALOSS: 0.0676 | VLOSS: 0.7945 | ENT: -0.8924 | KL: 0.0106 | CLIP: 0.1426 | TR: 0.0655 | WTR: 0.0164 | VALID: 0.9922 | ATOTAL: 0.0840 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3973
+| train | E: 941 | S: 235250 | R: 852.7102
+| train | E: 942 | S: 235500 | R: 841.3308
+| train | E: 943 | S: 235750 | R: 853.2878
+| train | E: 944 | S: 236000 | R: 852.0856
+| train | S: 236000 | ALOSS: 0.0013 | VLOSS: 0.9322 | ENT: -0.8926 | KL: 0.0103 | CLIP: 0.1442 | TR: 0.0538 | WTR: 0.0134 | VALID: 0.9964 | ATOTAL: 0.0148 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4661
+| train | E: 945 | S: 236250 | R: 845.5670
+| train | E: 946 | S: 236500 | R: 847.6519
+| train | E: 947 | S: 236750 | R: 848.8189
+| train | E: 948 | S: 237000 | R: 850.6515
+| train | S: 237000 | ALOSS: -0.0067 | VLOSS: 0.5542 | ENT: -0.8600 | KL: 0.0144 | CLIP: 0.1860 | TR: 0.0630 | WTR: 0.0158 | VALID: 0.9962 | ATOTAL: 0.0091 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2771
+| train | E: 949 | S: 237250 | R: 852.7890
+| train | E: 950 | S: 237500 | R: 852.9482
+| train | E: 951 | S: 237750 | R: 844.9093
+| train | E: 952 | S: 238000 | R: 843.2482
+| train | S: 238000 | ALOSS: -0.0015 | VLOSS: 0.5560 | ENT: -0.9062 | KL: 0.0141 | CLIP: 0.1916 | TR: 0.0597 | WTR: 0.0149 | VALID: 0.9956 | ATOTAL: 0.0134 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2780
+| train | E: 953 | S: 238250 | R: 848.6380
+| train | E: 954 | S: 238500 | R: 854.0228
+| train | E: 955 | S: 238750 | R: 844.7024
+| train | E: 956 | S: 239000 | R: 851.0348
+| train | S: 239000 | ALOSS: 0.0792 | VLOSS: 0.6279 | ENT: -0.9830 | KL: 0.0084 | CLIP: 0.1187 | TR: 0.0531 | WTR: 0.0133 | VALID: 0.9969 | ATOTAL: 0.0924 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3139
+| train | E: 957 | S: 239250 | R: 854.5623
+| train | E: 958 | S: 239500 | R: 849.4299
+| train | E: 959 | S: 239750 | R: 848.8160
+| train | E: 960 | S: 240000 | R: 854.8246
+| train | S: 240000 | ALOSS: 0.0065 | VLOSS: 0.5500 | ENT: -0.9030 | KL: 0.0104 | CLIP: 0.1619 | TR: 0.0533 | WTR: 0.0133 | VALID: 0.9972 | ATOTAL: 0.0199 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2750
+| eval  | S: 240000 | ER: 904.9803
+| train | E: 961 | S: 240250 | R: 844.0663
+| train | E: 962 | S: 240500 | R: 851.2973
+| train | E: 963 | S: 240750 | R: 849.2584
+| train | E: 964 | S: 241000 | R: 851.8824
+| train | S: 241000 | ALOSS: -0.0253 | VLOSS: 0.5735 | ENT: -1.0184 | KL: 0.0081 | CLIP: 0.0977 | TR: 0.0579 | WTR: 0.0145 | VALID: 0.9922 | ATOTAL: -0.0108 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2868
+| train | E: 965 | S: 241250 | R: 844.8637
+| train | E: 966 | S: 241500 | R: 845.5881
+| train | E: 967 | S: 241750 | R: 846.8682
+| train | E: 968 | S: 242000 | R: 851.2761
+| train | S: 242000 | ALOSS: 0.0029 | VLOSS: 0.3323 | ENT: -0.9410 | KL: 0.0119 | CLIP: 0.1480 | TR: 0.0563 | WTR: 0.0141 | VALID: 0.9960 | ATOTAL: 0.0170 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1662
+| train | E: 969 | S: 242250 | R: 850.7866
+| train | E: 970 | S: 242500 | R: 850.5100
+| train | E: 971 | S: 242750 | R: 845.2221
+| train | E: 972 | S: 243000 | R: 849.5445
+| train | S: 243000 | ALOSS: 0.0115 | VLOSS: 0.3808 | ENT: -0.9510 | KL: 0.0086 | CLIP: 0.1139 | TR: 0.0562 | WTR: 0.0140 | VALID: 0.9968 | ATOTAL: 0.0255 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1904
+| train | E: 973 | S: 243250 | R: 839.9475
+| train | E: 974 | S: 243500 | R: 847.6579
+| train | E: 975 | S: 243750 | R: 847.5748
+| train | E: 976 | S: 244000 | R: 842.5022
+| train | S: 244000 | ALOSS: 0.0016 | VLOSS: 0.5173 | ENT: -0.9442 | KL: 0.0052 | CLIP: 0.0656 | TR: 0.0600 | WTR: 0.0150 | VALID: 0.9969 | ATOTAL: 0.0167 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2586
+| train | E: 977 | S: 244250 | R: 841.0529
+| train | E: 978 | S: 244500 | R: 850.8395
+| train | E: 979 | S: 244750 | R: 843.7324
+| train | E: 980 | S: 245000 | R: 837.3699
+| train | S: 245000 | ALOSS: -0.0113 | VLOSS: 0.5841 | ENT: -0.9718 | KL: 0.0147 | CLIP: 0.1948 | TR: 0.0525 | WTR: 0.0131 | VALID: 0.9952 | ATOTAL: 0.0019 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2921
+| train | E: 981 | S: 245250 | R: 841.1501
+| train | E: 982 | S: 245500 | R: 843.2999
+| train | E: 983 | S: 245750 | R: 834.7532
+| train | E: 984 | S: 246000 | R: 842.9701
+| train | S: 246000 | ALOSS: -0.0078 | VLOSS: 0.4525 | ENT: -0.9933 | KL: 0.0071 | CLIP: 0.1094 | TR: 0.0508 | WTR: 0.0127 | VALID: 0.9961 | ATOTAL: 0.0049 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2263
+| train | E: 985 | S: 246250 | R: 850.9295
+| train | E: 986 | S: 246500 | R: 842.9640
+| train | E: 987 | S: 246750 | R: 838.0392
+| train | E: 988 | S: 247000 | R: 841.5982
+| train | S: 247000 | ALOSS: 0.0148 | VLOSS: 0.5746 | ENT: -0.9525 | KL: 0.0123 | CLIP: 0.1844 | TR: 0.0569 | WTR: 0.0142 | VALID: 0.9969 | ATOTAL: 0.0291 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2873
+| train | E: 989 | S: 247250 | R: 850.1513
+| train | E: 990 | S: 247500 | R: 841.4197
+| train | E: 991 | S: 247750 | R: 841.8184
+| train | E: 992 | S: 248000 | R: 843.2505
+| train | S: 248000 | ALOSS: 0.0001 | VLOSS: 0.5496 | ENT: -1.0480 | KL: 0.0071 | CLIP: 0.1016 | TR: 0.0613 | WTR: 0.0153 | VALID: 0.9948 | ATOTAL: 0.0154 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2748
+| train | E: 993 | S: 248250 | R: 850.2459
+| train | E: 994 | S: 248500 | R: 855.1137
+| train | E: 995 | S: 248750 | R: 854.9678
+| train | E: 996 | S: 249000 | R: 851.2838
+| train | S: 249000 | ALOSS: -0.0138 | VLOSS: 0.6486 | ENT: -1.0136 | KL: 0.0105 | CLIP: 0.1467 | TR: 0.0551 | WTR: 0.0138 | VALID: 0.9964 | ATOTAL: -0.0000 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3243
+| train | E: 997 | S: 249250 | R: 848.7994
+| train | E: 998 | S: 249500 | R: 851.4028
+| train | E: 999 | S: 249750 | R: 854.5766
+| train | E: 1000 | S: 250000 | R: 853.2234
+| train | S: 250000 | ALOSS: -0.0056 | VLOSS: 0.4134 | ENT: -0.9802 | KL: 0.0142 | CLIP: 0.1922 | TR: 0.0576 | WTR: 0.0144 | VALID: 0.9959 | ATOTAL: 0.0088 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2067
+| eval  | S: 250000 | ER: 911.6015
+| train | E: 1001 | S: 250250 | R: 848.2219
+| train | E: 1002 | S: 250500 | R: 845.6316
+| train | E: 1003 | S: 250750 | R: 840.5826
+| train | E: 1004 | S: 251000 | R: 846.6398
+| train | S: 251000 | ALOSS: -0.0173 | VLOSS: 0.6760 | ENT: -1.0782 | KL: 0.0097 | CLIP: 0.1211 | TR: 0.0645 | WTR: 0.0161 | VALID: 0.9922 | ATOTAL: -0.0011 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3380
+| train | E: 1005 | S: 251250 | R: 843.2295
+| train | E: 1006 | S: 251500 | R: 844.0791
+| train | E: 1007 | S: 251750 | R: 840.6750
+| train | E: 1008 | S: 252000 | R: 841.7458
+| train | S: 252000 | ALOSS: 0.0013 | VLOSS: 0.5076 | ENT: -1.0192 | KL: 0.0140 | CLIP: 0.1910 | TR: 0.0572 | WTR: 0.0143 | VALID: 0.9960 | ATOTAL: 0.0156 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2538
+| train | E: 1009 | S: 252250 | R: 851.3585
+| train | E: 1010 | S: 252500 | R: 837.8814
+| train | E: 1011 | S: 252750 | R: 841.7569
+| train | E: 1012 | S: 253000 | R: 840.5370
+| train | S: 253000 | ALOSS: 0.0489 | VLOSS: 0.8065 | ENT: -0.9739 | KL: 0.0091 | CLIP: 0.1228 | TR: 0.0601 | WTR: 0.0150 | VALID: 1.0000 | ATOTAL: 0.0639 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4033
+| train | E: 1013 | S: 253250 | R: 849.2703
+| train | E: 1014 | S: 253500 | R: 856.3598
+| train | E: 1015 | S: 253750 | R: 847.7621
+| train | E: 1016 | S: 254000 | R: 851.4352
+| train | S: 254000 | ALOSS: -0.0443 | VLOSS: 0.7922 | ENT: -0.9929 | KL: 0.0078 | CLIP: 0.1068 | TR: 0.0602 | WTR: 0.0150 | VALID: 0.9922 | ATOTAL: -0.0293 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3961
+| train | E: 1017 | S: 254250 | R: 855.9259
+| train | E: 1018 | S: 254500 | R: 846.8951
+| train | E: 1019 | S: 254750 | R: 844.3771
+| train | E: 1020 | S: 255000 | R: 858.2826
+| train | S: 255000 | ALOSS: -0.0060 | VLOSS: 0.5073 | ENT: -1.0440 | KL: 0.0140 | CLIP: 0.1851 | TR: 0.0589 | WTR: 0.0147 | VALID: 0.9957 | ATOTAL: 0.0087 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2536
+| train | E: 1021 | S: 255250 | R: 857.2754
+| train | E: 1022 | S: 255500 | R: 845.6888
+| train | E: 1023 | S: 255750 | R: 857.5985
+| train | E: 1024 | S: 256000 | R: 850.1939
+| train | S: 256000 | ALOSS: 0.0049 | VLOSS: 0.6849 | ENT: -1.0570 | KL: 0.0129 | CLIP: 0.1883 | TR: 0.0540 | WTR: 0.0135 | VALID: 0.9959 | ATOTAL: 0.0184 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3424
+| train | E: 1025 | S: 256250 | R: 861.2156
+| train | E: 1026 | S: 256500 | R: 835.1223
+| train | E: 1027 | S: 256750 | R: 851.2695
+| train | E: 1028 | S: 257000 | R: 847.0805
+| train | S: 257000 | ALOSS: -0.0038 | VLOSS: 2.0676 | ENT: -1.1278 | KL: 0.0138 | CLIP: 0.1830 | TR: 0.0552 | WTR: 0.0138 | VALID: 0.9958 | ATOTAL: 0.0100 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.0338
+| train | E: 1029 | S: 257250 | R: 861.6082
+| train | E: 1030 | S: 257500 | R: 856.1329
+| train | E: 1031 | S: 257750 | R: 849.5882
+| train | E: 1032 | S: 258000 | R: 814.9723
+| train | S: 258000 | ALOSS: -0.0567 | VLOSS: 4.9444 | ENT: -1.0770 | KL: 0.0060 | CLIP: 0.0729 | TR: 0.0507 | WTR: 0.0127 | VALID: 0.9948 | ATOTAL: -0.0440 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.4722
+| train | E: 1033 | S: 258250 | R: 861.0040
+| train | E: 1034 | S: 258500 | R: 860.5960
+| train | E: 1035 | S: 258750 | R: 859.3038
+| train | E: 1036 | S: 259000 | R: 858.2770
+| train | S: 259000 | ALOSS: 0.0161 | VLOSS: 0.7895 | ENT: -1.0997 | KL: 0.0075 | CLIP: 0.1024 | TR: 0.0485 | WTR: 0.0121 | VALID: 0.9957 | ATOTAL: 0.0282 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3948
+| train | E: 1037 | S: 259250 | R: 858.3612
+| train | E: 1038 | S: 259500 | R: 853.2918
+| train | E: 1039 | S: 259750 | R: 852.8363
+| train | E: 1040 | S: 260000 | R: 857.9800
+| train | S: 260000 | ALOSS: -0.0073 | VLOSS: 0.5956 | ENT: -1.1828 | KL: 0.0065 | CLIP: 0.0705 | TR: 0.0525 | WTR: 0.0131 | VALID: 0.9962 | ATOTAL: 0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2978
+| eval  | S: 260000 | ER: 900.5114
+| train | E: 1041 | S: 260250 | R: 856.5303
+| train | E: 1042 | S: 260500 | R: 855.8380
+| train | E: 1043 | S: 260750 | R: 854.1494
+| train | E: 1044 | S: 261000 | R: 859.9429
+| train | S: 261000 | ALOSS: -0.0012 | VLOSS: 0.4665 | ENT: -1.0776 | KL: 0.0113 | CLIP: 0.1667 | TR: 0.0471 | WTR: 0.0118 | VALID: 0.9955 | ATOTAL: 0.0105 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2332
+| train | E: 1045 | S: 261250 | R: 857.8494
+| train | E: 1046 | S: 261500 | R: 855.2650
+| train | E: 1047 | S: 261750 | R: 854.2131
+| train | E: 1048 | S: 262000 | R: 857.8396
+| train | S: 262000 | ALOSS: 0.0062 | VLOSS: 0.2913 | ENT: -1.1395 | KL: 0.0115 | CLIP: 0.1556 | TR: 0.0478 | WTR: 0.0120 | VALID: 0.9958 | ATOTAL: 0.0182 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1456
+| train | E: 1049 | S: 262250 | R: 852.8878
+| train | E: 1050 | S: 262500 | R: 858.3471
+| train | E: 1051 | S: 262750 | R: 864.6587
+| train | E: 1052 | S: 263000 | R: 850.3208
+| train | S: 263000 | ALOSS: -0.0287 | VLOSS: 0.5615 | ENT: -1.2324 | KL: 0.0062 | CLIP: 0.0898 | TR: 0.0539 | WTR: 0.0135 | VALID: 0.9961 | ATOTAL: -0.0152 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2808
+| train | E: 1053 | S: 263250 | R: 853.7057
+| train | E: 1054 | S: 263500 | R: 852.5393
+| train | E: 1055 | S: 263750 | R: 854.1329
+| train | E: 1056 | S: 264000 | R: 862.6259
+| train | S: 264000 | ALOSS: -0.0171 | VLOSS: 0.4272 | ENT: -1.1774 | KL: 0.0118 | CLIP: 0.1667 | TR: 0.0550 | WTR: 0.0137 | VALID: 0.9961 | ATOTAL: -0.0033 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2136
+| train | E: 1057 | S: 264250 | R: 791.2896
+| train | E: 1058 | S: 264500 | R: 856.0351
+| train | E: 1059 | S: 264750 | R: 861.4593
+| train | E: 1060 | S: 265000 | R: 858.3154
+| train | S: 265000 | ALOSS: 0.0039 | VLOSS: 24.4877 | ENT: -1.2256 | KL: 0.0085 | CLIP: 0.1027 | TR: 0.0530 | WTR: 0.0133 | VALID: 0.9955 | ATOTAL: 0.0171 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 12.2439
+| train | E: 1061 | S: 265250 | R: 856.0373
+| train | E: 1062 | S: 265500 | R: 860.0539
+| train | E: 1063 | S: 265750 | R: 860.3010
+| train | E: 1064 | S: 266000 | R: 860.0979
+| train | S: 266000 | ALOSS: -0.0150 | VLOSS: 0.5423 | ENT: -1.1404 | KL: 0.0085 | CLIP: 0.1009 | TR: 0.0528 | WTR: 0.0132 | VALID: 0.9957 | ATOTAL: -0.0018 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2712
+| train | E: 1065 | S: 266250 | R: 857.3713
+| train | E: 1066 | S: 266500 | R: 857.0869
+| train | E: 1067 | S: 266750 | R: 855.8935
+| train | E: 1068 | S: 267000 | R: 863.9340
+| train | S: 267000 | ALOSS: 0.0066 | VLOSS: 0.4586 | ENT: -1.2041 | KL: 0.0082 | CLIP: 0.1078 | TR: 0.0506 | WTR: 0.0127 | VALID: 1.0000 | ATOTAL: 0.0193 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2293
+| train | E: 1069 | S: 267250 | R: 863.9975
+| train | E: 1070 | S: 267500 | R: 862.0098
+| train | E: 1071 | S: 267750 | R: 848.9490
+| train | E: 1072 | S: 268000 | R: 856.2507
+| train | S: 268000 | ALOSS: -0.0004 | VLOSS: 0.4252 | ENT: -1.1452 | KL: 0.0125 | CLIP: 0.1745 | TR: 0.0548 | WTR: 0.0137 | VALID: 0.9964 | ATOTAL: 0.0133 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2126
+| train | E: 1073 | S: 268250 | R: 855.0350
+| train | E: 1074 | S: 268500 | R: 853.7462
+| train | E: 1075 | S: 268750 | R: 859.3714
+| train | E: 1076 | S: 269000 | R: 856.7493
+| train | S: 269000 | ALOSS: -0.0358 | VLOSS: 0.4353 | ENT: -1.1144 | KL: 0.0122 | CLIP: 0.1719 | TR: 0.0570 | WTR: 0.0143 | VALID: 0.9980 | ATOTAL: -0.0215 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2177
+| train | E: 1077 | S: 269250 | R: 861.1629
+| train | E: 1078 | S: 269500 | R: 868.0346
+| train | E: 1079 | S: 269750 | R: 861.1596
+| train | E: 1080 | S: 270000 | R: 863.3223
+| train | S: 270000 | ALOSS: 0.0270 | VLOSS: 0.3957 | ENT: -1.1509 | KL: 0.0085 | CLIP: 0.1141 | TR: 0.0516 | WTR: 0.0129 | VALID: 0.9958 | ATOTAL: 0.0399 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1978
+| eval  | S: 270000 | ER: 916.3237
+| train | E: 1081 | S: 270250 | R: 862.7101
+| train | E: 1082 | S: 270500 | R: 862.5282
+| train | E: 1083 | S: 270750 | R: 860.0994
+| train | E: 1084 | S: 271000 | R: 865.2632
+| train | S: 271000 | ALOSS: 0.0081 | VLOSS: 0.2953 | ENT: -1.1229 | KL: 0.0088 | CLIP: 0.1156 | TR: 0.0529 | WTR: 0.0132 | VALID: 0.9964 | ATOTAL: 0.0214 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1477
+| train | E: 1085 | S: 271250 | R: 864.4246
+| train | E: 1086 | S: 271500 | R: 862.1222
+| train | E: 1087 | S: 271750 | R: 866.6127
+| train | E: 1088 | S: 272000 | R: 862.7962
+| train | S: 272000 | ALOSS: 0.0028 | VLOSS: 0.3021 | ENT: -1.1545 | KL: 0.0106 | CLIP: 0.1505 | TR: 0.0506 | WTR: 0.0126 | VALID: 0.9960 | ATOTAL: 0.0154 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1511
+| train | E: 1089 | S: 272250 | R: 856.6417
+| train | E: 1090 | S: 272500 | R: 860.4192
+| train | E: 1091 | S: 272750 | R: 865.0753
+| train | E: 1092 | S: 273000 | R: 865.9358
+| train | S: 273000 | ALOSS: 0.0173 | VLOSS: 0.3084 | ENT: -1.1260 | KL: 0.0122 | CLIP: 0.1779 | TR: 0.0506 | WTR: 0.0126 | VALID: 0.9952 | ATOTAL: 0.0300 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1542
+| train | E: 1093 | S: 273250 | R: 867.1974
+| train | E: 1094 | S: 273500 | R: 859.8545
+| train | E: 1095 | S: 273750 | R: 860.8335
+| train | E: 1096 | S: 274000 | R: 862.3397
+| train | S: 274000 | ALOSS: -0.0068 | VLOSS: 0.3167 | ENT: -1.0712 | KL: 0.0081 | CLIP: 0.1172 | TR: 0.0463 | WTR: 0.0116 | VALID: 0.9974 | ATOTAL: 0.0048 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1583
+| train | E: 1097 | S: 274250 | R: 866.0137
+| train | E: 1098 | S: 274500 | R: 860.7175
+| train | E: 1099 | S: 274750 | R: 862.3553
+| train | E: 1100 | S: 275000 | R: 863.8882
+| train | S: 275000 | ALOSS: 0.0081 | VLOSS: 0.3096 | ENT: -1.2014 | KL: 0.0140 | CLIP: 0.1898 | TR: 0.0457 | WTR: 0.0114 | VALID: 0.9962 | ATOTAL: 0.0195 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1548
+| train | E: 1101 | S: 275250 | R: 860.1511
+| train | E: 1102 | S: 275500 | R: 865.7335
+| train | E: 1103 | S: 275750 | R: 869.4760
+| train | E: 1104 | S: 276000 | R: 861.7388
+| train | S: 276000 | ALOSS: 0.0078 | VLOSS: 0.3581 | ENT: -1.2274 | KL: 0.0130 | CLIP: 0.1726 | TR: 0.0541 | WTR: 0.0135 | VALID: 0.9959 | ATOTAL: 0.0214 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1790
+| train | E: 1105 | S: 276250 | R: 862.4258
+| train | E: 1106 | S: 276500 | R: 863.6820
+| train | E: 1107 | S: 276750 | R: 864.7985
+| train | E: 1108 | S: 277000 | R: 862.7616
+| train | S: 277000 | ALOSS: -0.0063 | VLOSS: 0.2170 | ENT: -1.2790 | KL: 0.0153 | CLIP: 0.2114 | TR: 0.0503 | WTR: 0.0126 | VALID: 0.9959 | ATOTAL: 0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1085
+| train | E: 1109 | S: 277250 | R: 866.7608
+| train | E: 1110 | S: 277500 | R: 864.1243
+| train | E: 1111 | S: 277750 | R: 860.7608
+| train | E: 1112 | S: 278000 | R: 868.2302
+| train | S: 278000 | ALOSS: -0.0011 | VLOSS: 0.2180 | ENT: -1.2868 | KL: 0.0123 | CLIP: 0.1663 | TR: 0.0471 | WTR: 0.0118 | VALID: 0.9960 | ATOTAL: 0.0106 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1090
+| train | E: 1113 | S: 278250 | R: 858.8842
+| train | E: 1114 | S: 278500 | R: 863.8689
+| train | E: 1115 | S: 278750 | R: 866.3342
+| train | E: 1116 | S: 279000 | R: 869.5922
+| train | S: 279000 | ALOSS: 0.0030 | VLOSS: 0.3398 | ENT: -1.3854 | KL: 0.0103 | CLIP: 0.1266 | TR: 0.0493 | WTR: 0.0123 | VALID: 0.9956 | ATOTAL: 0.0153 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1699
+| train | E: 1117 | S: 279250 | R: 870.1176
+| train | E: 1118 | S: 279500 | R: 865.9461
+| train | E: 1119 | S: 279750 | R: 863.1960
+| train | E: 1120 | S: 280000 | R: 871.1910
+| train | S: 280000 | ALOSS: 0.0075 | VLOSS: 0.4022 | ENT: -1.2967 | KL: 0.0083 | CLIP: 0.1021 | TR: 0.0496 | WTR: 0.0124 | VALID: 0.9958 | ATOTAL: 0.0199 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2011
+| eval  | S: 280000 | ER: 918.4053
+| train | E: 1121 | S: 280250 | R: 866.3589
+| train | E: 1122 | S: 280500 | R: 871.4923
+| train | E: 1123 | S: 280750 | R: 863.4758
+| train | E: 1124 | S: 281000 | R: 870.0699
+| train | S: 281000 | ALOSS: -0.0088 | VLOSS: 0.3917 | ENT: -1.3484 | KL: 0.0137 | CLIP: 0.1804 | TR: 0.0461 | WTR: 0.0115 | VALID: 0.9965 | ATOTAL: 0.0028 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1959
+| train | E: 1125 | S: 281250 | R: 872.1036
+| train | E: 1126 | S: 281500 | R: 870.1574
+| train | E: 1127 | S: 281750 | R: 867.8929
+| train | E: 1128 | S: 282000 | R: 866.3501
+| train | S: 282000 | ALOSS: 0.0212 | VLOSS: 0.2987 | ENT: -1.3543 | KL: 0.0120 | CLIP: 0.1545 | TR: 0.0461 | WTR: 0.0115 | VALID: 0.9960 | ATOTAL: 0.0328 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1493
+| train | E: 1129 | S: 282250 | R: 868.5413
+| train | E: 1130 | S: 282500 | R: 870.6333
+| train | E: 1131 | S: 282750 | R: 869.1503
+| train | E: 1132 | S: 283000 | R: 868.7185
+| train | S: 283000 | ALOSS: 0.0109 | VLOSS: 0.1783 | ENT: -1.3608 | KL: 0.0103 | CLIP: 0.1529 | TR: 0.0432 | WTR: 0.0108 | VALID: 0.9955 | ATOTAL: 0.0217 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0892
+| train | E: 1133 | S: 283250 | R: 869.4398
+| train | E: 1134 | S: 283500 | R: 869.4013
+| train | E: 1135 | S: 283750 | R: 870.5332
+| train | E: 1136 | S: 284000 | R: 863.9296
+| train | S: 284000 | ALOSS: 0.0072 | VLOSS: 0.1887 | ENT: -1.3577 | KL: 0.0125 | CLIP: 0.1690 | TR: 0.0454 | WTR: 0.0114 | VALID: 0.9960 | ATOTAL: 0.0185 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0944
+| train | E: 1137 | S: 284250 | R: 872.5603
+| train | E: 1138 | S: 284500 | R: 869.5867
+| train | E: 1139 | S: 284750 | R: 871.2872
+| train | E: 1140 | S: 285000 | R: 871.9527
+| train | S: 285000 | ALOSS: 0.0026 | VLOSS: 0.2180 | ENT: -1.4141 | KL: 0.0100 | CLIP: 0.1321 | TR: 0.0458 | WTR: 0.0114 | VALID: 0.9962 | ATOTAL: 0.0140 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1090
+| train | E: 1141 | S: 285250 | R: 873.3024
+| train | E: 1142 | S: 285500 | R: 872.3088
+| train | E: 1143 | S: 285750 | R: 871.9142
+| train | E: 1144 | S: 286000 | R: 872.4995
+| train | S: 286000 | ALOSS: 0.0152 | VLOSS: 0.3195 | ENT: -1.2394 | KL: 0.0098 | CLIP: 0.1187 | TR: 0.0440 | WTR: 0.0110 | VALID: 0.9969 | ATOTAL: 0.0262 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1598
+| train | E: 1145 | S: 286250 | R: 867.9650
+| train | E: 1146 | S: 286500 | R: 870.6025
+| train | E: 1147 | S: 286750 | R: 874.3340
+| train | E: 1148 | S: 287000 | R: 875.5856
+| train | S: 287000 | ALOSS: 0.0019 | VLOSS: 0.2888 | ENT: -1.4663 | KL: 0.0079 | CLIP: 0.1000 | TR: 0.0422 | WTR: 0.0106 | VALID: 0.9969 | ATOTAL: 0.0124 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1444
+| train | E: 1149 | S: 287250 | R: 870.8338
+| train | E: 1150 | S: 287500 | R: 870.0471
+| train | E: 1151 | S: 287750 | R: 872.5252
+| train | E: 1152 | S: 288000 | R: 871.7679
+| train | S: 288000 | ALOSS: -0.0315 | VLOSS: 0.1834 | ENT: -1.3957 | KL: 0.0088 | CLIP: 0.1302 | TR: 0.0376 | WTR: 0.0094 | VALID: 1.0000 | ATOTAL: -0.0221 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0917
+| train | E: 1153 | S: 288250 | R: 870.5931
+| train | E: 1154 | S: 288500 | R: 870.0340
+| train | E: 1155 | S: 288750 | R: 871.4436
+| train | E: 1156 | S: 289000 | R: 864.2590
+| train | S: 289000 | ALOSS: 0.0073 | VLOSS: 0.2430 | ENT: -1.4782 | KL: 0.0153 | CLIP: 0.1990 | TR: 0.0420 | WTR: 0.0105 | VALID: 0.9968 | ATOTAL: 0.0178 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1215
+| train | E: 1157 | S: 289250 | R: 875.6156
+| train | E: 1158 | S: 289500 | R: 874.2268
+| train | E: 1159 | S: 289750 | R: 872.9618
+| train | E: 1160 | S: 290000 | R: 871.0599
+| train | S: 290000 | ALOSS: 0.0828 | VLOSS: 0.3683 | ENT: -1.4363 | KL: 0.0107 | CLIP: 0.1660 | TR: 0.0409 | WTR: 0.0102 | VALID: 0.9961 | ATOTAL: 0.0931 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1841
+| eval  | S: 290000 | ER: 914.0690
+| train | E: 1161 | S: 290250 | R: 874.0141
+| train | E: 1162 | S: 290500 | R: 871.0084
+| train | E: 1163 | S: 290750 | R: 871.7579
+| train | E: 1164 | S: 291000 | R: 870.0919
+| train | S: 291000 | ALOSS: -0.0196 | VLOSS: 0.2595 | ENT: -1.3772 | KL: 0.0094 | CLIP: 0.1315 | TR: 0.0440 | WTR: 0.0110 | VALID: 0.9961 | ATOTAL: -0.0086 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1297
+| train | E: 1165 | S: 291250 | R: 873.5005
+| train | E: 1166 | S: 291500 | R: 873.0590
+| train | E: 1167 | S: 291750 | R: 873.7324
+| train | E: 1168 | S: 292000 | R: 873.9917
+| train | S: 292000 | ALOSS: 0.0042 | VLOSS: 0.2024 | ENT: -1.4884 | KL: 0.0126 | CLIP: 0.1508 | TR: 0.0435 | WTR: 0.0109 | VALID: 0.9960 | ATOTAL: 0.0151 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1012
+| train | E: 1169 | S: 292250 | R: 871.1570
+| train | E: 1170 | S: 292500 | R: 867.8983
+| train | E: 1171 | S: 292750 | R: 872.7969
+| train | E: 1172 | S: 293000 | R: 871.5155
+| train | S: 293000 | ALOSS: 0.0057 | VLOSS: 0.1839 | ENT: -1.4478 | KL: 0.0091 | CLIP: 0.1000 | TR: 0.0427 | WTR: 0.0107 | VALID: 0.9960 | ATOTAL: 0.0164 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0919
+| train | E: 1173 | S: 293250 | R: 873.1493
+| train | E: 1174 | S: 293500 | R: 875.1725
+| train | E: 1175 | S: 293750 | R: 875.6740
+| train | E: 1176 | S: 294000 | R: 875.5641
+| train | S: 294000 | ALOSS: -0.0012 | VLOSS: 0.2462 | ENT: -1.4496 | KL: 0.0117 | CLIP: 0.1444 | TR: 0.0421 | WTR: 0.0105 | VALID: 0.9962 | ATOTAL: 0.0093 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1231
+| train | E: 1177 | S: 294250 | R: 872.6659
+| train | E: 1178 | S: 294500 | R: 875.5371
+| train | E: 1179 | S: 294750 | R: 876.5965
+| train | E: 1180 | S: 295000 | R: 870.5459
+| train | S: 295000 | ALOSS: 0.0665 | VLOSS: 0.2139 | ENT: -1.6205 | KL: 0.0102 | CLIP: 0.0871 | TR: 0.0386 | WTR: 0.0096 | VALID: 0.9955 | ATOTAL: 0.0761 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1070
+| train | E: 1181 | S: 295250 | R: 876.8541
+| train | E: 1182 | S: 295500 | R: 877.0004
+| train | E: 1183 | S: 295750 | R: 876.7432
+| train | E: 1184 | S: 296000 | R: 875.8450
+| train | S: 296000 | ALOSS: -0.0139 | VLOSS: 0.2734 | ENT: -1.5131 | KL: 0.0139 | CLIP: 0.2022 | TR: 0.0413 | WTR: 0.0103 | VALID: 0.9968 | ATOTAL: -0.0035 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1367
+| train | E: 1185 | S: 296250 | R: 877.3409
+| train | E: 1186 | S: 296500 | R: 873.4909
+| train | E: 1187 | S: 296750 | R: 872.9056
+| train | E: 1188 | S: 297000 | R: 873.9872
+| train | S: 297000 | ALOSS: 0.0130 | VLOSS: 0.4093 | ENT: -1.5658 | KL: 0.0096 | CLIP: 0.1344 | TR: 0.0440 | WTR: 0.0110 | VALID: 0.9958 | ATOTAL: 0.0240 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2047
+| train | E: 1189 | S: 297250 | R: 874.3426
+| train | E: 1190 | S: 297500 | R: 877.9740
+| train | E: 1191 | S: 297750 | R: 875.7520
+| train | E: 1192 | S: 298000 | R: 873.8078
+| train | S: 298000 | ALOSS: 0.0019 | VLOSS: 0.1721 | ENT: -1.5386 | KL: 0.0134 | CLIP: 0.1830 | TR: 0.0456 | WTR: 0.0114 | VALID: 0.9959 | ATOTAL: 0.0133 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0860
+| train | E: 1193 | S: 298250 | R: 877.5623
+| train | E: 1194 | S: 298500 | R: 880.0089
+| train | E: 1195 | S: 298750 | R: 877.1804
+| train | E: 1196 | S: 299000 | R: 872.8607
+| train | S: 299000 | ALOSS: 0.0125 | VLOSS: 0.2667 | ENT: -1.6181 | KL: 0.0111 | CLIP: 0.1394 | TR: 0.0417 | WTR: 0.0104 | VALID: 0.9976 | ATOTAL: 0.0229 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1334
+| train | E: 1197 | S: 299250 | R: 873.7527
+| train | E: 1198 | S: 299500 | R: 874.3115
+| train | E: 1199 | S: 299750 | R: 877.6816
+| train | E: 1200 | S: 300000 | R: 877.1175
+| train | S: 300000 | ALOSS: 0.0206 | VLOSS: 0.2574 | ENT: -1.5400 | KL: 0.0117 | CLIP: 0.1523 | TR: 0.0438 | WTR: 0.0110 | VALID: 0.9962 | ATOTAL: 0.0316 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1287
+| eval  | S: 300000 | ER: 920.8755
+| train | E: 1201 | S: 300250 | R: 875.6295
+| train | E: 1202 | S: 300500 | R: 874.8377
+| train | E: 1203 | S: 300750 | R: 873.3955
+| train | E: 1204 | S: 301000 | R: 878.0453
+| train | S: 301000 | ALOSS: -0.0118 | VLOSS: 0.2028 | ENT: -1.4772 | KL: 0.0069 | CLIP: 0.0898 | TR: 0.0464 | WTR: 0.0116 | VALID: 0.9922 | ATOTAL: -0.0002 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1014
+| train | E: 1205 | S: 301250 | R: 878.0483
+| train | E: 1206 | S: 301500 | R: 876.3762
+| train | E: 1207 | S: 301750 | R: 873.6177
+| train | E: 1208 | S: 302000 | R: 878.1550
+| train | S: 302000 | ALOSS: -0.0070 | VLOSS: 0.3161 | ENT: -1.5605 | KL: 0.0137 | CLIP: 0.1645 | TR: 0.0418 | WTR: 0.0105 | VALID: 0.9953 | ATOTAL: 0.0035 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1581
+| train | E: 1209 | S: 302250 | R: 876.7848
+| train | E: 1210 | S: 302500 | R: 880.4894
+| train | E: 1211 | S: 302750 | R: 879.2934
+| train | E: 1212 | S: 303000 | R: 870.9880
+| train | S: 303000 | ALOSS: 0.0122 | VLOSS: 1.3070 | ENT: -1.5490 | KL: 0.0111 | CLIP: 0.1451 | TR: 0.0427 | WTR: 0.0107 | VALID: 0.9911 | ATOTAL: 0.0229 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.6535
+| train | E: 1213 | S: 303250 | R: 877.1843
+| train | E: 1214 | S: 303500 | R: 880.2908
+| train | E: 1215 | S: 303750 | R: 877.7779
+| train | E: 1216 | S: 304000 | R: 873.5317
+| train | S: 304000 | ALOSS: 0.0040 | VLOSS: 0.2453 | ENT: -1.6274 | KL: 0.0115 | CLIP: 0.1739 | TR: 0.0401 | WTR: 0.0100 | VALID: 0.9962 | ATOTAL: 0.0141 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1226
+| train | E: 1217 | S: 304250 | R: 234.5729
+| train | E: 1218 | S: 304500 | R: 873.9596
+| train | E: 1219 | S: 304750 | R: 873.6632
+| train | E: 1220 | S: 305000 | R: 876.8412
+| train | S: 305000 | ALOSS: -0.0955 | VLOSS: 346.6388 | ENT: -1.8500 | KL: 0.0104 | CLIP: 0.1205 | TR: 0.1540 | WTR: 0.0385 | VALID: 1.0000 | ATOTAL: -0.0570 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 173.3194
+| train | E: 1221 | S: 305250 | R: 875.4331
+| train | E: 1222 | S: 305500 | R: 876.2366
+| train | E: 1223 | S: 305750 | R: 875.6640
+| train | E: 1224 | S: 306000 | R: 872.7679
+| train | S: 306000 | ALOSS: -0.0005 | VLOSS: 0.1983 | ENT: -1.5197 | KL: 0.0059 | CLIP: 0.0437 | TR: 0.0413 | WTR: 0.0103 | VALID: 0.9938 | ATOTAL: 0.0098 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0991
+| train | E: 1225 | S: 306250 | R: 878.0194
+| train | E: 1226 | S: 306500 | R: 877.1797
+| train | E: 1227 | S: 306750 | R: 875.6714
+| train | E: 1228 | S: 307000 | R: 871.9794
+| train | S: 307000 | ALOSS: 0.0070 | VLOSS: 0.7986 | ENT: -1.6246 | KL: 0.0115 | CLIP: 0.1442 | TR: 0.0442 | WTR: 0.0111 | VALID: 0.9964 | ATOTAL: 0.0181 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3993
+| train | E: 1229 | S: 307250 | R: 872.8790
+| train | E: 1230 | S: 307500 | R: 876.0847
+| train | E: 1231 | S: 307750 | R: 873.4678
+| train | E: 1232 | S: 308000 | R: 875.4862
+| train | S: 308000 | ALOSS: 0.0119 | VLOSS: 0.4056 | ENT: -1.6267 | KL: 0.0138 | CLIP: 0.1670 | TR: 0.0466 | WTR: 0.0116 | VALID: 0.9960 | ATOTAL: 0.0235 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2028
+| train | E: 1233 | S: 308250 | R: 873.9634
+| train | E: 1234 | S: 308500 | R: 874.6048
+| train | E: 1235 | S: 308750 | R: 874.4755
+| train | E: 1236 | S: 309000 | R: 875.9994
+| train | S: 309000 | ALOSS: 0.0453 | VLOSS: 0.2187 | ENT: -1.5516 | KL: 0.0078 | CLIP: 0.0964 | TR: 0.0469 | WTR: 0.0117 | VALID: 0.9974 | ATOTAL: 0.0570 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1093
+| train | E: 1237 | S: 309250 | R: 877.8415
+| train | E: 1238 | S: 309500 | R: 873.8175
+| train | E: 1239 | S: 309750 | R: 873.2168
+| train | E: 1240 | S: 310000 | R: 879.5752
+| train | S: 310000 | ALOSS: -0.0369 | VLOSS: 0.3500 | ENT: -1.6087 | KL: 0.0106 | CLIP: 0.1562 | TR: 0.0402 | WTR: 0.0100 | VALID: 0.9953 | ATOTAL: -0.0268 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1750
+| eval  | S: 310000 | ER: 919.7132
+| train | E: 1241 | S: 310250 | R: 874.3399
+| train | E: 1242 | S: 310500 | R: 871.6335
+| train | E: 1243 | S: 310750 | R: 877.7866
+| train | E: 1244 | S: 311000 | R: 875.7967
+| train | S: 311000 | ALOSS: 0.0052 | VLOSS: 0.3590 | ENT: -1.5805 | KL: 0.0119 | CLIP: 0.1656 | TR: 0.0437 | WTR: 0.0109 | VALID: 0.9938 | ATOTAL: 0.0161 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1795
+| train | E: 1245 | S: 311250 | R: 874.2938
+| train | E: 1246 | S: 311500 | R: 876.3361
+| train | E: 1247 | S: 311750 | R: 877.4578
+| train | E: 1248 | S: 312000 | R: 873.4705
+| train | S: 312000 | ALOSS: 0.0081 | VLOSS: 0.2646 | ENT: -1.6026 | KL: 0.0120 | CLIP: 0.1650 | TR: 0.0424 | WTR: 0.0106 | VALID: 0.9960 | ATOTAL: 0.0187 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1323
+| train | E: 1249 | S: 312250 | R: 877.3272
+| train | E: 1250 | S: 312500 | R: 876.7798
+| train | E: 1251 | S: 312750 | R: 878.2389
+| train | E: 1252 | S: 313000 | R: 877.2205
+| train | S: 313000 | ALOSS: 0.0153 | VLOSS: 0.2413 | ENT: -1.6459 | KL: 0.0107 | CLIP: 0.1518 | TR: 0.0399 | WTR: 0.0100 | VALID: 0.9955 | ATOTAL: 0.0253 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1206
+| train | E: 1253 | S: 313250 | R: 874.6941
+| train | E: 1254 | S: 313500 | R: 874.6588
+| train | E: 1255 | S: 313750 | R: 869.0022
+| train | E: 1256 | S: 314000 | R: 872.4163
+| train | S: 314000 | ALOSS: -0.0248 | VLOSS: 0.4724 | ENT: -1.6118 | KL: 0.0127 | CLIP: 0.1547 | TR: 0.0410 | WTR: 0.0103 | VALID: 0.9953 | ATOTAL: -0.0146 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2362
+| train | E: 1257 | S: 314250 | R: 876.0702
+| train | E: 1258 | S: 314500 | R: 877.9520
+| train | E: 1259 | S: 314750 | R: 865.0360
+| train | E: 1260 | S: 315000 | R: 871.2817
+| train | S: 315000 | ALOSS: 0.0065 | VLOSS: 0.3590 | ENT: -1.6670 | KL: 0.0104 | CLIP: 0.1409 | TR: 0.0416 | WTR: 0.0104 | VALID: 0.9966 | ATOTAL: 0.0169 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1795
+| train | E: 1261 | S: 315250 | R: 875.3275
+| train | E: 1262 | S: 315500 | R: 874.3645
+| train | E: 1263 | S: 315750 | R: 878.8543
+| train | E: 1264 | S: 316000 | R: 872.0954
+| train | S: 316000 | ALOSS: 0.0160 | VLOSS: 0.2569 | ENT: -1.6177 | KL: 0.0126 | CLIP: 0.1584 | TR: 0.0410 | WTR: 0.0103 | VALID: 0.9960 | ATOTAL: 0.0263 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1285
+| train | E: 1265 | S: 316250 | R: 873.2116
+| train | E: 1266 | S: 316500 | R: 875.7956
+| train | E: 1267 | S: 316750 | R: 875.9027
+| train | E: 1268 | S: 317000 | R: 878.1959
+| train | S: 317000 | ALOSS: -0.0019 | VLOSS: 0.1817 | ENT: -1.6621 | KL: 0.0120 | CLIP: 0.1543 | TR: 0.0437 | WTR: 0.0109 | VALID: 0.9965 | ATOTAL: 0.0090 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0909
+| train | E: 1269 | S: 317250 | R: 874.9670
+| train | E: 1270 | S: 317500 | R: 880.2992
+| train | E: 1271 | S: 317750 | R: 877.0686
+| train | E: 1272 | S: 318000 | R: 871.7931
+| train | S: 318000 | ALOSS: 0.0206 | VLOSS: 0.2778 | ENT: -1.6779 | KL: 0.0133 | CLIP: 0.1731 | TR: 0.0424 | WTR: 0.0106 | VALID: 0.9952 | ATOTAL: 0.0312 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1389
+| train | E: 1273 | S: 318250 | R: 883.8107
+| train | E: 1274 | S: 318500 | R: 877.9078
+| train | E: 1275 | S: 318750 | R: 880.6088
+| train | E: 1276 | S: 319000 | R: 882.3112
+| train | S: 319000 | ALOSS: 0.0019 | VLOSS: 0.2582 | ENT: -1.6625 | KL: 0.0130 | CLIP: 0.1618 | TR: 0.0439 | WTR: 0.0110 | VALID: 0.9957 | ATOTAL: 0.0129 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1291
+| train | E: 1277 | S: 319250 | R: 879.9294
+| train | E: 1278 | S: 319500 | R: 881.9197
+| train | E: 1279 | S: 319750 | R: 879.6279
+| train | E: 1280 | S: 320000 | R: 880.6000
+| train | S: 320000 | ALOSS: 0.0290 | VLOSS: 0.2193 | ENT: -1.7058 | KL: 0.0093 | CLIP: 0.1250 | TR: 0.0475 | WTR: 0.0119 | VALID: 0.9958 | ATOTAL: 0.0409 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1097
+| eval  | S: 320000 | ER: 921.2125
+| train | E: 1281 | S: 320250 | R: 879.7457
+| train | E: 1282 | S: 320500 | R: 885.0947
+| train | E: 1283 | S: 320750 | R: 883.3267
+| train | E: 1284 | S: 321000 | R: 882.4634
+| train | S: 321000 | ALOSS: 0.0123 | VLOSS: 0.2146 | ENT: -1.6730 | KL: 0.0102 | CLIP: 0.1285 | TR: 0.0474 | WTR: 0.0119 | VALID: 0.9960 | ATOTAL: 0.0241 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1073
+| train | E: 1285 | S: 321250 | R: 882.9351
+| train | E: 1286 | S: 321500 | R: 881.1803
+| train | E: 1287 | S: 321750 | R: 880.4877
+| train | E: 1288 | S: 322000 | R: 883.9781
+| train | S: 322000 | ALOSS: 0.0089 | VLOSS: 0.2225 | ENT: -1.7127 | KL: 0.0095 | CLIP: 0.1272 | TR: 0.0466 | WTR: 0.0116 | VALID: 0.9955 | ATOTAL: 0.0206 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1112
+| train | E: 1289 | S: 322250 | R: 878.2179
+| train | E: 1290 | S: 322500 | R: 880.9149
+| train | E: 1291 | S: 322750 | R: 876.8666
+| train | E: 1292 | S: 323000 | R: 880.5219
+| train | S: 323000 | ALOSS: -0.0201 | VLOSS: 0.1870 | ENT: -1.7045 | KL: 0.0101 | CLIP: 0.1234 | TR: 0.0471 | WTR: 0.0118 | VALID: 0.9938 | ATOTAL: -0.0084 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0935
+| train | E: 1293 | S: 323250 | R: 884.2489
+| train | E: 1294 | S: 323500 | R: 884.4614
+| train | E: 1295 | S: 323750 | R: 883.9249
+| train | E: 1296 | S: 324000 | R: 878.3586
+| train | S: 324000 | ALOSS: -0.0060 | VLOSS: 0.1975 | ENT: -1.6919 | KL: 0.0121 | CLIP: 0.1620 | TR: 0.0483 | WTR: 0.0121 | VALID: 0.9959 | ATOTAL: 0.0060 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0988
+| train | E: 1297 | S: 324250 | R: 876.8341
+| train | E: 1298 | S: 324500 | R: 879.9020
+| train | E: 1299 | S: 324750 | R: 878.2762
+| train | E: 1300 | S: 325000 | R: 873.3239
+| train | S: 325000 | ALOSS: -0.0085 | VLOSS: 0.1407 | ENT: -1.6645 | KL: 0.0104 | CLIP: 0.1429 | TR: 0.0469 | WTR: 0.0117 | VALID: 0.9978 | ATOTAL: 0.0032 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0704
+| train | E: 1301 | S: 325250 | R: 876.9207
+| train | E: 1302 | S: 325500 | R: 876.5856
+| train | E: 1303 | S: 325750 | R: 882.4758
+| train | E: 1304 | S: 326000 | R: 884.1746
+| train | S: 326000 | ALOSS: 0.0183 | VLOSS: 0.1864 | ENT: -1.7505 | KL: 0.0094 | CLIP: 0.1146 | TR: 0.0450 | WTR: 0.0113 | VALID: 0.9974 | ATOTAL: 0.0296 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0932
+| train | E: 1305 | S: 326250 | R: 883.5432
+| train | E: 1306 | S: 326500 | R: 881.0753
+| train | E: 1307 | S: 326750 | R: 882.8008
+| train | E: 1308 | S: 327000 | R: 881.0713
+| train | S: 327000 | ALOSS: -0.0023 | VLOSS: 0.1649 | ENT: -1.6956 | KL: 0.0099 | CLIP: 0.1406 | TR: 0.0478 | WTR: 0.0119 | VALID: 0.9967 | ATOTAL: 0.0097 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0824
+| train | E: 1309 | S: 327250 | R: 886.2412
+| train | E: 1310 | S: 327500 | R: 878.3484
+| train | E: 1311 | S: 327750 | R: 883.6134
+| train | E: 1312 | S: 328000 | R: 879.0446
+| train | S: 328000 | ALOSS: 0.0204 | VLOSS: 0.2141 | ENT: -1.6897 | KL: 0.0149 | CLIP: 0.2201 | TR: 0.0531 | WTR: 0.0133 | VALID: 0.9961 | ATOTAL: 0.0336 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1070
+| train | E: 1313 | S: 328250 | R: 884.1766
+| train | E: 1314 | S: 328500 | R: 879.2328
+| train | E: 1315 | S: 328750 | R: 805.6571
+| train | E: 1316 | S: 329000 | R: 257.0937
+| train | S: 329000 | ALOSS: 0.0064 | VLOSS: 478.9746 | ENT: -2.1810 | KL: 0.0127 | CLIP: 0.1629 | TR: 0.1530 | WTR: 0.0383 | VALID: 0.9955 | ATOTAL: 0.0447 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 239.4873
+| train | E: 1317 | S: 329250 | R: 228.7937
+| train | E: 1318 | S: 329500 | R: 881.1503
+| train | E: 1319 | S: 329750 | R: 878.4396
+| train | E: 1320 | S: 330000 | R: 883.7939
+| train | S: 330000 | ALOSS: 0.0062 | VLOSS: 554.3255 | ENT: -2.0664 | KL: 0.0078 | CLIP: 0.0437 | TR: 0.1872 | WTR: 0.0468 | VALID: 0.9969 | ATOTAL: 0.0530 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 277.1627
+| eval  | S: 330000 | ER: 919.1644
+| train | E: 1321 | S: 330250 | R: 879.8370
+| train | E: 1322 | S: 330500 | R: 881.9171
+| train | E: 1323 | S: 330750 | R: 883.2424
+| train | E: 1324 | S: 331000 | R: 884.2718
+| train | S: 331000 | ALOSS: -0.0013 | VLOSS: 0.9272 | ENT: -1.6969 | KL: 0.0107 | CLIP: 0.1094 | TR: 0.0450 | WTR: 0.0113 | VALID: 0.9952 | ATOTAL: 0.0099 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4636
+| train | E: 1325 | S: 331250 | R: 884.7275
+| train | E: 1326 | S: 331500 | R: 878.4791
+| train | E: 1327 | S: 331750 | R: 881.6560
+| train | E: 1328 | S: 332000 | R: 883.3905
+| train | S: 332000 | ALOSS: 0.0062 | VLOSS: 0.2105 | ENT: -1.7296 | KL: 0.0120 | CLIP: 0.1453 | TR: 0.0444 | WTR: 0.0111 | VALID: 0.9960 | ATOTAL: 0.0173 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1052
+| train | E: 1329 | S: 332250 | R: 835.3601
+| train | E: 1330 | S: 332500 | R: 885.1723
+| train | E: 1331 | S: 332750 | R: 882.3407
+| train | E: 1332 | S: 333000 | R: 882.7120
+| train | S: 333000 | ALOSS: -0.0251 | VLOSS: 7.4143 | ENT: -1.7241 | KL: 0.0059 | CLIP: 0.0335 | TR: 0.0435 | WTR: 0.0109 | VALID: 0.9955 | ATOTAL: -0.0142 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.7072
+| train | E: 1333 | S: 333250 | R: 882.9397
+| train | E: 1334 | S: 333500 | R: 881.2109
+| train | E: 1335 | S: 333750 | R: 878.2202
+| train | E: 1336 | S: 334000 | R: 881.4753
+| train | S: 334000 | ALOSS: 0.0121 | VLOSS: 0.1899 | ENT: -1.7978 | KL: 0.0146 | CLIP: 0.1830 | TR: 0.0447 | WTR: 0.0112 | VALID: 0.9960 | ATOTAL: 0.0233 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0950
+| train | E: 1337 | S: 334250 | R: 885.1199
+| train | E: 1338 | S: 334500 | R: 877.3248
+| train | E: 1339 | S: 334750 | R: 882.7430
+| train | E: 1340 | S: 335000 | R: 881.2164
+| train | S: 335000 | ALOSS: 0.0046 | VLOSS: 0.1483 | ENT: -1.7965 | KL: 0.0121 | CLIP: 0.1600 | TR: 0.0454 | WTR: 0.0114 | VALID: 0.9960 | ATOTAL: 0.0160 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0741
+| train | E: 1341 | S: 335250 | R: 882.6883
+| train | E: 1342 | S: 335500 | R: 880.5276
+| train | E: 1343 | S: 335750 | R: 881.4267
+| train | E: 1344 | S: 336000 | R: 880.7504
+| train | S: 336000 | ALOSS: -0.0539 | VLOSS: 0.1569 | ENT: -1.7330 | KL: 0.0082 | CLIP: 0.1250 | TR: 0.0344 | WTR: 0.0086 | VALID: 1.0000 | ATOTAL: -0.0453 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0784
+| train | E: 1345 | S: 336250 | R: 882.8114
+| train | E: 1346 | S: 336500 | R: 879.8614
+| train | E: 1347 | S: 336750 | R: 881.4301
+| train | E: 1348 | S: 337000 | R: 879.8561
+| train | S: 337000 | ALOSS: -0.1133 | VLOSS: 0.1948 | ENT: -1.6101 | KL: 0.0058 | CLIP: 0.0820 | TR: 0.0499 | WTR: 0.0125 | VALID: 1.0000 | ATOTAL: -0.1008 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0974
+| train | E: 1349 | S: 337250 | R: 880.4846
+| train | E: 1350 | S: 337500 | R: 887.2288
+| train | E: 1351 | S: 337750 | R: 885.5649
+| train | E: 1352 | S: 338000 | R: 882.6327
+| train | S: 338000 | ALOSS: 0.0096 | VLOSS: 0.1584 | ENT: -1.7533 | KL: 0.0141 | CLIP: 0.1935 | TR: 0.0462 | WTR: 0.0116 | VALID: 0.9952 | ATOTAL: 0.0211 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0792
+| train | E: 1353 | S: 338250 | R: 882.1810
+| train | E: 1354 | S: 338500 | R: 881.4336
+| train | E: 1355 | S: 338750 | R: 880.7672
+| train | E: 1356 | S: 339000 | R: 879.1963
+| train | S: 339000 | ALOSS: 0.0112 | VLOSS: 0.2336 | ENT: -1.7468 | KL: 0.0122 | CLIP: 0.1570 | TR: 0.0463 | WTR: 0.0116 | VALID: 0.9960 | ATOTAL: 0.0227 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1168
+| train | E: 1357 | S: 339250 | R: 883.6922
+| train | E: 1358 | S: 339500 | R: 877.8993
+| train | E: 1359 | S: 339750 | R: 874.8986
+| train | E: 1360 | S: 340000 | R: 881.0177
+| train | S: 340000 | ALOSS: 0.0080 | VLOSS: 0.1508 | ENT: -1.7993 | KL: 0.0133 | CLIP: 0.1562 | TR: 0.0444 | WTR: 0.0111 | VALID: 0.9948 | ATOTAL: 0.0191 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0754
+| eval  | S: 340000 | ER: 918.3023
+| train | E: 1361 | S: 340250 | R: 881.7152
+| train | E: 1362 | S: 340500 | R: 879.1520
+| train | E: 1363 | S: 340750 | R: 878.2309
+| train | E: 1364 | S: 341000 | R: 886.6209
+| train | S: 341000 | ALOSS: 0.0016 | VLOSS: 0.2946 | ENT: -1.7431 | KL: 0.0101 | CLIP: 0.1094 | TR: 0.0415 | WTR: 0.0104 | VALID: 0.9958 | ATOTAL: 0.0119 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1473
+| train | E: 1365 | S: 341250 | R: 879.0793
+| train | E: 1366 | S: 341500 | R: 884.0033
+| train | E: 1367 | S: 341750 | R: 884.5604
+| train | E: 1368 | S: 342000 | R: 883.1886
+| train | S: 342000 | ALOSS: 0.0141 | VLOSS: 0.1844 | ENT: -1.8687 | KL: 0.0103 | CLIP: 0.1699 | TR: 0.0442 | WTR: 0.0111 | VALID: 0.9961 | ATOTAL: 0.0252 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0922
+| train | E: 1369 | S: 342250 | R: 879.7896
+| train | E: 1370 | S: 342500 | R: 880.8034
+| train | E: 1371 | S: 342750 | R: 883.1186
+| train | E: 1372 | S: 343000 | R: 886.0949
+| train | S: 343000 | ALOSS: 0.0083 | VLOSS: 0.1779 | ENT: -1.8629 | KL: 0.0099 | CLIP: 0.1250 | TR: 0.0436 | WTR: 0.0109 | VALID: 0.9960 | ATOTAL: 0.0192 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0889
+| train | E: 1373 | S: 343250 | R: 880.1220
+| train | E: 1374 | S: 343500 | R: 882.2450
+| train | E: 1375 | S: 343750 | R: 882.0597
+| train | E: 1376 | S: 344000 | R: 885.3762
+| train | S: 344000 | ALOSS: -0.0186 | VLOSS: 0.1484 | ENT: -1.7605 | KL: 0.0122 | CLIP: 0.1836 | TR: 0.0472 | WTR: 0.0118 | VALID: 0.9883 | ATOTAL: -0.0068 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0742
+| train | E: 1377 | S: 344250 | R: 881.0103
+| train | E: 1378 | S: 344500 | R: 880.4969
+| train | E: 1379 | S: 344750 | R: 877.8790
+| train | E: 1380 | S: 345000 | R: 883.6845
+| train | S: 345000 | ALOSS: 0.0081 | VLOSS: 0.1902 | ENT: -1.8190 | KL: 0.0104 | CLIP: 0.0949 | TR: 0.0401 | WTR: 0.0100 | VALID: 0.9962 | ATOTAL: 0.0181 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0951
+| train | E: 1381 | S: 345250 | R: 881.4934
+| train | E: 1382 | S: 345500 | R: 880.3647
+| train | E: 1383 | S: 345750 | R: 880.2542
+| train | E: 1384 | S: 346000 | R: 885.1209
+| train | S: 346000 | ALOSS: 0.0600 | VLOSS: 0.2099 | ENT: -1.8587 | KL: 0.0105 | CLIP: 0.1429 | TR: 0.0449 | WTR: 0.0112 | VALID: 0.9955 | ATOTAL: 0.0712 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1049
+| train | E: 1385 | S: 346250 | R: 831.8610
+| train | E: 1386 | S: 346500 | R: 882.2415
+| train | E: 1387 | S: 346750 | R: 880.1933
+| train | E: 1388 | S: 347000 | R: 883.1739
+| train | S: 347000 | ALOSS: -0.0082 | VLOSS: 11.6013 | ENT: -1.8312 | KL: 0.0096 | CLIP: 0.1156 | TR: 0.0480 | WTR: 0.0120 | VALID: 0.9938 | ATOTAL: 0.0038 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 5.8007
+| train | E: 1389 | S: 347250 | R: 882.0280
+| train | E: 1390 | S: 347500 | R: 880.6695
+| train | E: 1391 | S: 347750 | R: 886.8849
+| train | E: 1392 | S: 348000 | R: 886.0763
+| train | S: 348000 | ALOSS: 0.0061 | VLOSS: 0.1865 | ENT: -1.7886 | KL: 0.0108 | CLIP: 0.1285 | TR: 0.0410 | WTR: 0.0103 | VALID: 0.9965 | ATOTAL: 0.0163 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0933
+| train | E: 1393 | S: 348250 | R: 885.7645
+| train | E: 1394 | S: 348500 | R: 887.6568
+| train | E: 1395 | S: 348750 | R: 884.5781
+| train | E: 1396 | S: 349000 | R: 885.3586
+| train | S: 349000 | ALOSS: 0.0066 | VLOSS: 0.2058 | ENT: -1.7729 | KL: 0.0124 | CLIP: 0.1726 | TR: 0.0407 | WTR: 0.0102 | VALID: 0.9949 | ATOTAL: 0.0167 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1029
+| train | E: 1397 | S: 349250 | R: 884.0738
+| train | E: 1398 | S: 349500 | R: 880.7477
+| train | E: 1399 | S: 349750 | R: 880.2063
+| train | E: 1400 | S: 350000 | R: 886.5923
+| train | S: 350000 | ALOSS: 0.0036 | VLOSS: 0.2150 | ENT: -1.8798 | KL: 0.0100 | CLIP: 0.1380 | TR: 0.0442 | WTR: 0.0111 | VALID: 0.9960 | ATOTAL: 0.0146 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1075
+| eval  | S: 350000 | ER: 926.1292
+| train | E: 1401 | S: 350250 | R: 886.2746
+| train | E: 1402 | S: 350500 | R: 882.6391
+| train | E: 1403 | S: 350750 | R: 882.7780
+| train | E: 1404 | S: 351000 | R: 881.1525
+| train | S: 351000 | ALOSS: 0.0055 | VLOSS: 0.2066 | ENT: -1.8653 | KL: 0.0116 | CLIP: 0.1349 | TR: 0.0384 | WTR: 0.0096 | VALID: 0.9958 | ATOTAL: 0.0151 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1033
+| train | E: 1405 | S: 351250 | R: 879.6091
+| train | E: 1406 | S: 351500 | R: 871.2936
+| train | E: 1407 | S: 351750 | R: 883.6119
+| train | E: 1408 | S: 352000 | R: 880.7890
+| train | S: 352000 | ALOSS: -0.0570 | VLOSS: 6.0460 | ENT: -1.7584 | KL: 0.0061 | CLIP: 0.0813 | TR: 0.0417 | WTR: 0.0104 | VALID: 0.9938 | ATOTAL: -0.0466 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 3.0230
+| train | E: 1409 | S: 352250 | R: 883.7693
+| train | E: 1410 | S: 352500 | R: 887.9474
+| train | E: 1411 | S: 352750 | R: 885.3369
+| train | E: 1412 | S: 353000 | R: 885.0512
+| train | S: 353000 | ALOSS: 0.0731 | VLOSS: 0.2997 | ENT: -1.8918 | KL: 0.0009 | CLIP: 0.0104 | TR: 0.0395 | WTR: 0.0099 | VALID: 1.0000 | ATOTAL: 0.0830 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1498
+| train | E: 1413 | S: 353250 | R: 879.8258
+| train | E: 1414 | S: 353500 | R: 882.1116
+| train | E: 1415 | S: 353750 | R: 887.6737
+| train | E: 1416 | S: 354000 | R: 883.5810
+| train | S: 354000 | ALOSS: 0.0770 | VLOSS: 0.1535 | ENT: -1.8814 | KL: 0.0105 | CLIP: 0.1156 | TR: 0.0348 | WTR: 0.0087 | VALID: 0.9938 | ATOTAL: 0.0857 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0768
+| train | E: 1417 | S: 354250 | R: 880.3996
+| train | E: 1418 | S: 354500 | R: 881.2586
+| train | E: 1419 | S: 354750 | R: 881.3393
+| train | E: 1420 | S: 355000 | R: 878.7719
+| train | S: 355000 | ALOSS: 0.0112 | VLOSS: 0.2168 | ENT: -1.8744 | KL: 0.0136 | CLIP: 0.1438 | TR: 0.0397 | WTR: 0.0099 | VALID: 0.9964 | ATOTAL: 0.0211 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1084
+| train | E: 1421 | S: 355250 | R: 882.6102
+| train | E: 1422 | S: 355500 | R: 882.2399
+| train | E: 1423 | S: 355750 | R: 882.4846
+| train | E: 1424 | S: 356000 | R: 883.7921
+| train | S: 356000 | ALOSS: 0.0215 | VLOSS: 0.2287 | ENT: -1.8858 | KL: 0.0168 | CLIP: 0.2230 | TR: 0.0398 | WTR: 0.0099 | VALID: 0.9972 | ATOTAL: 0.0314 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1143
+| train | E: 1425 | S: 356250 | R: 881.8903
+| train | E: 1426 | S: 356500 | R: 879.0220
+| train | E: 1427 | S: 356750 | R: 878.6046
+| train | E: 1428 | S: 357000 | R: 882.4651
+| train | S: 357000 | ALOSS: -0.0698 | VLOSS: 0.2542 | ENT: -1.8538 | KL: 0.0119 | CLIP: 0.1693 | TR: 0.0378 | WTR: 0.0095 | VALID: 1.0000 | ATOTAL: -0.0603 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1271
+| train | E: 1429 | S: 357250 | R: 881.0961
+| train | E: 1430 | S: 357500 | R: 884.7891
+| train | E: 1431 | S: 357750 | R: 885.0100
+| train | E: 1432 | S: 358000 | R: 888.6535
+| train | S: 358000 | ALOSS: 0.0149 | VLOSS: 0.2983 | ENT: -1.8439 | KL: 0.0107 | CLIP: 0.1358 | TR: 0.0381 | WTR: 0.0095 | VALID: 0.9952 | ATOTAL: 0.0244 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1492
+| train | E: 1433 | S: 358250 | R: 881.8066
+| train | E: 1434 | S: 358500 | R: 885.2576
+| train | E: 1435 | S: 358750 | R: 884.4361
+| train | E: 1436 | S: 359000 | R: 882.0847
+| train | S: 359000 | ALOSS: 0.0018 | VLOSS: 0.1473 | ENT: -1.8164 | KL: 0.0128 | CLIP: 0.1755 | TR: 0.0379 | WTR: 0.0095 | VALID: 0.9956 | ATOTAL: 0.0112 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0736
+| train | E: 1437 | S: 359250 | R: 880.4864
+| train | E: 1438 | S: 359500 | R: 886.4203
+| train | E: 1439 | S: 359750 | R: 881.3411
+| train | E: 1440 | S: 360000 | R: 877.3427
+| train | S: 360000 | ALOSS: 0.0409 | VLOSS: 0.2212 | ENT: -1.9054 | KL: 0.0065 | CLIP: 0.0688 | TR: 0.0357 | WTR: 0.0089 | VALID: 0.9969 | ATOTAL: 0.0498 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1106
+| eval  | S: 360000 | ER: 920.0549
+| train | E: 1441 | S: 360250 | R: 887.2636
+| train | E: 1442 | S: 360500 | R: 881.4315
+| train | E: 1443 | S: 360750 | R: 887.1860
+| train | E: 1444 | S: 361000 | R: 880.3660
+| train | S: 361000 | ALOSS: 0.0059 | VLOSS: 0.2770 | ENT: -1.8593 | KL: 0.0107 | CLIP: 0.1530 | TR: 0.0395 | WTR: 0.0099 | VALID: 0.9962 | ATOTAL: 0.0158 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1385
+| train | E: 1445 | S: 361250 | R: 878.0075
+| train | E: 1446 | S: 361500 | R: 877.8359
+| train | E: 1447 | S: 361750 | R: 878.8796
+| train | E: 1448 | S: 362000 | R: 872.3415
+| train | S: 362000 | ALOSS: 0.0303 | VLOSS: 0.5867 | ENT: -1.9320 | KL: 0.0109 | CLIP: 0.1484 | TR: 0.0462 | WTR: 0.0115 | VALID: 0.9948 | ATOTAL: 0.0419 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2933
+| train | E: 1449 | S: 362250 | R: 872.8316
+| train | E: 1450 | S: 362500 | R: 885.4791
+| train | E: 1451 | S: 362750 | R: 886.8104
+| train | E: 1452 | S: 363000 | R: 883.5277
+| train | S: 363000 | ALOSS: -0.0222 | VLOSS: 0.5308 | ENT: -1.9858 | KL: 0.0109 | CLIP: 0.1266 | TR: 0.0455 | WTR: 0.0114 | VALID: 0.9969 | ATOTAL: -0.0108 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2654
+| train | E: 1453 | S: 363250 | R: 888.7377
+| train | E: 1454 | S: 363500 | R: 882.9749
+| train | E: 1455 | S: 363750 | R: 881.3300
+| train | E: 1456 | S: 364000 | R: 888.9519
+| train | S: 364000 | ALOSS: 0.0134 | VLOSS: 0.2714 | ENT: -1.8266 | KL: 0.0156 | CLIP: 0.2188 | TR: 0.0353 | WTR: 0.0088 | VALID: 0.9961 | ATOTAL: 0.0222 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1357
+| train | E: 1457 | S: 364250 | R: 883.9454
+| train | E: 1458 | S: 364500 | R: 888.4339
+| train | E: 1459 | S: 364750 | R: 889.2697
+| train | E: 1460 | S: 365000 | R: 884.9271
+| train | S: 365000 | ALOSS: 0.0120 | VLOSS: 0.1780 | ENT: -1.9117 | KL: 0.0127 | CLIP: 0.1459 | TR: 0.0384 | WTR: 0.0096 | VALID: 0.9959 | ATOTAL: 0.0216 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0890
+| train | E: 1461 | S: 365250 | R: 888.7257
+| train | E: 1462 | S: 365500 | R: 885.3310
+| train | E: 1463 | S: 365750 | R: 886.9179
+| train | E: 1464 | S: 366000 | R: 888.8041
+| train | S: 366000 | ALOSS: 0.0579 | VLOSS: 0.1762 | ENT: -1.8947 | KL: 0.0110 | CLIP: 0.1049 | TR: 0.0420 | WTR: 0.0105 | VALID: 0.9933 | ATOTAL: 0.0684 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0881
+| train | E: 1465 | S: 366250 | R: 883.0841
+| train | E: 1466 | S: 366500 | R: 885.0891
+| train | E: 1467 | S: 366750 | R: 890.6319
+| train | E: 1468 | S: 367000 | R: 886.8155
+| train | S: 367000 | ALOSS: 0.0027 | VLOSS: 0.1560 | ENT: -1.8993 | KL: 0.0168 | CLIP: 0.2165 | TR: 0.0354 | WTR: 0.0088 | VALID: 0.9955 | ATOTAL: 0.0115 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0780
+| train | E: 1469 | S: 367250 | R: 864.7612
+| train | E: 1470 | S: 367500 | R: 886.7203
+| train | E: 1471 | S: 367750 | R: 891.9747
+| train | E: 1472 | S: 368000 | R: 886.2547
+| train | S: 368000 | ALOSS: -0.0243 | VLOSS: 2.7399 | ENT: -1.9144 | KL: 0.0096 | CLIP: 0.1068 | TR: 0.0384 | WTR: 0.0096 | VALID: 0.9974 | ATOTAL: -0.0148 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.3700
+| train | E: 1473 | S: 368250 | R: 887.3799
+| train | E: 1474 | S: 368500 | R: 226.2157
+| train | E: 1475 | S: 368750 | R: 888.9929
+| train | E: 1476 | S: 369000 | R: 238.1617
+| train | S: 369000 | ALOSS: -0.0124 | VLOSS: 1597.6166 | ENT: -2.2540 | KL: 0.0062 | CLIP: 0.0531 | TR: 0.2888 | WTR: 0.0722 | VALID: 0.9969 | ATOTAL: 0.0598 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 798.8083
+| train | E: 1477 | S: 369250 | R: 887.9131
+| train | E: 1478 | S: 369500 | R: 886.5274
+| train | E: 1479 | S: 369750 | R: 805.6388
+| train | E: 1480 | S: 370000 | R: 882.6346
+| train | S: 370000 | ALOSS: 0.0044 | VLOSS: 71.9493 | ENT: -1.9846 | KL: 0.0096 | CLIP: 0.0865 | TR: 0.0489 | WTR: 0.0122 | VALID: 0.9969 | ATOTAL: 0.0166 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 35.9747
+| eval  | S: 370000 | ER: 669.9583
+| train | E: 1481 | S: 370250 | R: 888.1409
+| train | E: 1482 | S: 370500 | R: 879.2562
+| train | E: 1483 | S: 370750 | R: 404.8506
+| train | E: 1484 | S: 371000 | R: 886.8264
+| train | S: 371000 | ALOSS: 0.0330 | VLOSS: 402.3764 | ENT: -2.1159 | KL: 0.0125 | CLIP: 0.1010 | TR: 0.0995 | WTR: 0.0249 | VALID: 0.9958 | ATOTAL: 0.0579 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 201.1882
+| train | E: 1485 | S: 371250 | R: 347.5228
+| train | E: 1486 | S: 371500 | R: 674.4450
+| train | E: 1487 | S: 371750 | R: 822.6790
+| train | E: 1488 | S: 372000 | R: 886.0781
+| train | S: 372000 | ALOSS: 0.0340 | VLOSS: 863.2866 | ENT: -2.4116 | KL: 0.0063 | CLIP: 0.0500 | TR: 0.1658 | WTR: 0.0415 | VALID: 1.0000 | ATOTAL: 0.0755 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 431.6433
+| train | E: 1489 | S: 372250 | R: 229.8953
+| train | E: 1490 | S: 372500 | R: 886.6426
+| train | E: 1491 | S: 372750 | R: 338.5120
+| train | E: 1492 | S: 373000 | R: 241.0867
+| train | S: 373000 | ALOSS: -0.0089 | VLOSS: 1071.4999 | ENT: -2.7993 | KL: 0.0112 | CLIP: 0.1238 | TR: 0.2841 | WTR: 0.0710 | VALID: 0.9964 | ATOTAL: 0.0621 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 535.7499
+| train | E: 1493 | S: 373250 | R: 888.2377
+| train | E: 1494 | S: 373500 | R: 886.8544
+| train | E: 1495 | S: 373750 | R: 884.4292
+| train | E: 1496 | S: 374000 | R: 225.0328
+| train | S: 374000 | ALOSS: 0.0032 | VLOSS: 601.4371 | ENT: -2.1246 | KL: 0.0128 | CLIP: 0.1099 | TR: 0.1711 | WTR: 0.0428 | VALID: 0.9966 | ATOTAL: 0.0460 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 300.7185
+| train | E: 1497 | S: 374250 | R: 273.6370
+| train | E: 1498 | S: 374500 | R: 886.4134
+| train | E: 1499 | S: 374750 | R: 724.2151
+| train | E: 1500 | S: 375000 | R: 878.1859
+| train | S: 375000 | ALOSS: 0.0130 | VLOSS: 435.4559 | ENT: -2.3377 | KL: 0.0146 | CLIP: 0.1719 | TR: 0.1008 | WTR: 0.0252 | VALID: 0.9948 | ATOTAL: 0.0382 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 217.7279
+| train | E: 1501 | S: 375250 | R: 219.5364
+| train | E: 1502 | S: 375500 | R: 232.1811
+| train | E: 1503 | S: 375750 | R: 876.2317
+| train | E: 1504 | S: 376000 | R: 322.0373
+| train | S: 376000 | ALOSS: -0.0023 | VLOSS: 1154.4685 | ENT: -2.7381 | KL: 0.0145 | CLIP: 0.1673 | TR: 0.2952 | WTR: 0.0738 | VALID: 0.9962 | ATOTAL: 0.0715 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 577.2342
+| train | E: 1505 | S: 376250 | R: 872.9087
+| train | E: 1506 | S: 376500 | R: 646.4614
+| train | E: 1507 | S: 376750 | R: 227.1046
+| train | E: 1508 | S: 377000 | R: 214.5516
+| train | S: 377000 | ALOSS: -0.0115 | VLOSS: 1101.1132 | ENT: -2.4545 | KL: 0.0128 | CLIP: 0.1344 | TR: 0.3256 | WTR: 0.0814 | VALID: 0.9953 | ATOTAL: 0.0699 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 550.5566
+| train | E: 1509 | S: 377250 | R: 734.7210
+| train | E: 1510 | S: 377500 | R: 885.6263
+| train | E: 1511 | S: 377750 | R: 884.7966
+| train | E: 1512 | S: 378000 | R: 231.2666
+| train | S: 378000 | ALOSS: -0.0038 | VLOSS: 687.4112 | ENT: -2.2191 | KL: 0.0099 | CLIP: 0.1076 | TR: 0.2024 | WTR: 0.0506 | VALID: 0.9983 | ATOTAL: 0.0468 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 343.7056
+| train | E: 1513 | S: 378250 | R: 232.4320
+| train | E: 1514 | S: 378500 | R: 816.0883
+| train | E: 1515 | S: 378750 | R: 884.9082
+| train | E: 1516 | S: 379000 | R: 224.5443
+| train | S: 379000 | ALOSS: -0.0224 | VLOSS: 969.4928 | ENT: -2.3866 | KL: 0.0044 | CLIP: 0.0625 | TR: 0.2800 | WTR: 0.0700 | VALID: 1.0000 | ATOTAL: 0.0476 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 484.7464
+| train | E: 1517 | S: 379250 | R: 224.7110
+| train | E: 1518 | S: 379500 | R: 225.5811
+| train | E: 1519 | S: 379750 | R: 231.0023
+| train | E: 1520 | S: 380000 | R: 225.1183
+| train | S: 380000 | ALOSS: -0.0439 | VLOSS: 1371.2463 | ENT: -2.6716 | KL: 0.0112 | CLIP: 0.1484 | TR: 0.5128 | WTR: 0.1282 | VALID: 0.9961 | ATOTAL: 0.0843 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 685.6232
+| eval  | S: 380000 | ER: 435.6266
+| train | E: 1521 | S: 380250 | R: 274.0752
+| train | E: 1522 | S: 380500 | R: 225.7751
+| train | E: 1523 | S: 380750 | R: 224.2813
+| train | E: 1524 | S: 381000 | R: 242.4267
+| train | S: 381000 | ALOSS: -0.0068 | VLOSS: 1452.4623 | ENT: -2.7169 | KL: 0.0084 | CLIP: 0.1109 | TR: 0.4798 | WTR: 0.1199 | VALID: 0.9984 | ATOTAL: 0.1131 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 726.2311
+| train | E: 1525 | S: 381250 | R: 225.6084
+| train | E: 1526 | S: 381500 | R: 874.9668
+| train | E: 1527 | S: 381750 | R: 210.1469
+| train | E: 1528 | S: 382000 | R: 213.3861
+| train | S: 382000 | ALOSS: -0.0058 | VLOSS: 985.3972 | ENT: -2.4299 | KL: 0.0072 | CLIP: 0.1004 | TR: 0.3934 | WTR: 0.0984 | VALID: 0.9933 | ATOTAL: 0.0925 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 492.6986
+| train | E: 1529 | S: 382250 | R: 886.9410
+| train | E: 1530 | S: 382500 | R: 210.3180
+| train | E: 1531 | S: 382750 | R: 886.0231
+| train | E: 1532 | S: 383000 | R: 225.7081
+| train | S: 383000 | ALOSS: -0.0346 | VLOSS: 752.5209 | ENT: -2.2919 | KL: 0.0080 | CLIP: 0.0938 | TR: 0.2538 | WTR: 0.0635 | VALID: 0.9961 | ATOTAL: 0.0288 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 376.2605
+| train | E: 1533 | S: 383250 | R: 233.0531
+| train | E: 1534 | S: 383500 | R: 218.5997
+| train | E: 1535 | S: 383750 | R: 882.1941
+| train | E: 1536 | S: 384000 | R: 881.9377
+| train | S: 384000 | ALOSS: 0.0095 | VLOSS: 690.6746 | ENT: -2.3298 | KL: 0.0144 | CLIP: 0.1615 | TR: 0.2942 | WTR: 0.0735 | VALID: 0.9958 | ATOTAL: 0.0830 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 345.3373
+| train | E: 1537 | S: 384250 | R: 225.0001
+| train | E: 1538 | S: 384500 | R: 587.3033
+| train | E: 1539 | S: 384750 | R: 253.6768
+| train | E: 1540 | S: 385000 | R: 880.5370
+| train | S: 385000 | ALOSS: -0.0176 | VLOSS: 655.4480 | ENT: -2.5599 | KL: 0.0054 | CLIP: 0.0742 | TR: 0.2496 | WTR: 0.0624 | VALID: 1.0000 | ATOTAL: 0.0448 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 327.7240
+| train | E: 1541 | S: 385250 | R: 883.0100
+| train | E: 1542 | S: 385500 | R: 876.2508
+| train | E: 1543 | S: 385750 | R: 226.3173
+| train | E: 1544 | S: 386000 | R: 886.2158
+| train | S: 386000 | ALOSS: -0.0302 | VLOSS: 440.3226 | ENT: -2.1622 | KL: 0.0064 | CLIP: 0.0767 | TR: 0.1600 | WTR: 0.0400 | VALID: 0.9957 | ATOTAL: 0.0098 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 220.1613
+| train | E: 1545 | S: 386250 | R: 231.3221
+| train | E: 1546 | S: 386500 | R: 526.9175
+| train | E: 1547 | S: 386750 | R: 885.4552
+| train | E: 1548 | S: 387000 | R: 882.8475
+| train | S: 387000 | ALOSS: 0.0127 | VLOSS: 532.6385 | ENT: -2.2185 | KL: 0.0084 | CLIP: 0.0918 | TR: 0.2046 | WTR: 0.0511 | VALID: 0.9961 | ATOTAL: 0.0639 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 266.3193
+| train | E: 1549 | S: 387250 | R: 271.8787
+| train | E: 1550 | S: 387500 | R: 224.7610
+| train | E: 1551 | S: 387750 | R: 215.8056
+| train | E: 1552 | S: 388000 | R: 226.8145
+| train | S: 388000 | ALOSS: 0.0115 | VLOSS: 1230.8812 | ENT: -2.6314 | KL: 0.0125 | CLIP: 0.1465 | TR: 0.4197 | WTR: 0.1049 | VALID: 0.9961 | ATOTAL: 0.1164 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 615.4406
+| train | E: 1553 | S: 388250 | R: 209.6007
+| train | E: 1554 | S: 388500 | R: 257.4857
+| train | E: 1555 | S: 388750 | R: 627.7212
+| train | E: 1556 | S: 389000 | R: 220.1608
+| train | S: 389000 | ALOSS: 0.0478 | VLOSS: 936.3845 | ENT: -2.7576 | KL: 0.0099 | CLIP: 0.1250 | TR: 0.3108 | WTR: 0.0777 | VALID: 0.9974 | ATOTAL: 0.1255 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 468.1922
+| train | E: 1557 | S: 389250 | R: 226.7692
+| train | E: 1558 | S: 389500 | R: 796.5962
+| train | E: 1559 | S: 389750 | R: 885.8516
+| train | E: 1560 | S: 390000 | R: 377.3950
+| train | S: 390000 | ALOSS: 0.0097 | VLOSS: 717.2290 | ENT: -2.5223 | KL: 0.0169 | CLIP: 0.1670 | TR: 0.1930 | WTR: 0.0483 | VALID: 0.9960 | ATOTAL: 0.0579 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 358.6145
+| eval  | S: 390000 | ER: 395.6091
+| train | E: 1561 | S: 390250 | R: 491.3543
+| train | E: 1562 | S: 390500 | R: 883.1324
+| train | E: 1563 | S: 390750 | R: 614.0788
+| train | E: 1564 | S: 391000 | R: 225.8120
+| train | S: 391000 | ALOSS: 0.0297 | VLOSS: 667.9860 | ENT: -2.2942 | KL: 0.0084 | CLIP: 0.0875 | TR: 0.2117 | WTR: 0.0529 | VALID: 1.0000 | ATOTAL: 0.0826 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 333.9930
+| train | E: 1565 | S: 391250 | R: 823.8167
+| train | E: 1566 | S: 391500 | R: 259.3718
+| train | E: 1567 | S: 391750 | R: 769.3938
+| train | E: 1568 | S: 392000 | R: 868.1088
+| train | S: 392000 | ALOSS: 0.0202 | VLOSS: 440.7581 | ENT: -2.3900 | KL: 0.0123 | CLIP: 0.1663 | TR: 0.1060 | WTR: 0.0265 | VALID: 0.9955 | ATOTAL: 0.0467 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 220.3791
+| train | E: 1569 | S: 392250 | R: 887.3852
+| train | E: 1570 | S: 392500 | R: 742.7717
+| train | E: 1571 | S: 392750 | R: 395.5708
+| train | E: 1572 | S: 393000 | R: 820.7843
+| train | S: 393000 | ALOSS: 0.0092 | VLOSS: 354.2991 | ENT: -2.2281 | KL: 0.0110 | CLIP: 0.1360 | TR: 0.0899 | WTR: 0.0225 | VALID: 0.9960 | ATOTAL: 0.0317 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 177.1496
+| train | E: 1573 | S: 393250 | R: 227.0423
+| train | E: 1574 | S: 393500 | R: 287.0013
+| train | E: 1575 | S: 393750 | R: 462.2031
+| train | E: 1576 | S: 394000 | R: 211.0161
+| train | S: 394000 | ALOSS: -0.0017 | VLOSS: 1075.3194 | ENT: -2.9004 | KL: 0.0141 | CLIP: 0.1683 | TR: 0.2985 | WTR: 0.0746 | VALID: 0.9964 | ATOTAL: 0.0729 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 537.6597
+| train | E: 1577 | S: 394250 | R: 630.0206
+| train | E: 1578 | S: 394500 | R: 248.3749
+| train | E: 1579 | S: 394750 | R: 881.9555
+| train | E: 1580 | S: 395000 | R: 557.5440
+| train | S: 395000 | ALOSS: 0.0142 | VLOSS: 713.3046 | ENT: -2.4479 | KL: 0.0141 | CLIP: 0.1448 | TR: 0.2101 | WTR: 0.0525 | VALID: 0.9958 | ATOTAL: 0.0667 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 356.6523
+| train | E: 1581 | S: 395250 | R: 276.0878
+| train | E: 1582 | S: 395500 | R: 888.8784
+| train | E: 1583 | S: 395750 | R: 234.7975
+| train | E: 1584 | S: 396000 | R: 875.7952
+| train | S: 396000 | ALOSS: 0.0430 | VLOSS: 550.2328 | ENT: -2.3952 | KL: 0.0157 | CLIP: 0.1453 | TR: 0.2061 | WTR: 0.0515 | VALID: 0.9953 | ATOTAL: 0.0945 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 275.1164
+| train | E: 1585 | S: 396250 | R: 221.6612
+| train | E: 1586 | S: 396500 | R: 887.6270
+| train | E: 1587 | S: 396750 | R: 229.7535
+| train | E: 1588 | S: 397000 | R: 223.7948
+| train | S: 397000 | ALOSS: -0.0289 | VLOSS: 918.7020 | ENT: -2.3735 | KL: 0.0118 | CLIP: 0.1500 | TR: 0.2580 | WTR: 0.0645 | VALID: 0.9906 | ATOTAL: 0.0356 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 459.3510
+| train | E: 1589 | S: 397250 | R: 870.8621
+| train | E: 1590 | S: 397500 | R: 875.4827
+| train | E: 1591 | S: 397750 | R: 885.7362
+| train | E: 1592 | S: 398000 | R: 881.2644
+| train | S: 398000 | ALOSS: 0.0552 | VLOSS: 204.8429 | ENT: -1.9404 | KL: 0.0028 | CLIP: 0.0179 | TR: 0.0402 | WTR: 0.0100 | VALID: 0.9978 | ATOTAL: 0.0652 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 102.4214
+| train | E: 1593 | S: 398250 | R: 875.6753
+| train | E: 1594 | S: 398500 | R: 888.9996
+| train | E: 1595 | S: 398750 | R: 234.5952
+| train | E: 1596 | S: 399000 | R: 882.1266
+| train | S: 399000 | ALOSS: 0.0084 | VLOSS: 439.2187 | ENT: -2.2800 | KL: 0.0143 | CLIP: 0.1267 | TR: 0.1217 | WTR: 0.0304 | VALID: 0.9958 | ATOTAL: 0.0389 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 219.6093
+| train | E: 1597 | S: 399250 | R: 361.4938
+| train | E: 1598 | S: 399500 | R: 886.2815
+| train | E: 1599 | S: 399750 | R: 241.8542
+| train | E: 1600 | S: 400000 | R: 671.2788
+| train | S: 400000 | ALOSS: -0.0028 | VLOSS: 652.9030 | ENT: -2.4320 | KL: 0.0122 | CLIP: 0.1406 | TR: 0.1823 | WTR: 0.0456 | VALID: 0.9964 | ATOTAL: 0.0428 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 326.4515
+| eval  | S: 400000 | ER: 777.6471
+| train | E: 1601 | S: 400250 | R: 341.2541
+| train | E: 1602 | S: 400500 | R: 228.1623
+| train | E: 1603 | S: 400750 | R: 227.6219
+| train | E: 1604 | S: 401000 | R: 871.6261
+| train | S: 401000 | ALOSS: -0.0301 | VLOSS: 685.0673 | ENT: -2.6433 | KL: 0.0141 | CLIP: 0.1562 | TR: 0.2533 | WTR: 0.0633 | VALID: 0.9961 | ATOTAL: 0.0333 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 342.5336
+| train | E: 1605 | S: 401250 | R: 883.1203
+| train | E: 1606 | S: 401500 | R: 882.6042
+| train | E: 1607 | S: 401750 | R: 883.3145
+| train | E: 1608 | S: 402000 | R: 715.1512
+| train | S: 402000 | ALOSS: 0.0321 | VLOSS: 200.1134 | ENT: -2.0283 | KL: 0.0070 | CLIP: 0.0766 | TR: 0.0481 | WTR: 0.0120 | VALID: 0.9969 | ATOTAL: 0.0441 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 100.0567
+| train | E: 1609 | S: 402250 | R: 880.2865
+| train | E: 1610 | S: 402500 | R: 884.2406
+| train | E: 1611 | S: 402750 | R: 884.4775
+| train | E: 1612 | S: 403000 | R: 880.8550
+| train | S: 403000 | ALOSS: -0.0473 | VLOSS: 219.5047 | ENT: -2.1120 | KL: 0.0098 | CLIP: 0.1469 | TR: 0.0328 | WTR: 0.0082 | VALID: 0.9938 | ATOTAL: -0.0391 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 109.7523
+| train | E: 1613 | S: 403250 | R: 880.0070
+| train | E: 1614 | S: 403500 | R: 872.3610
+| train | E: 1615 | S: 403750 | R: 880.9179
+| train | E: 1616 | S: 404000 | R: 883.3610
+| train | S: 404000 | ALOSS: 0.0102 | VLOSS: 91.1094 | ENT: -1.9387 | KL: 0.0096 | CLIP: 0.1363 | TR: 0.0402 | WTR: 0.0101 | VALID: 0.9944 | ATOTAL: 0.0203 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 45.5547
+| train | E: 1617 | S: 404250 | R: 874.7961
+| train | E: 1618 | S: 404500 | R: 880.1147
+| train | E: 1619 | S: 404750 | R: 873.9480
+| train | E: 1620 | S: 405000 | R: 874.4496
+| train | S: 405000 | ALOSS: -0.0051 | VLOSS: 26.4486 | ENT: -1.9762 | KL: 0.0099 | CLIP: 0.1000 | TR: 0.0356 | WTR: 0.0089 | VALID: 0.9958 | ATOTAL: 0.0038 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 13.2243
+| train | E: 1621 | S: 405250 | R: 877.7698
+| train | E: 1622 | S: 405500 | R: 880.1937
+| train | E: 1623 | S: 405750 | R: 230.5954
+| train | E: 1624 | S: 406000 | R: 879.9416
+| train | S: 406000 | ALOSS: 0.0280 | VLOSS: 821.1129 | ENT: -2.2084 | KL: 0.0111 | CLIP: 0.0874 | TR: 0.1242 | WTR: 0.0310 | VALID: 0.9962 | ATOTAL: 0.0591 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 410.5565
+| train | E: 1625 | S: 406250 | R: 878.3673
+| train | E: 1626 | S: 406500 | R: 881.8619
+| train | E: 1627 | S: 406750 | R: 879.9408
+| train | E: 1628 | S: 407000 | R: 881.3033
+| train | S: 407000 | ALOSS: 0.0346 | VLOSS: 5.3126 | ENT: -1.8876 | KL: 0.0072 | CLIP: 0.0868 | TR: 0.0372 | WTR: 0.0093 | VALID: 0.9983 | ATOTAL: 0.0439 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 2.6563
+| train | E: 1629 | S: 407250 | R: 879.4038
+| train | E: 1630 | S: 407500 | R: 881.2786
+| train | E: 1631 | S: 407750 | R: 878.1825
+| train | E: 1632 | S: 408000 | R: 881.8897
+| train | S: 408000 | ALOSS: -0.0042 | VLOSS: 1.6756 | ENT: -1.9856 | KL: 0.0107 | CLIP: 0.1396 | TR: 0.0376 | WTR: 0.0094 | VALID: 0.9956 | ATOTAL: 0.0052 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.8378
+| train | E: 1633 | S: 408250 | R: 881.9990
+| train | E: 1634 | S: 408500 | R: 880.6235
+| train | E: 1635 | S: 408750 | R: 881.2397
+| train | E: 1636 | S: 409000 | R: 882.6291
+| train | S: 409000 | ALOSS: 0.0331 | VLOSS: 0.3246 | ENT: -1.9167 | KL: 0.0099 | CLIP: 0.1198 | TR: 0.0353 | WTR: 0.0088 | VALID: 0.9961 | ATOTAL: 0.0420 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1623
+| train | E: 1637 | S: 409250 | R: 881.5966
+| train | E: 1638 | S: 409500 | R: 885.2788
+| train | E: 1639 | S: 409750 | R: 880.2116
+| train | E: 1640 | S: 410000 | R: 885.9136
+| train | S: 410000 | ALOSS: 0.0248 | VLOSS: 0.1961 | ENT: -1.8714 | KL: 0.0136 | CLIP: 0.1983 | TR: 0.0382 | WTR: 0.0096 | VALID: 0.9952 | ATOTAL: 0.0343 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0980
+| eval  | S: 410000 | ER: 908.1357
+| train | E: 1641 | S: 410250 | R: 883.6559
+| train | E: 1642 | S: 410500 | R: 880.8832
+| train | E: 1643 | S: 410750 | R: 880.7611
+| train | E: 1644 | S: 411000 | R: 879.7489
+| train | S: 411000 | ALOSS: 0.0502 | VLOSS: 0.1716 | ENT: -1.9836 | KL: 0.0090 | CLIP: 0.1250 | TR: 0.0413 | WTR: 0.0103 | VALID: 0.9922 | ATOTAL: 0.0606 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0858
+| train | E: 1645 | S: 411250 | R: 883.4138
+| train | E: 1646 | S: 411500 | R: 884.2869
+| train | E: 1647 | S: 411750 | R: 882.9186
+| train | E: 1648 | S: 412000 | R: 884.9893
+| train | S: 412000 | ALOSS: 0.0151 | VLOSS: 0.1874 | ENT: -1.9831 | KL: 0.0125 | CLIP: 0.1906 | TR: 0.0381 | WTR: 0.0095 | VALID: 0.9938 | ATOTAL: 0.0246 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0937
+| train | E: 1649 | S: 412250 | R: 880.8778
+| train | E: 1650 | S: 412500 | R: 884.8081
+| train | E: 1651 | S: 412750 | R: 884.0670
+| train | E: 1652 | S: 413000 | R: 884.8611
+| train | S: 413000 | ALOSS: -0.0079 | VLOSS: 0.1963 | ENT: -1.9637 | KL: 0.0099 | CLIP: 0.1156 | TR: 0.0368 | WTR: 0.0092 | VALID: 0.9958 | ATOTAL: 0.0013 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0982
+| train | E: 1653 | S: 413250 | R: 884.4780
+| train | E: 1654 | S: 413500 | R: 884.0803
+| train | E: 1655 | S: 413750 | R: 881.6582
+| train | E: 1656 | S: 414000 | R: 878.6172
+| train | S: 414000 | ALOSS: -0.1136 | VLOSS: 0.3311 | ENT: -2.0149 | KL: 0.0091 | CLIP: 0.1302 | TR: 0.0353 | WTR: 0.0088 | VALID: 0.9896 | ATOTAL: -0.1048 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1656
+| train | E: 1657 | S: 414250 | R: 886.8399
+| train | E: 1658 | S: 414500 | R: 889.3077
+| train | E: 1659 | S: 414750 | R: 885.2955
+| train | E: 1660 | S: 415000 | R: 887.8090
+| train | S: 415000 | ALOSS: -0.0142 | VLOSS: 0.2535 | ENT: -1.9689 | KL: 0.0154 | CLIP: 0.1641 | TR: 0.0336 | WTR: 0.0084 | VALID: 0.9969 | ATOTAL: -0.0058 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1268
+| train | E: 1661 | S: 415250 | R: 883.5517
+| train | E: 1662 | S: 415500 | R: 887.1497
+| train | E: 1663 | S: 415750 | R: 884.0018
+| train | E: 1664 | S: 416000 | R: 887.6548
+| train | S: 416000 | ALOSS: -0.0259 | VLOSS: 0.2095 | ENT: -1.8971 | KL: 0.0087 | CLIP: 0.1302 | TR: 0.0415 | WTR: 0.0104 | VALID: 0.9896 | ATOTAL: -0.0155 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1047
+| train | E: 1665 | S: 416250 | R: 880.8614
+| train | E: 1666 | S: 416500 | R: 880.6745
+| train | E: 1667 | S: 416750 | R: 881.7737
+| train | E: 1668 | S: 417000 | R: 884.8196
+| train | S: 417000 | ALOSS: 0.0394 | VLOSS: 0.1979 | ENT: -1.9514 | KL: 0.0066 | CLIP: 0.0875 | TR: 0.0401 | WTR: 0.0100 | VALID: 0.9969 | ATOTAL: 0.0494 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0989
+| train | E: 1669 | S: 417250 | R: 883.3871
+| train | E: 1670 | S: 417500 | R: 884.8842
+| train | E: 1671 | S: 417750 | R: 884.2362
+| train | E: 1672 | S: 418000 | R: 884.3965
+| train | S: 418000 | ALOSS: -0.0033 | VLOSS: 0.2590 | ENT: -1.9540 | KL: 0.0078 | CLIP: 0.1156 | TR: 0.0392 | WTR: 0.0098 | VALID: 0.9969 | ATOTAL: 0.0065 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1295
+| train | E: 1673 | S: 418250 | R: 887.6111
+| train | E: 1674 | S: 418500 | R: 886.4694
+| train | E: 1675 | S: 418750 | R: 888.4181
+| train | E: 1676 | S: 419000 | R: 885.4475
+| train | S: 419000 | ALOSS: 0.0054 | VLOSS: 0.1699 | ENT: -2.0047 | KL: 0.0156 | CLIP: 0.2001 | TR: 0.0390 | WTR: 0.0098 | VALID: 0.9953 | ATOTAL: 0.0152 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0849
+| train | E: 1677 | S: 419250 | R: 886.3866
+| train | E: 1678 | S: 419500 | R: 887.5126
+| train | E: 1679 | S: 419750 | R: 677.6246
+| train | E: 1680 | S: 420000 | R: 888.6591
+| train | S: 420000 | ALOSS: 0.0017 | VLOSS: 146.8640 | ENT: -2.0878 | KL: 0.0074 | CLIP: 0.1250 | TR: 0.0530 | WTR: 0.0132 | VALID: 0.9906 | ATOTAL: 0.0150 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 73.4320
+| eval  | S: 420000 | ER: 678.2515
+| train | E: 1681 | S: 420250 | R: 892.1301
+| train | E: 1682 | S: 420500 | R: 869.9376
+| train | E: 1683 | S: 420750 | R: 889.8485
+| train | E: 1684 | S: 421000 | R: 256.9250
+| train | S: 421000 | ALOSS: 0.0080 | VLOSS: 441.8963 | ENT: -2.3372 | KL: 0.0138 | CLIP: 0.1810 | TR: 0.0958 | WTR: 0.0239 | VALID: 0.9961 | ATOTAL: 0.0320 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 220.9482
+| train | E: 1685 | S: 421250 | R: 320.7691
+| train | E: 1686 | S: 421500 | R: 889.9727
+| train | E: 1687 | S: 421750 | R: 890.6400
+| train | E: 1688 | S: 422000 | R: 348.9330
+| train | S: 422000 | ALOSS: -0.0672 | VLOSS: 735.4971 | ENT: -2.6586 | KL: 0.0107 | CLIP: 0.1163 | TR: 0.1316 | WTR: 0.0329 | VALID: 0.9965 | ATOTAL: -0.0343 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 367.7486
+| train | E: 1689 | S: 422250 | R: 890.1034
+| train | E: 1690 | S: 422500 | R: 888.4692
+| train | E: 1691 | S: 422750 | R: 260.6436
+| train | E: 1692 | S: 423000 | R: 881.6047
+| train | S: 423000 | ALOSS: 0.0042 | VLOSS: 246.6061 | ENT: -2.3080 | KL: 0.0136 | CLIP: 0.1409 | TR: 0.1032 | WTR: 0.0258 | VALID: 0.9958 | ATOTAL: 0.0300 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 123.3030
+| train | E: 1693 | S: 423250 | R: 878.4926
+| train | E: 1694 | S: 423500 | R: 229.6452
+| train | E: 1695 | S: 423750 | R: 881.2752
+| train | E: 1696 | S: 424000 | R: 290.1880
+| train | S: 424000 | ALOSS: 0.0092 | VLOSS: 770.7768 | ENT: -2.5440 | KL: 0.0112 | CLIP: 0.1138 | TR: 0.2034 | WTR: 0.0508 | VALID: 0.9955 | ATOTAL: 0.0601 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 385.3884
+| train | E: 1697 | S: 424250 | R: 273.1164
+| train | E: 1698 | S: 424500 | R: 889.6766
+| train | E: 1699 | S: 424750 | R: 889.5381
+| train | E: 1700 | S: 425000 | R: 880.0550
+| train | S: 425000 | ALOSS: -0.0030 | VLOSS: 298.4852 | ENT: -2.3004 | KL: 0.0115 | CLIP: 0.1277 | TR: 0.0982 | WTR: 0.0246 | VALID: 0.9956 | ATOTAL: 0.0216 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 149.2426
+| train | E: 1701 | S: 425250 | R: 216.1859
+| train | E: 1702 | S: 425500 | R: 234.3057
+| train | E: 1703 | S: 425750 | R: 880.5430
+| train | E: 1704 | S: 426000 | R: 592.0219
+| train | S: 426000 | ALOSS: 0.0138 | VLOSS: 934.2956 | ENT: -2.4165 | KL: 0.0117 | CLIP: 0.1219 | TR: 0.2438 | WTR: 0.0609 | VALID: 0.9953 | ATOTAL: 0.0748 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 467.1478
+| train | E: 1705 | S: 426250 | R: 886.2901
+| train | E: 1706 | S: 426500 | R: 578.5675
+| train | E: 1707 | S: 426750 | R: 374.2044
+| train | E: 1708 | S: 427000 | R: 216.9624
+| train | S: 427000 | ALOSS: -0.0303 | VLOSS: 690.5045 | ENT: -2.6528 | KL: 0.0053 | CLIP: 0.0651 | TR: 0.2207 | WTR: 0.0552 | VALID: 0.9948 | ATOTAL: 0.0249 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 345.2523
+| train | E: 1709 | S: 427250 | R: 279.0005
+| train | E: 1710 | S: 427500 | R: 883.3709
+| train | E: 1711 | S: 427750 | R: 881.9482
+| train | E: 1712 | S: 428000 | R: 863.3876
+| train | S: 428000 | ALOSS: 0.0085 | VLOSS: 509.0317 | ENT: -2.4110 | KL: 0.0134 | CLIP: 0.1435 | TR: 0.0946 | WTR: 0.0237 | VALID: 0.9943 | ATOTAL: 0.0321 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 254.5159
+| train | E: 1713 | S: 428250 | R: 883.5499
+| train | E: 1714 | S: 428500 | R: 709.9723
+| train | E: 1715 | S: 428750 | R: 891.2476
+| train | E: 1716 | S: 429000 | R: 882.0790
+| train | S: 429000 | ALOSS: 0.0172 | VLOSS: 265.1062 | ENT: -2.0723 | KL: 0.0065 | CLIP: 0.0663 | TR: 0.0568 | WTR: 0.0142 | VALID: 0.9958 | ATOTAL: 0.0314 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 132.5531
+| train | E: 1717 | S: 429250 | R: 883.3580
+| train | E: 1718 | S: 429500 | R: 885.4045
+| train | E: 1719 | S: 429750 | R: 863.2411
+| train | E: 1720 | S: 430000 | R: 870.0613
+| train | S: 430000 | ALOSS: -0.0010 | VLOSS: 98.1534 | ENT: -2.0590 | KL: 0.0060 | CLIP: 0.0714 | TR: 0.0395 | WTR: 0.0099 | VALID: 0.9978 | ATOTAL: 0.0089 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 49.0767
+| eval  | S: 430000 | ER: 855.4914
+| train | E: 1721 | S: 430250 | R: 881.1901
+| train | E: 1722 | S: 430500 | R: 480.6541
+| train | E: 1723 | S: 430750 | R: 277.2863
+| train | E: 1724 | S: 431000 | R: 884.3087
+| train | S: 431000 | ALOSS: 0.0127 | VLOSS: 572.0738 | ENT: -2.5523 | KL: 0.0131 | CLIP: 0.1719 | TR: 0.1418 | WTR: 0.0354 | VALID: 0.9964 | ATOTAL: 0.0481 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 286.0369
+| train | E: 1725 | S: 431250 | R: 885.8489
+| train | E: 1726 | S: 431500 | R: 883.9478
+| train | E: 1727 | S: 431750 | R: 888.9911
+| train | E: 1728 | S: 432000 | R: 883.7591
+| train | S: 432000 | ALOSS: -0.0049 | VLOSS: 20.5282 | ENT: -1.9696 | KL: 0.0099 | CLIP: 0.1390 | TR: 0.0376 | WTR: 0.0094 | VALID: 0.9951 | ATOTAL: 0.0045 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 10.2641
+| train | E: 1729 | S: 432250 | R: 887.9366
+| train | E: 1730 | S: 432500 | R: 875.0936
+| train | E: 1731 | S: 432750 | R: 886.1520
+| train | E: 1732 | S: 433000 | R: 891.1590
+| train | S: 433000 | ALOSS: 0.0149 | VLOSS: 9.6739 | ENT: -1.9284 | KL: 0.0046 | CLIP: 0.0402 | TR: 0.0364 | WTR: 0.0091 | VALID: 0.9955 | ATOTAL: 0.0240 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.8370
+| train | E: 1733 | S: 433250 | R: 880.4172
+| train | E: 1734 | S: 433500 | R: 867.7055
+| train | E: 1735 | S: 433750 | R: 885.4538
+| train | E: 1736 | S: 434000 | R: 883.6830
+| train | S: 434000 | ALOSS: -0.0132 | VLOSS: 29.2059 | ENT: -2.0155 | KL: 0.0109 | CLIP: 0.1128 | TR: 0.0403 | WTR: 0.0101 | VALID: 0.9948 | ATOTAL: -0.0031 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 14.6029
+| train | E: 1737 | S: 434250 | R: 885.6243
+| train | E: 1738 | S: 434500 | R: 887.6446
+| train | E: 1739 | S: 434750 | R: 892.1962
+| train | E: 1740 | S: 435000 | R: 884.5935
+| train | S: 435000 | ALOSS: 0.0474 | VLOSS: 0.4875 | ENT: -1.8899 | KL: 0.0088 | CLIP: 0.1339 | TR: 0.0418 | WTR: 0.0104 | VALID: 1.0000 | ATOTAL: 0.0579 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2438
+| train | E: 1741 | S: 435250 | R: 888.6088
+| train | E: 1742 | S: 435500 | R: 888.8817
+| train | E: 1743 | S: 435750 | R: 886.9775
+| train | E: 1744 | S: 436000 | R: 873.7843
+| train | S: 436000 | ALOSS: 0.0192 | VLOSS: 8.0240 | ENT: -1.9672 | KL: 0.0099 | CLIP: 0.1283 | TR: 0.0379 | WTR: 0.0095 | VALID: 0.9955 | ATOTAL: 0.0287 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 4.0120
+| train | E: 1745 | S: 436250 | R: 884.6435
+| train | E: 1746 | S: 436500 | R: 888.4145
+| train | E: 1747 | S: 436750 | R: 887.8904
+| train | E: 1748 | S: 437000 | R: 891.8385
+| train | S: 437000 | ALOSS: 0.0044 | VLOSS: 0.2405 | ENT: -1.9691 | KL: 0.0132 | CLIP: 0.1622 | TR: 0.0373 | WTR: 0.0093 | VALID: 0.9965 | ATOTAL: 0.0137 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1203
+| train | E: 1749 | S: 437250 | R: 884.3159
+| train | E: 1750 | S: 437500 | R: 887.4585
+| train | E: 1751 | S: 437750 | R: 883.7903
+| train | E: 1752 | S: 438000 | R: 886.2237
+| train | S: 438000 | ALOSS: 0.0352 | VLOSS: 0.3230 | ENT: -2.0181 | KL: 0.0191 | CLIP: 0.2609 | TR: 0.0369 | WTR: 0.0092 | VALID: 0.9969 | ATOTAL: 0.0444 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1615
+| train | E: 1753 | S: 438250 | R: 893.1061
+| train | E: 1754 | S: 438500 | R: 887.9723
+| train | E: 1755 | S: 438750 | R: 884.5652
+| train | E: 1756 | S: 439000 | R: 890.0557
+| train | S: 439000 | ALOSS: 0.0404 | VLOSS: 0.1889 | ENT: -2.0712 | KL: 0.0087 | CLIP: 0.1224 | TR: 0.0364 | WTR: 0.0091 | VALID: 1.0000 | ATOTAL: 0.0495 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0944
+| train | E: 1757 | S: 439250 | R: 886.5022
+| train | E: 1758 | S: 439500 | R: 887.9007
+| train | E: 1759 | S: 439750 | R: 883.9717
+| train | E: 1760 | S: 440000 | R: 885.8130
+| train | S: 440000 | ALOSS: -0.0148 | VLOSS: 0.1202 | ENT: -2.0022 | KL: 0.0140 | CLIP: 0.1611 | TR: 0.0340 | WTR: 0.0085 | VALID: 0.9964 | ATOTAL: -0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0601
+| eval  | S: 440000 | ER: 919.8711
+| train | E: 1761 | S: 440250 | R: 886.0220
+| train | E: 1762 | S: 440500 | R: 891.3295
+| train | E: 1763 | S: 440750 | R: 891.8701
+| train | E: 1764 | S: 441000 | R: 886.3494
+| train | S: 441000 | ALOSS: -0.1003 | VLOSS: 0.2307 | ENT: -1.8714 | KL: 0.0109 | CLIP: 0.1562 | TR: 0.0394 | WTR: 0.0099 | VALID: 0.9961 | ATOTAL: -0.0905 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1154
+| train | E: 1765 | S: 441250 | R: 891.1916
+| train | E: 1766 | S: 441500 | R: 890.5551
+| train | E: 1767 | S: 441750 | R: 886.7365
+| train | E: 1768 | S: 442000 | R: 894.7060
+| train | S: 442000 | ALOSS: 0.0049 | VLOSS: 0.1476 | ENT: -2.1062 | KL: 0.0112 | CLIP: 0.1280 | TR: 0.0313 | WTR: 0.0078 | VALID: 0.9960 | ATOTAL: 0.0128 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0738
+| train | E: 1769 | S: 442250 | R: 889.9174
+| train | E: 1770 | S: 442500 | R: 890.5715
+| train | E: 1771 | S: 442750 | R: 889.7761
+| train | E: 1772 | S: 443000 | R: 885.4926
+| train | S: 443000 | ALOSS: 0.0290 | VLOSS: 0.2032 | ENT: -2.0942 | KL: 0.0084 | CLIP: 0.1099 | TR: 0.0374 | WTR: 0.0093 | VALID: 0.9950 | ATOTAL: 0.0383 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1016
+| train | E: 1773 | S: 443250 | R: 885.7701
+| train | E: 1774 | S: 443500 | R: 882.2805
+| train | E: 1775 | S: 443750 | R: 888.4525
+| train | E: 1776 | S: 444000 | R: 888.4845
+| train | S: 444000 | ALOSS: 0.0008 | VLOSS: 0.2346 | ENT: -2.1211 | KL: 0.0153 | CLIP: 0.2340 | TR: 0.0365 | WTR: 0.0091 | VALID: 0.9960 | ATOTAL: 0.0100 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1173
+| train | E: 1777 | S: 444250 | R: 889.9950
+| train | E: 1778 | S: 444500 | R: 889.6937
+| train | E: 1779 | S: 444750 | R: 889.0114
+| train | E: 1780 | S: 445000 | R: 890.3466
+| train | S: 445000 | ALOSS: 0.0067 | VLOSS: 0.2010 | ENT: -2.1009 | KL: 0.0154 | CLIP: 0.2147 | TR: 0.0348 | WTR: 0.0087 | VALID: 0.9965 | ATOTAL: 0.0154 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1005
+| train | E: 1781 | S: 445250 | R: 887.9431
+| train | E: 1782 | S: 445500 | R: 891.0497
+| train | E: 1783 | S: 445750 | R: 891.3145
+| train | E: 1784 | S: 446000 | R: 889.6579
+| train | S: 446000 | ALOSS: 0.0088 | VLOSS: 0.1777 | ENT: -2.0910 | KL: 0.0129 | CLIP: 0.1696 | TR: 0.0361 | WTR: 0.0090 | VALID: 0.9955 | ATOTAL: 0.0178 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0889
+| train | E: 1785 | S: 446250 | R: 891.7738
+| train | E: 1786 | S: 446500 | R: 890.6541
+| train | E: 1787 | S: 446750 | R: 890.9072
+| train | E: 1788 | S: 447000 | R: 887.3132
+| train | S: 447000 | ALOSS: -0.0052 | VLOSS: 0.1324 | ENT: -2.0915 | KL: 0.0094 | CLIP: 0.1172 | TR: 0.0335 | WTR: 0.0084 | VALID: 0.9984 | ATOTAL: 0.0032 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0662
+| train | E: 1789 | S: 447250 | R: 889.8402
+| train | E: 1790 | S: 447500 | R: 889.5294
+| train | E: 1791 | S: 447750 | R: 890.3602
+| train | E: 1792 | S: 448000 | R: 894.3226
+| train | S: 448000 | ALOSS: 0.0574 | VLOSS: 0.1621 | ENT: -2.1025 | KL: 0.0087 | CLIP: 0.1211 | TR: 0.0349 | WTR: 0.0087 | VALID: 0.9922 | ATOTAL: 0.0661 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0810
+| train | E: 1793 | S: 448250 | R: 894.3800
+| train | E: 1794 | S: 448500 | R: 890.3450
+| train | E: 1795 | S: 448750 | R: 889.8427
+| train | E: 1796 | S: 449000 | R: 888.9458
+| train | S: 449000 | ALOSS: 0.0541 | VLOSS: 0.1420 | ENT: -2.0912 | KL: 0.0145 | CLIP: 0.2207 | TR: 0.0327 | WTR: 0.0082 | VALID: 1.0000 | ATOTAL: 0.0623 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0710
+| train | E: 1797 | S: 449250 | R: 894.2758
+| train | E: 1798 | S: 449500 | R: 894.0690
+| train | E: 1799 | S: 449750 | R: 894.7994
+| train | E: 1800 | S: 450000 | R: 893.4240
+| train | S: 450000 | ALOSS: 0.0014 | VLOSS: 0.1274 | ENT: -2.0970 | KL: 0.0129 | CLIP: 0.1695 | TR: 0.0329 | WTR: 0.0082 | VALID: 0.9952 | ATOTAL: 0.0096 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0637
+| eval  | S: 450000 | ER: 924.8273
+| train | E: 1801 | S: 450250 | R: 896.5273
+| train | E: 1802 | S: 450500 | R: 889.6816
+| train | E: 1803 | S: 450750 | R: 889.5824
+| train | E: 1804 | S: 451000 | R: 891.9743
+| train | S: 451000 | ALOSS: 0.0049 | VLOSS: 0.1344 | ENT: -2.1690 | KL: 0.0108 | CLIP: 0.1187 | TR: 0.0366 | WTR: 0.0091 | VALID: 0.9969 | ATOTAL: 0.0141 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0672
+| train | E: 1805 | S: 451250 | R: 894.3891
+| train | E: 1806 | S: 451500 | R: 894.0109
+| train | E: 1807 | S: 451750 | R: 892.1760
+| train | E: 1808 | S: 452000 | R: 889.6340
+| train | S: 452000 | ALOSS: -0.0413 | VLOSS: 0.4492 | ENT: -2.1612 | KL: 0.0071 | CLIP: 0.0879 | TR: 0.0369 | WTR: 0.0092 | VALID: 0.9961 | ATOTAL: -0.0321 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2246
+| train | E: 1809 | S: 452250 | R: 892.6251
+| train | E: 1810 | S: 452500 | R: 597.7071
+| train | E: 1811 | S: 452750 | R: 883.8579
+| train | E: 1812 | S: 453000 | R: 894.9642
+| train | S: 453000 | ALOSS: -0.0548 | VLOSS: 339.7927 | ENT: -2.1838 | KL: 0.0104 | CLIP: 0.1531 | TR: 0.0643 | WTR: 0.0161 | VALID: 0.9969 | ATOTAL: -0.0387 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 169.8963
+| train | E: 1813 | S: 453250 | R: 490.1577
+| train | E: 1814 | S: 453500 | R: 890.0482
+| train | E: 1815 | S: 453750 | R: 887.4720
+| train | E: 1816 | S: 454000 | R: 451.6946
+| train | S: 454000 | ALOSS: 0.0062 | VLOSS: 469.7058 | ENT: -2.7289 | KL: 0.0119 | CLIP: 0.1211 | TR: 0.0961 | WTR: 0.0240 | VALID: 0.9948 | ATOTAL: 0.0302 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 234.8529
+| train | E: 1817 | S: 454250 | R: 882.1616
+| train | E: 1818 | S: 454500 | R: 879.3114
+| train | E: 1819 | S: 454750 | R: 883.0482
+| train | E: 1820 | S: 455000 | R: 881.9215
+| train | S: 455000 | ALOSS: -0.0275 | VLOSS: 0.7925 | ENT: -2.2040 | KL: 0.0117 | CLIP: 0.1609 | TR: 0.0357 | WTR: 0.0089 | VALID: 0.9938 | ATOTAL: -0.0186 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3962
+| train | E: 1821 | S: 455250 | R: 891.2294
+| train | E: 1822 | S: 455500 | R: 890.5082
+| train | E: 1823 | S: 455750 | R: 887.6907
+| train | E: 1824 | S: 456000 | R: 889.5514
+| train | S: 456000 | ALOSS: 0.0451 | VLOSS: 0.3363 | ENT: -1.9516 | KL: 0.0103 | CLIP: 0.1250 | TR: 0.0420 | WTR: 0.0105 | VALID: 0.9948 | ATOTAL: 0.0556 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1681
+| train | E: 1825 | S: 456250 | R: 897.3560
+| train | E: 1826 | S: 456500 | R: 893.0182
+| train | E: 1827 | S: 456750 | R: 890.2808
+| train | E: 1828 | S: 457000 | R: 891.5705
+| train | S: 457000 | ALOSS: 0.0317 | VLOSS: 0.2152 | ENT: -2.2878 | KL: 0.0116 | CLIP: 0.2031 | TR: 0.0313 | WTR: 0.0078 | VALID: 0.9961 | ATOTAL: 0.0395 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1076
+| train | E: 1829 | S: 457250 | R: 889.2543
+| train | E: 1830 | S: 457500 | R: 890.4521
+| train | E: 1831 | S: 457750 | R: 884.2392
+| train | E: 1832 | S: 458000 | R: 893.2395
+| train | S: 458000 | ALOSS: -0.0485 | VLOSS: 0.9399 | ENT: -2.1670 | KL: 0.0067 | CLIP: 0.0851 | TR: 0.0351 | WTR: 0.0088 | VALID: 0.9948 | ATOTAL: -0.0397 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4699
+| train | E: 1833 | S: 458250 | R: 893.0558
+| train | E: 1834 | S: 458500 | R: 891.1631
+| train | E: 1835 | S: 458750 | R: 890.2451
+| train | E: 1836 | S: 459000 | R: 892.8438
+| train | S: 459000 | ALOSS: 0.0185 | VLOSS: 0.1667 | ENT: -2.1380 | KL: 0.0089 | CLIP: 0.1250 | TR: 0.0346 | WTR: 0.0087 | VALID: 0.9922 | ATOTAL: 0.0272 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0833
+| train | E: 1837 | S: 459250 | R: 883.9807
+| train | E: 1838 | S: 459500 | R: 889.8343
+| train | E: 1839 | S: 459750 | R: 890.8905
+| train | E: 1840 | S: 460000 | R: 894.1279
+| train | S: 460000 | ALOSS: 0.0142 | VLOSS: 0.2814 | ENT: -2.1250 | KL: 0.0101 | CLIP: 0.1406 | TR: 0.0379 | WTR: 0.0095 | VALID: 0.9974 | ATOTAL: 0.0237 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1407
+| eval  | S: 460000 | ER: 920.8892
+| train | E: 1841 | S: 460250 | R: 893.8516
+| train | E: 1842 | S: 460500 | R: 892.1419
+| train | E: 1843 | S: 460750 | R: 891.6851
+| train | E: 1844 | S: 461000 | R: 893.7019
+| train | S: 461000 | ALOSS: 0.0208 | VLOSS: 0.1249 | ENT: -2.1508 | KL: 0.0158 | CLIP: 0.2160 | TR: 0.0335 | WTR: 0.0084 | VALID: 0.9959 | ATOTAL: 0.0292 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0625
+| train | E: 1845 | S: 461250 | R: 885.9947
+| train | E: 1846 | S: 461500 | R: 889.4326
+| train | E: 1847 | S: 461750 | R: 890.8452
+| train | E: 1848 | S: 462000 | R: 888.9937
+| train | S: 462000 | ALOSS: 0.0178 | VLOSS: 0.1657 | ENT: -2.1227 | KL: 0.0124 | CLIP: 0.1695 | TR: 0.0356 | WTR: 0.0089 | VALID: 0.9952 | ATOTAL: 0.0267 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0828
+| train | E: 1849 | S: 462250 | R: 890.4397
+| train | E: 1850 | S: 462500 | R: 893.2756
+| train | E: 1851 | S: 462750 | R: 891.3934
+| train | E: 1852 | S: 463000 | R: 888.5031
+| train | S: 463000 | ALOSS: 0.0875 | VLOSS: 0.1420 | ENT: -2.2069 | KL: 0.0122 | CLIP: 0.1328 | TR: 0.0360 | WTR: 0.0090 | VALID: 0.9948 | ATOTAL: 0.0965 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0710
+| train | E: 1853 | S: 463250 | R: 887.2910
+| train | E: 1854 | S: 463500 | R: 890.1097
+| train | E: 1855 | S: 463750 | R: 893.7972
+| train | E: 1856 | S: 464000 | R: 889.0145
+| train | S: 464000 | ALOSS: -0.0014 | VLOSS: 0.1692 | ENT: -2.1568 | KL: 0.0084 | CLIP: 0.1198 | TR: 0.0355 | WTR: 0.0089 | VALID: 0.9961 | ATOTAL: 0.0075 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0846
+| train | E: 1857 | S: 464250 | R: 568.7427
+| train | E: 1858 | S: 464500 | R: 236.3396
+| train | E: 1859 | S: 464750 | R: 892.2492
+| train | E: 1860 | S: 465000 | R: 894.3458
+| train | S: 465000 | ALOSS: 0.0049 | VLOSS: 1655.7729 | ENT: -2.3221 | KL: 0.0089 | CLIP: 0.1172 | TR: 0.1465 | WTR: 0.0366 | VALID: 0.9961 | ATOTAL: 0.0415 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 827.8864
+| train | E: 1861 | S: 465250 | R: 893.0144
+| train | E: 1862 | S: 465500 | R: 894.5762
+| train | E: 1863 | S: 465750 | R: 892.1142
+| train | E: 1864 | S: 466000 | R: 872.8593
+| train | S: 466000 | ALOSS: -0.0355 | VLOSS: 0.8224 | ENT: -2.1747 | KL: 0.0085 | CLIP: 0.1183 | TR: 0.0324 | WTR: 0.0081 | VALID: 0.9955 | ATOTAL: -0.0274 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4112
+| train | E: 1865 | S: 466250 | R: 892.9578
+| train | E: 1866 | S: 466500 | R: 896.5814
+| train | E: 1867 | S: 466750 | R: 888.4783
+| train | E: 1868 | S: 467000 | R: 892.4845
+| train | S: 467000 | ALOSS: 0.0070 | VLOSS: 0.2893 | ENT: -2.2039 | KL: 0.0114 | CLIP: 0.1645 | TR: 0.0374 | WTR: 0.0094 | VALID: 0.9953 | ATOTAL: 0.0164 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1447
+| train | E: 1869 | S: 467250 | R: 895.5202
+| train | E: 1870 | S: 467500 | R: 896.0750
+| train | E: 1871 | S: 467750 | R: 891.1074
+| train | E: 1872 | S: 468000 | R: 889.1571
+| train | S: 468000 | ALOSS: 0.0011 | VLOSS: 0.2475 | ENT: -2.1536 | KL: 0.0113 | CLIP: 0.1529 | TR: 0.0379 | WTR: 0.0095 | VALID: 0.9967 | ATOTAL: 0.0105 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1237
+| train | E: 1873 | S: 468250 | R: 887.3815
+| train | E: 1874 | S: 468500 | R: 893.5479
+| train | E: 1875 | S: 468750 | R: 893.6970
+| train | E: 1876 | S: 469000 | R: 894.6061
+| train | S: 469000 | ALOSS: -0.0038 | VLOSS: 0.2485 | ENT: -2.1223 | KL: 0.0109 | CLIP: 0.1238 | TR: 0.0382 | WTR: 0.0095 | VALID: 0.9952 | ATOTAL: 0.0058 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1242
+| train | E: 1877 | S: 469250 | R: 889.8213
+| train | E: 1878 | S: 469500 | R: 892.9471
+| train | E: 1879 | S: 469750 | R: 893.2194
+| train | E: 1880 | S: 470000 | R: 895.9945
+| train | S: 470000 | ALOSS: 0.0076 | VLOSS: 0.2642 | ENT: -2.1796 | KL: 0.0118 | CLIP: 0.1529 | TR: 0.0418 | WTR: 0.0105 | VALID: 0.9962 | ATOTAL: 0.0181 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1321
+| eval  | S: 470000 | ER: 656.6794
+| train | E: 1881 | S: 470250 | R: 891.9285
+| train | E: 1882 | S: 470500 | R: 890.2921
+| train | E: 1883 | S: 470750 | R: 252.3573
+| train | E: 1884 | S: 471000 | R: 889.3148
+| train | S: 471000 | ALOSS: 0.0228 | VLOSS: 969.2108 | ENT: -2.5259 | KL: 0.0135 | CLIP: 0.1823 | TR: 0.1486 | WTR: 0.0371 | VALID: 0.9948 | ATOTAL: 0.0599 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 484.6054
+| train | E: 1885 | S: 471250 | R: 891.9140
+| train | E: 1886 | S: 471500 | R: 890.1439
+| train | E: 1887 | S: 471750 | R: 892.7378
+| train | E: 1888 | S: 472000 | R: 885.9751
+| train | S: 472000 | ALOSS: 0.0369 | VLOSS: 0.5279 | ENT: -2.1155 | KL: 0.0064 | CLIP: 0.0642 | TR: 0.0427 | WTR: 0.0107 | VALID: 0.9965 | ATOTAL: 0.0476 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2640
+| train | E: 1889 | S: 472250 | R: 222.2950
+| train | E: 1890 | S: 472500 | R: 312.7754
+| train | E: 1891 | S: 472750 | R: 286.9311
+| train | E: 1892 | S: 473000 | R: 893.5213
+| train | S: 473000 | ALOSS: 0.0034 | VLOSS: 1290.0025 | ENT: -3.1249 | KL: 0.0121 | CLIP: 0.1629 | TR: 0.2466 | WTR: 0.0617 | VALID: 0.9911 | ATOTAL: 0.0651 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 645.0013
+| train | E: 1893 | S: 473250 | R: 884.2031
+| train | E: 1894 | S: 473500 | R: 892.7494
+| train | E: 1895 | S: 473750 | R: 321.6076
+| train | E: 1896 | S: 474000 | R: 875.3506
+| train | S: 474000 | ALOSS: 0.0072 | VLOSS: 369.6693 | ENT: -2.5448 | KL: 0.0092 | CLIP: 0.0625 | TR: 0.0917 | WTR: 0.0229 | VALID: 0.9941 | ATOTAL: 0.0301 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 184.8346
+| train | E: 1897 | S: 474250 | R: 692.0339
+| train | E: 1898 | S: 474500 | R: 876.7174
+| train | E: 1899 | S: 474750 | R: 235.8283
+| train | E: 1900 | S: 475000 | R: 876.1627
+| train | S: 475000 | ALOSS: -0.0026 | VLOSS: 513.3808 | ENT: -2.6035 | KL: 0.0126 | CLIP: 0.1187 | TR: 0.1668 | WTR: 0.0417 | VALID: 0.9953 | ATOTAL: 0.0390 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 256.6904
+| train | E: 1901 | S: 475250 | R: 893.0318
+| train | E: 1902 | S: 475500 | R: 892.3587
+| train | E: 1903 | S: 475750 | R: 890.2028
+| train | E: 1904 | S: 476000 | R: 894.7024
+| train | S: 476000 | ALOSS: 0.0034 | VLOSS: 2.8765 | ENT: -2.1941 | KL: 0.0090 | CLIP: 0.1170 | TR: 0.0407 | WTR: 0.0102 | VALID: 0.9960 | ATOTAL: 0.0136 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.4382
+| train | E: 1905 | S: 476250 | R: 886.0425
+| train | E: 1906 | S: 476500 | R: 888.2788
+| train | E: 1907 | S: 476750 | R: 889.6596
+| train | E: 1908 | S: 477000 | R: 885.3701
+| train | S: 477000 | ALOSS: 0.0033 | VLOSS: 0.6884 | ENT: -2.2666 | KL: 0.0136 | CLIP: 0.1719 | TR: 0.0439 | WTR: 0.0110 | VALID: 0.9961 | ATOTAL: 0.0142 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.3442
+| train | E: 1909 | S: 477250 | R: 885.8200
+| train | E: 1910 | S: 477500 | R: 892.0436
+| train | E: 1911 | S: 477750 | R: 890.1550
+| train | E: 1912 | S: 478000 | R: 889.5657
+| train | S: 478000 | ALOSS: -0.0661 | VLOSS: 0.3654 | ENT: -2.1361 | KL: 0.0095 | CLIP: 0.1523 | TR: 0.0399 | WTR: 0.0100 | VALID: 0.9961 | ATOTAL: -0.0561 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1827
+| train | E: 1913 | S: 478250 | R: 892.6206
+| train | E: 1914 | S: 478500 | R: 887.4228
+| train | E: 1915 | S: 478750 | R: 892.9730
+| train | E: 1916 | S: 479000 | R: 243.4069
+| train | S: 479000 | ALOSS: -0.0020 | VLOSS: 462.4364 | ENT: -2.5733 | KL: 0.0037 | CLIP: 0.0365 | TR: 0.1375 | WTR: 0.0344 | VALID: 0.9948 | ATOTAL: 0.0323 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 231.2182
+| train | E: 1917 | S: 479250 | R: 896.2430
+| train | E: 1918 | S: 479500 | R: 891.0580
+| train | E: 1919 | S: 479750 | R: 893.5307
+| train | E: 1920 | S: 480000 | R: 893.9072
+| train | S: 480000 | ALOSS: -0.0003 | VLOSS: 0.1666 | ENT: -2.2289 | KL: 0.0132 | CLIP: 0.1395 | TR: 0.0414 | WTR: 0.0104 | VALID: 0.9961 | ATOTAL: 0.0101 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0833
+| eval  | S: 480000 | ER: 922.9317
+| train | E: 1921 | S: 480250 | R: 895.9695
+| train | E: 1922 | S: 480500 | R: 892.1493
+| train | E: 1923 | S: 480750 | R: 894.0723
+| train | E: 1924 | S: 481000 | R: 890.6160
+| train | S: 481000 | ALOSS: 0.0140 | VLOSS: 0.1722 | ENT: -2.1987 | KL: 0.0125 | CLIP: 0.1406 | TR: 0.0423 | WTR: 0.0106 | VALID: 0.9972 | ATOTAL: 0.0245 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0861
+| train | E: 1925 | S: 481250 | R: 894.4134
+| train | E: 1926 | S: 481500 | R: 893.3498
+| train | E: 1927 | S: 481750 | R: 891.6739
+| train | E: 1928 | S: 482000 | R: 896.7079
+| train | S: 482000 | ALOSS: -0.0963 | VLOSS: 0.2313 | ENT: -2.2181 | KL: 0.0108 | CLIP: 0.1667 | TR: 0.0346 | WTR: 0.0087 | VALID: 1.0000 | ATOTAL: -0.0876 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1156
+| train | E: 1929 | S: 482250 | R: 895.3216
+| train | E: 1930 | S: 482500 | R: 890.7733
+| train | E: 1931 | S: 482750 | R: 897.2166
+| train | E: 1932 | S: 483000 | R: 897.1814
+| train | S: 483000 | ALOSS: -0.0036 | VLOSS: 0.1776 | ENT: -2.1441 | KL: 0.0162 | CLIP: 0.2203 | TR: 0.0382 | WTR: 0.0095 | VALID: 0.9953 | ATOTAL: 0.0059 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0888
+| train | E: 1933 | S: 483250 | R: 888.2593
+| train | E: 1934 | S: 483500 | R: 894.9767
+| train | E: 1935 | S: 483750 | R: 895.0747
+| train | E: 1936 | S: 484000 | R: 388.6411
+| train | S: 484000 | ALOSS: 0.0037 | VLOSS: 240.7958 | ENT: -2.6807 | KL: 0.0113 | CLIP: 0.1562 | TR: 0.0891 | WTR: 0.0223 | VALID: 1.0000 | ATOTAL: 0.0260 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 120.3979
+| train | E: 1937 | S: 484250 | R: 890.7043
+| train | E: 1938 | S: 484500 | R: 892.6774
+| train | E: 1939 | S: 484750 | R: 887.9363
+| train | E: 1940 | S: 485000 | R: 891.7928
+| train | S: 485000 | ALOSS: 0.0824 | VLOSS: 0.2743 | ENT: -2.1629 | KL: 0.0085 | CLIP: 0.0599 | TR: 0.0388 | WTR: 0.0097 | VALID: 1.0000 | ATOTAL: 0.0921 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1371
+| train | E: 1941 | S: 485250 | R: 894.4195
+| train | E: 1942 | S: 485500 | R: 893.1146
+| train | E: 1943 | S: 485750 | R: 884.8070
+| train | E: 1944 | S: 486000 | R: 895.4643
+| train | S: 486000 | ALOSS: -0.0628 | VLOSS: 0.1819 | ENT: -2.3540 | KL: 0.0057 | CLIP: 0.0703 | TR: 0.0413 | WTR: 0.0103 | VALID: 0.9922 | ATOTAL: -0.0525 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0910
+| train | E: 1945 | S: 486250 | R: 891.0642
+| train | E: 1946 | S: 486500 | R: 891.5807
+| train | E: 1947 | S: 486750 | R: 895.5427
+| train | E: 1948 | S: 487000 | R: 892.8160
+| train | S: 487000 | ALOSS: 0.0067 | VLOSS: 0.2301 | ENT: -2.1838 | KL: 0.0161 | CLIP: 0.2370 | TR: 0.0361 | WTR: 0.0090 | VALID: 0.9960 | ATOTAL: 0.0158 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1150
+| train | E: 1949 | S: 487250 | R: 892.1835
+| train | E: 1950 | S: 487500 | R: 887.5756
+| train | E: 1951 | S: 487750 | R: 888.1201
+| train | E: 1952 | S: 488000 | R: 895.1099
+| train | S: 488000 | ALOSS: -0.0255 | VLOSS: 0.2053 | ENT: -2.2576 | KL: 0.0141 | CLIP: 0.2156 | TR: 0.0355 | WTR: 0.0089 | VALID: 0.9953 | ATOTAL: -0.0166 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1026
+| train | E: 1953 | S: 488250 | R: 888.7519
+| train | E: 1954 | S: 488500 | R: 895.4393
+| train | E: 1955 | S: 488750 | R: 893.5075
+| train | E: 1956 | S: 489000 | R: 896.4190
+| train | S: 489000 | ALOSS: 0.0444 | VLOSS: 0.1979 | ENT: -2.2019 | KL: 0.0073 | CLIP: 0.1094 | TR: 0.0313 | WTR: 0.0078 | VALID: 0.9969 | ATOTAL: 0.0523 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0989
+| train | E: 1957 | S: 489250 | R: 890.1994
+| train | E: 1958 | S: 489500 | R: 884.8265
+| train | E: 1959 | S: 489750 | R: 898.0828
+| train | E: 1960 | S: 490000 | R: 895.9927
+| train | S: 490000 | ALOSS: -0.1084 | VLOSS: 0.2539 | ENT: -2.3752 | KL: 0.0102 | CLIP: 0.1625 | TR: 0.0329 | WTR: 0.0082 | VALID: 0.9969 | ATOTAL: -0.1002 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1269
+| eval  | S: 490000 | ER: 925.0189
+| train | E: 1961 | S: 490250 | R: 897.1285
+| train | E: 1962 | S: 490500 | R: 894.7289
+| train | E: 1963 | S: 490750 | R: 892.8627
+| train | E: 1964 | S: 491000 | R: 897.6111
+| train | S: 491000 | ALOSS: -0.0264 | VLOSS: 0.1894 | ENT: -2.2399 | KL: 0.0135 | CLIP: 0.1849 | TR: 0.0375 | WTR: 0.0094 | VALID: 0.9948 | ATOTAL: -0.0170 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0947
+| train | E: 1965 | S: 491250 | R: 891.4448
+| train | E: 1966 | S: 491500 | R: 893.8436
+| train | E: 1967 | S: 491750 | R: 897.5708
+| train | E: 1968 | S: 492000 | R: 894.1778
+| train | S: 492000 | ALOSS: -0.0045 | VLOSS: 0.1822 | ENT: -2.2000 | KL: 0.0141 | CLIP: 0.2094 | TR: 0.0393 | WTR: 0.0098 | VALID: 0.9969 | ATOTAL: 0.0053 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0911
+| train | E: 1969 | S: 492250 | R: 889.8006
+| train | E: 1970 | S: 492500 | R: 897.8069
+| train | E: 1971 | S: 492750 | R: 892.8575
+| train | E: 1972 | S: 493000 | R: 892.0725
+| train | S: 493000 | ALOSS: 0.0502 | VLOSS: 0.2749 | ENT: -2.1905 | KL: 0.0032 | CLIP: 0.0547 | TR: 0.0466 | WTR: 0.0116 | VALID: 1.0000 | ATOTAL: 0.0618 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1375
+| train | E: 1973 | S: 493250 | R: 892.4676
+| train | E: 1974 | S: 493500 | R: 895.0402
+| train | E: 1975 | S: 493750 | R: 871.0334
+| train | E: 1976 | S: 494000 | R: 220.4350
+| train | S: 494000 | ALOSS: -0.0215 | VLOSS: 379.6306 | ENT: -2.4993 | KL: 0.0097 | CLIP: 0.1302 | TR: 0.1113 | WTR: 0.0278 | VALID: 0.9896 | ATOTAL: 0.0063 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 189.8153
+| train | E: 1977 | S: 494250 | R: 881.5617
+| train | E: 1978 | S: 494500 | R: 215.3406
+| train | E: 1979 | S: 494750 | R: 883.5806
+| train | E: 1980 | S: 495000 | R: 878.7354
+| train | S: 495000 | ALOSS: 0.0386 | VLOSS: 642.8096 | ENT: -2.5459 | KL: 0.0081 | CLIP: 0.0938 | TR: 0.1426 | WTR: 0.0357 | VALID: 0.9948 | ATOTAL: 0.0743 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 321.4048
+| train | E: 1981 | S: 495250 | R: 892.4569
+| train | E: 1982 | S: 495500 | R: 874.6332
+| train | E: 1983 | S: 495750 | R: 887.4660
+| train | E: 1984 | S: 496000 | R: 886.5249
+| train | S: 496000 | ALOSS: -0.0690 | VLOSS: 0.8094 | ENT: -2.3176 | KL: 0.0085 | CLIP: 0.1068 | TR: 0.0391 | WTR: 0.0098 | VALID: 0.9948 | ATOTAL: -0.0592 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.4047
+| train | E: 1985 | S: 496250 | R: 892.8756
+| train | E: 1986 | S: 496500 | R: 895.9645
+| train | E: 1987 | S: 496750 | R: 887.4170
+| train | E: 1988 | S: 497000 | R: 893.6806
+| train | S: 497000 | ALOSS: 0.0723 | VLOSS: 0.1860 | ENT: -2.1698 | KL: 0.0117 | CLIP: 0.1540 | TR: 0.0362 | WTR: 0.0091 | VALID: 0.9955 | ATOTAL: 0.0813 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.0930
+| train | E: 1989 | S: 497250 | R: 892.6974
+| train | E: 1990 | S: 497500 | R: 896.2451
+| train | E: 1991 | S: 497750 | R: 891.6821
+| train | E: 1992 | S: 498000 | R: 890.0399
+| train | S: 498000 | ALOSS: 0.0790 | VLOSS: 0.3926 | ENT: -2.2415 | KL: 0.0111 | CLIP: 0.1797 | TR: 0.0407 | WTR: 0.0102 | VALID: 0.9961 | ATOTAL: 0.0892 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.1963
+| train | E: 1993 | S: 498250 | R: 890.2897
+| train | E: 1994 | S: 498500 | R: 887.6945
+| train | E: 1995 | S: 498750 | R: 886.8368
+| train | E: 1996 | S: 499000 | R: 878.2375
+| train | S: 499000 | ALOSS: 0.0612 | VLOSS: 3.3552 | ENT: -2.3220 | KL: 0.0104 | CLIP: 0.1094 | TR: 0.0468 | WTR: 0.0117 | VALID: 0.9911 | ATOTAL: 0.0729 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 1.6776
+| train | E: 1997 | S: 499250 | R: 892.9023
+| train | E: 1998 | S: 499500 | R: 894.0000
+| train | E: 1999 | S: 499750 | R: 896.1095
+| train | E: 2000 | S: 500000 | R: 886.4160
+| train | S: 500000 | ALOSS: 0.0108 | VLOSS: 0.4471 | ENT: -2.3226 | KL: 0.0145 | CLIP: 0.1960 | TR: 0.0410 | WTR: 0.0102 | VALID: 0.9960 | ATOTAL: 0.0211 | TRV: 0.0000 | WTRV: 0.0000 | VTOTAL: 0.2236
+| eval  | S: 500000 | ER: 924.1595

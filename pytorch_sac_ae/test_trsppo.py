@@ -248,6 +248,90 @@ class TRSPPOTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             buffer.batch(.9, .95, 'cpu')
 
+    def test_value_loss_uses_next_state_valid_pairs_and_detached_reference(self):
+        agent = self.agent(tr_value_coef=.1)
+        agent.critic = torch.nn.Linear(17, 1, bias=False)
+        with torch.no_grad():
+            agent.critic.weight.zero_()
+            agent.critic.weight[0, 0] = .5
+            agent.critic.weight[0, 8] = .25
+        obs = torch.zeros(3, 17)
+        obs[:, 0] = torch.tensor([1., 99., 2.])
+        obs[:, 8] = torch.tensor([2., 99., 4.])
+        obs.requires_grad_()
+        next_obs = torch.zeros(3, 17)
+        next_obs[:, 0] = torch.tensor([3., 0., 6.])
+        next_obs[:, 8] = torch.tensor([4., 0., 8.])
+        next_obs[1] = float('nan')
+        next_obs.requires_grad_()
+        indices = torch.tensor([2, 1, 0])
+        reference_values = agent.critic(obs[indices]).squeeze(-1)
+        reference_values.retain_grad()
+        batch = {'obs': obs, 'next_obs': next_obs,
+                 'tr_valid': torch.tensor([True, False, True])}
+        weighted, metrics = agent._auxiliary_critic_loss(batch, indices, reference_values)
+        # Valid targets are [2, 1], and reversed-next predictions are [1, 0.5].
+        self.assertAlmostEqual(metrics['tr_value_loss'], .625)
+        self.assertAlmostEqual(metrics['tr_value_loss_weighted'], .0625)
+        weighted.backward()
+        self.assertIsNone(reference_values.grad)
+        self.assertIsNone(obs.grad)
+        self.assertTrue(torch.isfinite(next_obs.grad).all())
+        self.assertGreater(next_obs.grad[batch['tr_valid']].abs().sum().item(), 0.)
+        self.assertEqual(next_obs.grad[1].abs().sum().item(), 0.)
+        # Detached-reference gradients: 0.1 * mean(2 * difference * reversed_obs).
+        expected_gradient = torch.zeros_like(agent.critic.weight)
+        expected_gradient[0, 0] = -.75
+        expected_gradient[0, 8] = 1.
+        torch.testing.assert_close(agent.critic.weight.grad, expected_gradient)
+        self.assertTrue(all(parameter.grad is None for parameter in agent.actor.parameters()))
+
+        with patch.object(agent.critic, 'forward', side_effect=AssertionError('must skip invalid pairs')):
+            loss = agent.critic_symmetry_loss(
+                torch.full_like(next_obs, float('nan')),
+                torch.full_like(reference_values, float('nan')),
+                torch.zeros(3, dtype=torch.bool))
+        self.assertEqual(loss.item(), 0.)
+
+    def test_zero_value_coefficient_skips_symmetry_calculation(self):
+        agent = self.agent(tr_value_coef=0.)
+        _, buffer = self.paired_buffers(agent)
+        critic_calls = []
+        hook = agent.critic.register_forward_hook(
+            lambda module, inputs, output: critic_calls.append(torch.is_grad_enabled()))
+        try:
+            with patch.object(agent, 'critic_symmetry_loss', side_effect=AssertionError('must skip')):
+                metrics = agent.update(buffer)
+        finally:
+            hook.remove()
+        # One ordinary critic evaluation per minibatch, then explained variance.
+        self.assertEqual(critic_calls, [True] * metrics['updates'] + [False])
+        self.assertEqual(metrics['tr_value_loss'], 0.)
+        self.assertEqual(metrics['tr_value_loss_weighted'], 0.)
+
+    def test_enabled_value_loss_changes_critic_but_not_actor_update(self):
+        baseline = self.agent(tr_policy_coef=.1, tr_value_coef=0.)
+        regularized = self.agent(tr_policy_coef=.1, tr_value_coef=.2)
+        regularized.actor.load_state_dict(baseline.actor.state_dict())
+        regularized.critic.load_state_dict(baseline.critic.state_dict())
+        _, buffer = self.paired_buffers(baseline)
+        torch.manual_seed(31)
+        baseline.update(buffer)
+        baseline_rng = torch.get_rng_state()
+        torch.manual_seed(31)
+        metrics = regularized.update(buffer)
+        torch.testing.assert_close(torch.get_rng_state(), baseline_rng)
+        for a, b in zip(baseline.actor.parameters(), regularized.actor.parameters()):
+            torch.testing.assert_close(a, b, rtol=0, atol=0)
+        self.assertTrue(any(not torch.equal(a, b) for a, b in
+                            zip(baseline.critic.parameters(), regularized.critic.parameters())))
+        self.assertTrue(all(math.isfinite(value) for value in metrics.values()))
+        self.assertGreater(metrics['tr_value_loss'], 0.)
+        self.assertAlmostEqual(metrics['tr_value_loss_weighted'], .2 * metrics['tr_value_loss'], places=6)
+        self.assertAlmostEqual(metrics['critic_total_loss'],
+                               regularized.value_coef * metrics['critic_loss'] +
+                               metrics['tr_value_loss_weighted'], places=6)
+
     def test_zero_coefficient_matches_vanilla_ppo_updates_exactly(self):
         for domain, task, obs_dim, action_dim, _ in MAPPING_CASES:
             with self.subTest(domain=domain, task=task):
@@ -294,15 +378,19 @@ class TRSPPOTests(unittest.TestCase):
 
     def test_all_masked_and_single_transition_rollouts_are_safe(self):
         for terminal in (False, True):
-            agent = self.agent()
+            agent = self.agent(tr_value_coef=.2)
             _, buffer = self.paired_buffers(agent, count=1)
             buffer.dones[0] = terminal
+            if terminal:
+                buffer.next_obs[0] = float('nan')
             metrics = agent.update(buffer)
             self.assertTrue(all(math.isfinite(x) for x in metrics.values()))
             self.assertEqual(metrics['tr_valid_pair_fraction'], float(not terminal))
             if terminal:
                 self.assertEqual(metrics['tr_policy_loss'], 0.)
                 self.assertEqual(metrics['tr_policy_loss_weighted'], 0.)
+                self.assertEqual(metrics['tr_value_loss'], 0.)
+                self.assertEqual(metrics['tr_value_loss_weighted'], 0.)
 
     def test_checkpoint_restores_networks_and_optimizers(self):
         for domain, task, obs_dim, action_dim, _ in MAPPING_CASES:
@@ -327,6 +415,8 @@ class TRSPPOTests(unittest.TestCase):
         for coefficient in (-1., float('nan'), float('inf')):
             with self.assertRaises(ValueError):
                 self.agent(tr_policy_coef=coefficient)
+            with self.assertRaises(ValueError):
+                self.agent(tr_value_coef=coefficient)
         with self.assertRaises(ValueError):
             TRSPPOAgent((18,), (6,), 'cpu')
         with self.assertRaises(ValueError):
@@ -371,10 +461,12 @@ class TRSPPOTests(unittest.TestCase):
                 ('reacher', 'hard', 6, 2),
                 ('hopper', 'stand', 15, 4), ('hopper', 'hop', 15, 4)):
             with self.subTest(domain=domain, task=task):
-                argv = ['train.py', '--agent', 'trsppo', '--domain_name', domain, '--task_name', task]
+                argv = ['train.py', '--agent', 'trsppo', '--domain_name', domain, '--task_name', task,
+                        '--tr_value_coef', '0.05']
                 with patch('sys.argv', argv):
                     args = parse_args()
                 self.assertEqual(args.tr_policy_coef, .1)
+                self.assertEqual(args.tr_value_coef, .05)
                 self.assertEqual(args.rollout_steps, 1000)
                 self.assertFalse(hasattr(args, 'tr_warmup_updates'))
                 args.hidden_dim = 16
@@ -382,6 +474,7 @@ class TRSPPOTests(unittest.TestCase):
                 self.assertIsInstance(agent, TRSPPOAgent)
                 self.assertEqual(agent.domain_name, domain)
                 self.assertEqual(agent.task_name, task)
+                self.assertEqual(agent.tr_value_coef, .05)
         for extra in (['--domain_name', 'walker', '--task_name', 'unknown'],
                       ['--domain_name', 'hopper', '--task_name', 'run'],
                       ['--domain_name', 'cartpole', '--task_name', 'two_poles'],

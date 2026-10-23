@@ -57,6 +57,7 @@
     "task_name": "swingup",
     "time_rev": false,
     "tr_policy_coef": 0.1,
+    "tr_value_coef": 0.0,
     "value_coef": 0.5,
     "work_dir": "./logs/acrobot/trsppo/1"
 }

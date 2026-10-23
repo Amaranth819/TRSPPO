@@ -34,6 +34,7 @@ class TrainArgsTests(unittest.TestCase):
         self.assertEqual((args.agent, args.domain_name, args.task_name), ('sac_ae', 'cheetah', 'run'))
         self.assertEqual((args.actor_lr, args.hidden_dim, args.seed), (.001, 256, 1))
         self.assertEqual(args.work_dir, 'logs/cheetah_run/sac_ae/1')
+        self.assertEqual(args.tr_value_coef, 0.)
         self.assertTrue(args.save_video)
         self.assertFalse(args.gym_env or args.prioritized_replay or args.time_rev)
         args = parse_args(['--agent', 'ppo', '--seed', '7', '--no_save_video'])
@@ -87,22 +88,40 @@ class TrainArgsTests(unittest.TestCase):
                     if name not in ('cfg', 'work_dir'):
                         self.assertEqual(getattr(args, name), value)
                 expected = Path('logs') / '{}_{}'.format(saved['domain_name'], saved['task_name'])
-                expected = expected / saved['agent'] / str(saved['seed'])
+                agent_dir = ('trsppo_policy_0.1_value_0' if saved['agent'] == 'trsppo'
+                             else saved['agent'])
+                expected = expected / agent_dir / str(saved['seed'])
                 self.assertEqual(Path(args.work_dir), expected)
 
     def test_work_dir_uses_final_settings_and_ignores_archived_path(self):
         config = self.write_config({
             'agent': 'trsppo', 'domain_name': 'cheetah', 'task_name': 'bidirectional',
             'seed': 1, 'work_dir': './logs/cheetah_bidirectional/trsppo/2'})
-        self.assertEqual(parse_args(config).work_dir, 'logs/cheetah_bidirectional/trsppo/1')
+        self.assertEqual(parse_args(config).work_dir,
+                         'logs/cheetah_bidirectional/trsppo_policy_0.1_value_0/1')
         for agent in ('sac_ae', 'ppo', 'trsppo'):
             overrides = ['--agent', agent, '--domain_name', 'pendulum',
-                         '--task_name', 'two_poles', '--seed', '3']
+                         '--task_name', 'two_poles', '--seed', '3', '--tr_policy_coef', '0.25',
+                         '--tr_value_coef', '0.05']
             for argv in (config + overrides, overrides + config):
                 with self.subTest(agent=agent, argv=argv):
                     args = parse_args(argv)
-                    self.assertEqual(args.work_dir, 'logs/pendulum_two_poles/{}/3'.format(agent))
+                    agent_dir = 'trsppo_policy_0.25_value_0.05' if agent == 'trsppo' else agent
+                    self.assertEqual(args.work_dir, 'logs/pendulum_two_poles/{}/3'.format(agent_dir))
         self.assert_parse_error(['--work_dir', '/tmp/custom'], 'unrecognized arguments: --work_dir')
+
+    def test_value_symmetry_config_and_cli_overrides_round_trip(self):
+        config = self.write_config({'agent': 'trsppo', 'tr_policy_coef': 0.2, 'tr_value_coef': 0.05})
+        args = parse_args(config)
+        self.assertEqual(args.work_dir, 'logs/cheetah_run/trsppo_policy_0.2_value_0.05/1')
+        for argv in (config + ['--tr_value_coef', '0'], ['--tr_value_coef', '0'] + config):
+            self.assertEqual(parse_args(argv).work_dir, 'logs/cheetah_run/trsppo_policy_0.2_value_0/1')
+        self.assertEqual(vars(parse_args(self.write_config(vars(args)))), vars(args))
+        for coefficient in ('-1', 'nan', 'inf'):
+            self.assert_parse_error(['--agent', 'trsppo', '--tr_value_coef', coefficient],
+                                    '--tr_value_coef must be finite and nonnegative')
+        self.assert_parse_error(self.write_config({'agent': 'trsppo', 'tr_value_coef': -0.1}),
+                                '--tr_value_coef must be finite and nonnegative')
 
     def test_saved_merged_args_can_be_reloaded(self):
         args = parse_args(self.write_config({'agent': 'ppo', 'seed': 5}) + ['--seed', '8'])

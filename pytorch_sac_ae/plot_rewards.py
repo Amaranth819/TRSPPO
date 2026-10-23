@@ -11,7 +11,10 @@ import numpy as np
 REWARD_TAG = 'eval/episode_reward'
 ALGORITHM_STYLES = {
     'ppo': ('PPO', '#1f77b4'),
-    'trsppo': ('TRSPPO', '#ff7f0e'),
+    'trsppo_policy_0.1_value_0': ('TRSPPO_policy_0.1_value_0', '#ff7f0e'),
+    'trsppo_policy_0.1_value_0.25': ('TRSPPO_policy_0.1_value_0.25', '#ff0000'),
+    'trsppo_policy_0.5_value_0': ('TRSPPO_policy_0.5_value_0', '#00ff00'),
+    'trsppo_policy_0.25_value_0': ('TRSPPO_policy_0.25_value_0', '#0000ff'),
 }
 RunCurve = namedtuple('RunCurve', 'path steps rewards')
 CurveStats = namedtuple('CurveStats', 'steps mean std counts')
@@ -70,18 +73,24 @@ def load_runs(log_root, domain, task):
     return curves
 
 
-def aggregate_runs(runs, step_interval):
+def aggregate_runs(runs, step_interval, max_training_steps=None):
     """Mean and population std on a step grid, using only runs covering each step.
 
     Exact logged values are used when present; otherwise interpolate linearly
     between neighboring evaluations. Never extrapolate beyond a run's endpoints.
+    If specified, only sample steps strictly below max_training_steps.
     """
     if step_interval <= 0:
         raise ValueError('step_interval must be positive')
+    if max_training_steps is not None and max_training_steps <= 0:
+        raise ValueError('max_training_steps must be positive')
     if not runs:
         raise ValueError('At least one run is required')
     last_step = max(run.steps[-1] for run in runs)
-    steps = np.arange(0, last_step + 1, step_interval, dtype=np.int64)
+    stop = last_step + 1
+    if max_training_steps is not None:
+        stop = min(stop, max_training_steps)
+    steps = np.arange(0, stop, step_interval, dtype=np.int64)
     rewards = np.full((len(runs), len(steps)), np.nan)
     for index, run in enumerate(runs):
         available = (steps >= run.steps[0]) & (steps <= run.steps[-1])
@@ -89,13 +98,16 @@ def aggregate_runs(runs, step_interval):
     counts = np.sum(np.isfinite(rewards), axis=0)
     available = counts > 0
     if not available.any():
-        raise ValueError('No evaluations overlap the sampling grid; reduce --step_interval')
+        hint = 'reduce --step_interval'
+        if max_training_steps is not None:
+            hint += ' or increase --max_training_steps'
+        raise ValueError('No evaluations overlap the sampling grid; {}'.format(hint))
     rewards = rewards[:, available]
     return CurveStats(steps[available], np.nanmean(rewards, axis=0),
                       np.nanstd(rewards, axis=0, ddof=0), counts[available])
 
 
-def plot_curves(curves, domain, task, step_interval, output):
+def plot_curves(curves, domain, task, step_interval, output, max_training_steps=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -106,10 +118,11 @@ def plot_curves(curves, domain, task, step_interval, output):
             if algorithm not in curves:
                 continue
             runs = curves[algorithm]
-            stats = aggregate_runs(runs, step_interval)
+            stats = aggregate_runs(runs, step_interval, max_training_steps)
             ax.plot(stats.steps, stats.mean, color=color, linewidth=2, linestyle='-',
                     marker='o' if len(stats.steps) == 1 else None,
                     label='{} ({} run{})'.format(label, len(runs), '' if len(runs) == 1 else 's'))
+                    # label='{}'.format(label))
             ax.fill_between(stats.steps, stats.mean - stats.std, stats.mean + stats.std,
                             color=color, alpha=0.2, linewidth=0)
             print('{}: {} runs, {} plotted points, {}-{} runs contributing per point'.format(
@@ -117,9 +130,9 @@ def plot_curves(curves, domain, task, step_interval, output):
             for run in runs:
                 print('  {}: {} evaluations, steps {}-{}'.format(
                     run.path, len(run.steps), run.steps[0], run.steps[-1]))
-        ax.set_title('{} / {}'.format(domain, task))
-        ax.set_xlabel('Training steps')
-        ax.set_ylabel('Evaluation episode return')
+        ax.set_title('{}_{}'.format(domain, task))
+        ax.set_xlabel('Training Steps')
+        ax.set_ylabel('Episode Return')
         ax.ticklabel_format(axis='x', style='sci', scilimits=(0, 0))
         ax.grid(True, alpha=0.25)
         ax.spines['top'].set_visible(False)
@@ -143,15 +156,20 @@ def main(argv=None):
     parser.add_argument('--task', required=True)
     parser.add_argument('--step_interval', type=int, default=10000,
                         help='sample every X training steps (default: 10000); interpolate missing steps')
+    parser.add_argument('--max_training_steps', type=int,
+                        help='only plot steps strictly below this limit (default: full training curve)')
     parser.add_argument('--output', type=Path,
                         help='output image or PDF path (default: plots/{domain}_{task}.png)')
     args = parser.parse_args(argv)
     if args.step_interval <= 0:
         parser.error('--step_interval must be positive')
+    if args.max_training_steps is not None and args.max_training_steps <= 0:
+        parser.error('--max_training_steps must be positive')
     output = args.output or Path('plots') / '{}_{}.png'.format(args.domain, args.task)
     try:
         curves = load_runs(args.log_root, args.domain, args.task)
-        plot_curves(curves, args.domain, args.task, args.step_interval, output)
+        plot_curves(curves, args.domain, args.task, args.step_interval, output,
+                    max_training_steps=args.max_training_steps)
     except ImportError as error:
         parser.error('{}; install plotting dependencies with: python -m pip install matplotlib tensorboard'.format(error))
     except (OSError, ValueError) as error:

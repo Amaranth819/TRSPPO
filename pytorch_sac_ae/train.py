@@ -110,7 +110,9 @@ def parse_args(argv=None):
     parser.add_argument('--target_kl', default=0.03, type=float,
                         help='PPO early-stop KL threshold; 0 disables it')
     parser.add_argument('--tr_policy_coef', default=0.1, type=float,
-                        help='TRSPPO actor consistency weight; 0 recovers vanilla PPO')
+                        help='TRSPPO actor consistency weight; 0 disables this penalty')
+    parser.add_argument('--tr_value_coef', default=0.0, type=float,
+                        help='TRSPPO critic consistency weight; 0 skips this penalty')
     # encoder/decoder
     # parser.add_argument('--encoder_type', default='pixel', type=str)
     parser.add_argument('--encoder_type', default='identity', type=str)
@@ -182,10 +184,14 @@ def parse_args(argv=None):
             get_time_reversal_spec(args.domain_name, args.task_name)
         except ValueError as error:
             parser.error(str(error))
-        if not math.isfinite(args.tr_policy_coef) or args.tr_policy_coef < 0:
-            parser.error('--tr_policy_coef must be finite and nonnegative')
+        for name in ('tr_policy_coef', 'tr_value_coef'):
+            if not math.isfinite(getattr(args, name)) or getattr(args, name) < 0:
+                parser.error('--{} must be finite and nonnegative'.format(name))
+    agent_dir = args.agent
+    if args.agent == 'trsppo':
+        agent_dir = 'trsppo_policy_{:g}_value_{:g}'.format(args.tr_policy_coef, args.tr_value_coef)
     args.work_dir = os.path.join('logs', '{}_{}'.format(args.domain_name, args.task_name),
-                                args.agent, str(args.seed))
+                                agent_dir, str(args.seed))
     return args
 
 def conjugate_obs(obs, next_obs, args):
@@ -328,8 +334,8 @@ def evaluate(env, agent, video, num_episodes, L, step, args):
 def make_agent(obs_shape, action_shape, args, device):
     if args.agent in ('ppo', 'trsppo'):
         agent_class = TRSPPOAgent if args.agent == 'trsppo' else PPOAgent
-        agent_kwargs = ({'tr_policy_coef': args.tr_policy_coef, 'domain_name': args.domain_name,
-                         'task_name': args.task_name}
+        agent_kwargs = ({'tr_policy_coef': args.tr_policy_coef, 'tr_value_coef': args.tr_value_coef,
+                         'domain_name': args.domain_name, 'task_name': args.task_name}
                         if args.agent == 'trsppo' else {})
         return agent_class(
             obs_shape=obs_shape, action_shape=action_shape, device=device,

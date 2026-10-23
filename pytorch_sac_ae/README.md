@@ -96,6 +96,49 @@ final merged arguments, relative to the current working directory. Stored
 `work_dir` values in JSON files are ignored, and there is no `--work_dir` option.
 The example above writes to `logs/cheetah_bidirectional/trsppo/2/`.
 
+### Submit multiple jobs with HTCondor
+
+Edit the `queue agent, cfg, seed from (...)` table in `condor_learn.sub`. Each row
+starts one job with its own `--agent`, `--cfg`, and `--seed`, for example:
+
+```text
+queue agent, cfg, seed from (
+ppo     args/quadruped/walk/ppo.json       1
+trsppo  args/quadruped/walk/trsppo.json    1
+ppo     args/cartpole/swingup/ppo.json    1
+trsppo  args/cartpole/swingup/trsppo.json 1
+)
+```
+
+From the repository root, validate the submission and then submit it:
+
+```bash
+cd pytorch_sac_ae
+mkdir -p condor_logs
+condor_submit -dry-run /tmp/trsppo-condor.ads condor_learn.sub
+condor_submit condor_learn.sub
+```
+
+The [HTCondor dry run](https://htcondor.readthedocs.io/en/latest/man-pages/condor_submit.html)
+writes the expanded job descriptions without submitting jobs. The wrapper
+activates the `tsda` Conda environment and runs
+`python -u train.py --agent <agent> --cfg <cfg> --seed <seed> --no_save_video`. Config paths are
+relative to `pytorch_sac_ae/`; the explicit agent and seed override their JSON settings.
+`--no_save_video` disables video recording even if the JSON sets `save_video` to
+`true`. Use the same flag when running `train.py` directly.
+The wrapper also adds the environment's libraries to `LD_LIBRARY_PATH` so
+Pillow/torchvision can use its C++ runtime.
+
+Each job requests one CPU and 8 GB of RAM; uncomment `request_gpus = 1` in the
+submit file to request a GPU. This setup uses a shared filesystem: worker nodes must be able
+to access this repository, `/home/<user>/miniconda3`, and the MuJoCo installation.
+Condor logs use `condor_logs/condor_learn.<cluster>.<process>.{out,err,log}`.
+Create `condor_logs/` before submitting; a missing directory causes jobs to be held.
+Training results
+still use `logs/{domain}_{task}/{agent}/{seed}/`; jobs with the same domain, task,
+agent, and seed share that directory. For repeated runs, add rows with different
+seed values so each run has its own output.
+
 ## PPO with state observations
 
 Select `--agent ppo` to train separate actor and state-value MLPs, each with two
@@ -183,7 +226,7 @@ From `pytorch_sac_ae/`, plot PPO and TRSPPO evaluation returns over training:
 
 ```bash
 python -m pip install matplotlib tensorboard
-python plot_rewards.py --domain_name cheetah --task_name bidirectional \
+python plot_rewards.py --domain cheetah --task bidirectional \
     --step_interval 50000
 ```
 
@@ -203,9 +246,14 @@ and the number contributing can decrease later in training. The script prints
 the included run paths, their step ranges, and contributing-run counts. Every
 available run is included, even if seeds or hyperparameters differ.
 
-## Actor-only TRSPPO
+Use `--max_training_steps N` to plot only training steps strictly below `N`.
+Omit it to plot the full training curve. To apply the limit to all plots in the
+shell script, run `bash plot_rewards.sh --max_training_steps 1000000`.
+
+## TRSPPO
 
 `--agent trsppo` adds time-reversal actor consistency to the existing PPO update.
+The optional `--tr_value_coef` enables a separate critic symmetry ablation.
 The actor and critic use the same two-layer MLPs as vanilla PPO and take one
 state observation per action. Supported tasks and flattened observation mappings:
 
@@ -281,6 +329,14 @@ To use the other supported tasks, set `--domain_name acrobot --task_name swingup
 follows the selected domain, task, agent, and seed automatically. The same
 PPO/TRSPPO hyperparameters and logging options apply.
 
+TRSPPO runs write to
+`logs/{domain}_{task}/trsppo_policy_{tr_policy_coef}_value_{tr_value_coef}/{seed}/`,
+using the final coefficients after config and command-line overrides. For
+example, `--tr_policy_coef 0.1 --tr_value_coef 0.05 --seed 23` uses
+`logs/{domain}_{task}/trsppo_policy_0.1_value_0.05/23/`. Both TR coefficients
+must be finite and nonnegative; the critic symmetry coefficient is separate
+from PPO's ordinary `value_coef`.
+
 For each real transition `(obs, action, reward, next_obs)`, `T(obs)` uses the
 mapping in the table above. The actor's deterministic action is
 `f(obs) = tanh(actor_mean(obs))`. The auxiliary loss is:
@@ -294,30 +350,47 @@ The mean includes valid transitions and all action components, using the action
 dimension in the table above. The target
 is recomputed by the current actor with gradients detached for each minibatch;
 it is not the stored sampled action. Only the reversed-next-observation branch
-receives the consistency gradient. The critic fits ordinary GAE returns, and
-PPO probabilities/returns/advantages are computed only from the real rollout.
-No value-symmetry loss, observation history, or TR warmup is used.
+receives the consistency gradient. PPO probabilities/returns/advantages are
+computed only from the real rollout. No observation history or TR warmup is used.
+
+For the critic ablation, use the same adjacent-state pairs as the actor:
+
+```text
+tr_value_loss = mean((V(T(next_obs)) - stop_gradient(V(obs))) ** 2)
+critic_total_loss = value_coef * critic_loss + tr_value_coef * tr_value_loss
+```
+
+Here `critic_loss` is the ordinary MSE against GAE return targets. The reference
+reuses the current critic predictions from that loss and receives no gradient
+from the symmetry term. The additional gradient flows through `V(T(next_obs))`.
+`--tr_value_coef` defaults to **0**; zero skips the transformation and additional
+critic forward pass entirely, and logs zero for the skipped penalty. Positive
+values encourage critic consistency across reversed transition endpoints as an
+ablation. The actor and critic use the same valid-transition mask, selecting
+eligible pairs before evaluating reversed observations.
 
 `TRSPPORolloutBuffer` stores the actual next observation before an environment
 reset and keeps it paired with the original observation during shuffling. Both
-terminal and time-limit transitions are conservatively excluded from the TR
-loss; they remain in PPO training, including timeout bootstrapping. A minibatch
-with no eligible transitions contributes zero TR loss.
+terminal and time-limit transitions are conservatively excluded from both TR
+losses; they remain in PPO training, including timeout bootstrapping. A minibatch
+with no eligible transitions contributes zero actor and critic TR loss.
 
-`--tr_policy_coef` defaults to **0.1**. Set it to `0` for an ablation that has
-vanilla PPO's parameter updates; the unweighted symmetry error is still logged
+`--tr_policy_coef` defaults to **0.1**. Set both TR coefficients to `0` for an
+ablation that has vanilla PPO's parameter updates; the unweighted actor symmetry error is still logged
 without gradients. All existing PPO settings, including the current
 `rollout_steps=1000` default, apply. Do not pass `--time_rev`: that flag belongs
 to SAC's synthetic replay augmentation.
 
 TRSPPO saves the usual training/evaluation logs, TensorBoard events, videos and
 configuration. Additional training scalars are `tr_policy_loss`,
-`tr_policy_loss_weighted`, `tr_valid_pair_fraction`, and `actor_total_loss`.
+`tr_policy_loss_weighted`, `tr_valid_pair_fraction`, `actor_total_loss`,
+`tr_value_loss`, `tr_value_loss_weighted`, and `critic_total_loss`.
 Update logs average minibatch diagnostics, weighted by minibatch size; each
-minibatch's TR loss is averaged over its valid pairs. Checkpoints use
+minibatch's actor and critic TR losses are averaged over their valid pairs.
+Checkpoints use
 `model/trsppo_<step>.pt` and restore through `TRSPPOAgent.load(model_dir, step)`.
 Construct the agent with the `domain_name`, `task_name`, network settings and
-coefficient in `args.json`. Older checkpoints for existing domains can still be
+coefficients in `args.json`. Older checkpoints for existing domains can still be
 loaded without `task_name`. Omitting `domain_name` retains the cheetah default.
 The optional `buffer/rollout.npz` snapshot additionally includes `next_obs`.
 
@@ -336,6 +409,17 @@ small joint damping and a cart travel limit.
 Walker, cheetah, hopper, finger and quadruped also include dissipative dynamics, so the
 consistency relation is an experimental inductive bias rather than an exact
 dynamics identity.
+
+Reference comparison: the `xchen` branch of
+[symm_rl_isaaclab](https://github.com/DLARlab/symm_rl_isaaclab/blob/3c34f5753969ab626280ea1c5eb8e8fc4b432761/source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/symm_quadruped/time_reversal_ppo.py)
+uses temporally shifted observation histories for both actor and critic
+consistency. This implementation uses adjacent states for both losses, matching
+the single-frame version of that temporal pairing without observation history.
+
+Deferred paper work: develop a mathematical analysis of critic symmetry,
+including invariant and sign-reversed rewards, physical time reversal versus
+forward MDP symmetries, and the roles of policy, discounting, and episode
+boundaries. Complete the critic ablation implementation before this analysis.
 
 ## Results
 Our method demonstrates significantly improved performance over the baseline SAC:pixel. It matches the state-of-the-art performance of model-based algorithms, such as PlaNet (Hafner et al., 2018) and SLAC (Lee et al., 2019), as well

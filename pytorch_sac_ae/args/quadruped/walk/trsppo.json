@@ -57,5 +57,6 @@
     "task_name": "walk",
     "time_rev": false,
     "tr_policy_coef": 0.1,
+    "tr_value_coef": 0.0,
     "value_coef": 0.5
 }

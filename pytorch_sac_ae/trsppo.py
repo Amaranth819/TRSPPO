@@ -1,8 +1,10 @@
-"""Actor-only time-reversal consistency for PPO on supported state observations.
+"""Time-reversal consistency for PPO on supported state observations.
 
 For a real transition (o, a, r, next_o), regularize the deterministic action at
 T(next_o) toward the detached current-policy action at o. This is an inductive
 bias, not a guarantee that the environment dynamics are reversible.
+An optional critic penalty compares V(T(next_o)) with detached V(o), using the
+same valid transition pairs as the actor.
 """
 
 from collections import namedtuple
@@ -125,21 +127,23 @@ class TRSPPORolloutBuffer(RolloutBuffer):
 
 
 class TRSPPOAgent(PPOAgent):
-    """PPO with a detached-reference actor loss and an ordinary value critic."""
+    """PPO with detached-reference actor and optional critic consistency losses."""
 
     checkpoint_prefix = 'trsppo'
 
     def __init__(self, obs_shape, action_shape, device, tr_policy_coef=0.1,
-                 domain_name='cheetah', task_name=None, **kwargs):
+                 domain_name='cheetah', task_name=None, tr_value_coef=0.0, **kwargs):
         spec = get_time_reversal_spec(domain_name, task_name)
         if tuple(obs_shape) != (spec.obs_dim,) or tuple(action_shape) != (spec.action_dim,):
             environment = domain_name if task_name is None else domain_name + '/' + task_name
             raise ValueError('TRSPPO {} requires state observations ({},) and actions ({},).'
                              .format(environment, spec.obs_dim, spec.action_dim))
-        if not math.isfinite(tr_policy_coef) or tr_policy_coef < 0:
-            raise ValueError('tr_policy_coef must be finite and nonnegative.')
+        for name, coefficient in (('tr_policy_coef', tr_policy_coef), ('tr_value_coef', tr_value_coef)):
+            if not math.isfinite(coefficient) or coefficient < 0:
+                raise ValueError('{} must be finite and nonnegative.'.format(name))
         super().__init__(obs_shape, action_shape, device, **kwargs)
         self.tr_policy_coef = tr_policy_coef
+        self.tr_value_coef = tr_value_coef
         self.domain_name = domain_name
         self.task_name = task_name
 
@@ -178,4 +182,31 @@ class TRSPPOAgent(PPOAgent):
             'tr_policy_loss': symmetry_loss.item(),
             'tr_policy_loss_weighted': weighted_loss.item(),
             'tr_valid_pair_fraction': valid.float().mean().item(),
+        }
+
+    def critic_symmetry_loss(self, next_obs, reference_values, valid):
+        """Match reversed-next-state values to detached current-state predictions.
+
+        Reuse the current critic predictions from the ordinary value loss and
+        apply the same valid-transition mask as the actor before evaluation.
+        """
+        if not valid.any():
+            return next_obs.new_zeros(())
+        reversed_obs = reverse_observation(next_obs[valid], self.domain_name, self.task_name)
+        reversed_values = self.critic(reversed_obs).squeeze(-1)
+        return F.mse_loss(reversed_values, reference_values.detach()[valid])
+
+    def _auxiliary_critic_loss(self, batch, indices, predicted_values):
+        if self.tr_value_coef == 0:
+            # Skip even diagnostic evaluations to preserve the baseline's cost.
+            return predicted_values.new_zeros(()), {
+                'tr_value_loss': 0.0,
+                'tr_value_loss_weighted': 0.0,
+            }
+        symmetry_loss = self.critic_symmetry_loss(
+            batch['next_obs'][indices], predicted_values, batch['tr_valid'][indices])
+        weighted_loss = self.tr_value_coef * symmetry_loss
+        return weighted_loss, {
+            'tr_value_loss': symmetry_loss.item(),
+            'tr_value_loss_weighted': weighted_loss.item(),
         }

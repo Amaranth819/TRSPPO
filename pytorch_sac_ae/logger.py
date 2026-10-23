@@ -37,7 +37,10 @@ FORMAT_CONFIG['trsppo'] = {
         ('tr_policy_loss', 'TR', 'float'),
         ('tr_policy_loss_weighted', 'WTR', 'float'),
         ('tr_valid_pair_fraction', 'VALID', 'float'),
-        ('actor_total_loss', 'ATOTAL', 'float')
+        ('actor_total_loss', 'ATOTAL', 'float'),
+        ('tr_value_loss', 'TRV', 'float'),
+        ('tr_value_loss_weighted', 'WTRV', 'float'),
+        ('critic_total_loss', 'VTOTAL', 'float')
     ],
     'eval': FORMAT_CONFIG['ppo']['eval']
 }

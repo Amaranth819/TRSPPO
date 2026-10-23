@@ -1,0 +1,40 @@
+# Submit from pytorch_sac_ae/: mkdir -p condor_logs && condor_submit condor_learn.sub
+universe = vanilla
+executable = ./condor_learn.sh
+arguments = "--agent $(agent) --cfg '$(cfg)' --seed $(seed) --tr_policy_coef $(trpc) --tr_value_coef $(trvc) --no_save_video --no_save_buffer"
+
+# The repository, configs, and tsda environment must be on a shared filesystem.
+should_transfer_files = NO
+
+error  = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).err
+output = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).out
+log    = ./condor_logs/condor_learn.$(ClusterId).$(ProcId).log
+
+notification = Complete
+# notify_user = xchen168@syr.edu
+
+request_cpus = 1
+# request_gpus = 1
+request_memory = 8GB
+
+# Optional GPU memory constraint:
+# requirements = (CUDAGlobalMemoryMb >= 22699) && (CUDAGlobalMemoryMb < 40000)
+
+# One job per row: agent, JSON config path relative to pytorch_sac_ae/, seed.
+queue agent, cfg, trpc, trvc, seed from (
+trsppo  args/walker/run/trsppo.json  0.25  0  1
+trsppo  args/cheetah/run/trsppo.json  0.25  0  1
+trsppo  args/cheetah/bidirectional/trsppo.json  0.25  0  1
+trsppo  args/pendulum/three_poles/trsppo.json  0.25  0  1
+trsppo  args/finger/spin/trsppo.json  0.25  0  1
+trsppo  args/walker/run/trsppo.json  0.5  0  1
+trsppo  args/cheetah/run/trsppo.json  0.5  0  1
+trsppo  args/cheetah/bidirectional/trsppo.json  0.5  0  1
+trsppo  args/pendulum/three_poles/trsppo.json  0.5  0  1
+trsppo  args/finger/spin/trsppo.json  0.5  0  1
+trsppo  args/walker/run/trsppo.json  0.1  0.25  1
+trsppo  args/cheetah/run/trsppo.json  0.1  0.25  1
+trsppo  args/cheetah/bidirectional/trsppo.json  0.1  0.25  1
+trsppo  args/pendulum/three_poles/trsppo.json  0.1  0.25  1
+trsppo  args/finger/spin/trsppo.json  0.1  0.25  1
+)

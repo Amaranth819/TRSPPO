@@ -1,0 +1,38 @@
+013 (6507259.001.000) 2026-10-22 17:04:10 Job was released.
+	via condor_release (by user xchen168)
+...
+001 (6507259.001.000) 2026-10-22 17:04:31 Job executing on host: <10.5.207.189:9618?addrs=10.5.207.189-9618&alias=CRUSH-OG-10-5-207-189&noUDP&sock=startd_1520_2c0b>
+...
+006 (6507259.001.000) 2026-10-22 17:04:40 Image size of job updated: 20348
+	1  -  MemoryUsage of job (MB)
+	564  -  ResidentSetSize of job (KB)
+...
+006 (6507259.001.000) 2026-10-22 17:09:41 Image size of job updated: 2671456
+	209  -  MemoryUsage of job (MB)
+	214012  -  ResidentSetSize of job (KB)
+...
+006 (6507259.001.000) 2026-10-22 17:14:42 Image size of job updated: 2671704
+	210  -  MemoryUsage of job (MB)
+	214276  -  ResidentSetSize of job (KB)
+...
+006 (6507259.001.000) 2026-10-22 18:34:50 Image size of job updated: 2671956
+	210  -  MemoryUsage of job (MB)
+	214540  -  ResidentSetSize of job (KB)
+...
+005 (6507259.001.000) 2026-10-22 21:00:03 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 03:45:13, Sys 0 00:00:59  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 03:45:13, Sys 0 00:00:59  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     0.83        1         1 
+	   Disk (KB)            :     1           1     27421 
+	   Memory (MB)          :   210        8192      8192 
+
+	Job terminated of its own accord at 2026-10-23T01:00:03Z with exit-code 0.
+...
