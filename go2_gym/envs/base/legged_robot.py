@@ -317,8 +317,11 @@ class LeggedRobot(BaseTask):
         #                               ), dim=-1)
 
         if self.cfg.env.observe_command:
+            indices = self.cfg.commands.cmd_indices
+            commands_obs = self.commands if indices is None else self.commands[:, indices]
+            commands_scale = self.commands_scale if indices is None else self.commands_scale[indices]
             self.obs_buf = torch.cat((self.projected_gravity,
-                                      self.commands * self.commands_scale,
+                                      commands_obs * commands_scale,
                                       (self.dof_pos[:, :self.num_actuated_dof] - self.default_dof_pos[:,
                                                                                  :self.num_actuated_dof]) * self.obs_scales.dof_pos,
                                       self.dof_vel[:, :self.num_actuated_dof] * self.obs_scales.dof_vel,
@@ -1073,8 +1076,10 @@ class LeggedRobot(BaseTask):
                                ), dim=0)
 
         if self.cfg.env.observe_command:
+            indices = cfg.commands.cmd_indices
+            num_commands = cfg.commands.num_commands if indices is None else len(indices)
             noise_vec = torch.cat((torch.ones(3) * noise_scales.gravity * noise_level,
-                                   torch.zeros(self.cfg.commands.num_commands),
+                                   torch.zeros(num_commands),
                                    torch.ones(
                                        self.num_actuated_dof) * noise_scales.dof_pos * noise_level * self.obs_scales.dof_pos,
                                    torch.ones(
@@ -1237,7 +1242,7 @@ class LeggedRobot(BaseTask):
 
         if self.cfg.control.control_type == "actuator_net":
             actuator_path = f'{os.path.dirname(os.path.dirname(os.path.realpath(__file__)))}/../../resources/actuator_nets/unitree_go1.pt'
-            actuator_network = torch.jit.load(actuator_path).to(self.device)
+            actuator_network = torch.jit.load(actuator_path, map_location=self.device).to(self.device)
 
             def eval_actuator_network(joint_pos, joint_pos_last, joint_pos_last_last, joint_vel, joint_vel_last,
                                       joint_vel_last_last):
@@ -1301,6 +1306,8 @@ class LeggedRobot(BaseTask):
         self.category_names = ['nominal']
         if self.cfg.commands.gaitwise_curricula:
             self.category_names = ['pronk', 'trot', 'pace', 'bound']
+        if self.cfg.commands.gait_category_names is not None:
+            self.category_names = list(self.cfg.commands.gait_category_names)
 
         if self.cfg.commands.curriculum_type == "RewardThresholdCurriculum":
             from .curriculum import RewardThresholdCurriculum
@@ -1707,7 +1714,8 @@ class LeggedRobot(BaseTask):
             # create a grid of robots
             num_cols = np.floor(np.sqrt(len(env_ids)))
             num_rows = np.ceil(self.num_envs / num_cols)
-            xx, yy = torch.meshgrid(torch.arange(num_rows), torch.arange(num_cols))
+            xx, yy = torch.meshgrid(torch.arange(num_rows, device=self.device),
+                                    torch.arange(num_cols, device=self.device), indexing='ij')
             spacing = cfg.env.env_spacing
             self.env_origins[env_ids, 0] = spacing * xx.flatten()[:len(env_ids)]
             self.env_origins[env_ids, 1] = spacing * yy.flatten()[:len(env_ids)]

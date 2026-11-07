@@ -1,4 +1,58 @@
-def train_go2(headless=True):
+OBSERVATION_HISTORY_LENGTH = 20
+ROBOT_HISTORY_LENGTHS = {robot: OBSERVATION_HISTORY_LENGTH for robot in ("go2", "x1", "x1_go2bend")}
+
+
+def parse_args(argv=None):
+    # Keep --help usable without importing Isaac Gym, torch, or params_proto.
+    import argparse
+    import math
+
+    def positive_int(value):
+        value = int(value)
+        if value <= 0:
+            raise argparse.ArgumentTypeError("must be positive")
+        return value
+
+    def nonnegative_float(value):
+        value = float(value)
+        if not math.isfinite(value) or value < 0:
+            raise argparse.ArgumentTypeError("must be finite and nonnegative")
+        return value
+
+    parser = argparse.ArgumentParser(description="Train Go2 or X1 MLP policies with PPO or time-reversal PPO.")
+    parser.add_argument("--robot", choices=tuple(ROBOT_HISTORY_LENGTHS), default="go2",
+                        help="Select the robot model and training environment.")
+    parser.add_argument("--algorithm", choices=("ppo", "trsppo"), default="ppo",
+                        help="Use trsppo for actor time-reversal consistency.")
+    parser.add_argument("--headless", action="store_true", help="Disable the simulator viewer.")
+    parser.add_argument("--num-envs", type=positive_int, default=None)
+    parser.add_argument("--num-steps-per-env", type=positive_int, default=None,
+                        help="Rollout length: default 24 for both algorithms and all robots.")
+    parser.add_argument("--iterations", dest="num_learning_iterations", type=positive_int, default=10000)
+    parser.add_argument("--tensorboard", action="store_true",
+                        help="Write TensorBoard scalars alongside the run's metrics.pkl.")
+    parser.add_argument("--tensorboard-log-dir", default=None,
+                        help="Override the TensorBoard directory (also enables logging).")
+    parser.add_argument("--tr-actor-loss-coef", type=nonnegative_float, default=0.1)
+    parser.add_argument("--tr-value-loss-coef", type=nonnegative_float, default=0.0,
+                        help="Optional value consistency loss; disabled by default.")
+    parser.add_argument("--tr-warmup-iterations", type=int, default=0)
+    parser.add_argument("--tr-min-abs-command-velocity", type=nonnegative_float, default=0.0)
+    args = parser.parse_args(argv)
+    if args.tr_warmup_iterations < 0:
+        parser.error("--tr-warmup-iterations must be nonnegative")
+    history_length = ROBOT_HISTORY_LENGTHS[args.robot]
+    if (args.algorithm == "trsppo" and args.num_steps_per_env is not None
+            and args.num_steps_per_env < history_length + 2):
+        parser.error(f"trsppo requires --num-steps-per-env >= {history_length + 2} "
+                     f"for the {history_length}-frame history")
+    return args
+
+
+def train_go2(headless=True, algorithm="ppo", num_steps_per_env=None, num_envs=None,
+              num_learning_iterations=10000, tr_actor_loss_coef=0.1, tr_value_loss_coef=0.0,
+              tr_warmup_iterations=0, tr_min_abs_command_velocity=0.0,
+              tensorboard=False, tensorboard_log_dir=None, robot="go2"):
 
     import isaacgym
     assert isaacgym
@@ -6,17 +60,39 @@ def train_go2(headless=True):
 
     from go2_gym.envs.base.legged_robot_config import Cfg
     from go2_gym.envs.go2.go2_config import config_go2
+    from go2_gym.envs.x1.x1_config import config_x1, config_x1_go2bend
     from go2_gym.envs.go2.velocity_tracking import VelocityTrackingEasyEnv
 
     from ml_logger import logger
+
+    if tensorboard or tensorboard_log_dir is not None:
+        # Check the optional dependency before creating the simulator.
+        try:
+            from torch.utils.tensorboard import SummaryWriter
+        except ImportError as exc:
+            raise RuntimeError(
+                "TensorBoard logging requires the optional dependency. Install it with: "
+                "python -m pip install -e '.[tensorboard]'"
+            ) from exc
 
     from go2_gym_learn.ppo_cse import Runner
     from go2_gym.envs.wrappers.history_wrapper import HistoryWrapper
     from go2_gym_learn.ppo_cse.actor_critic import AC_Args
     from go2_gym_learn.ppo_cse.ppo import PPO_Args
     from go2_gym_learn.ppo_cse import RunnerArgs
+    from go2_gym_learn.ppo_cse.algorithms import normalize_algorithm
 
-    config_go2(Cfg)
+    algorithm = normalize_algorithm(algorithm)
+    if robot not in ROBOT_HISTORY_LENGTHS:
+        raise ValueError(f"Unsupported robot: {robot}")
+    RunnerArgs.algorithm_class_name = algorithm
+    default_steps = max(24, ROBOT_HISTORY_LENGTHS[robot] + 2) if algorithm == "trsppo" else 24
+    RunnerArgs.num_steps_per_env = num_steps_per_env if num_steps_per_env is not None else default_steps
+
+    {"go2": config_go2, "x1": config_x1, "x1_go2bend": config_x1_go2bend}[robot](Cfg)
+    # Share the full command vector and four-gait curriculum across all robots.
+    Cfg.commands.cmd_indices = None
+    Cfg.commands.gait_category_names = None
 
     Cfg.commands.num_lin_vel_bins = 30
     Cfg.commands.num_ang_vel_bins = 30
@@ -29,7 +105,7 @@ def train_go2(headless=True):
 
     Cfg.domain_rand.lag_timesteps = 6
     Cfg.domain_rand.randomize_lag_timesteps = True
-    Cfg.control.control_type = "actuator_net"
+    Cfg.control.control_type = "actuator_net" if robot == "go2" else "P"
 
     Cfg.domain_rand.randomize_rigids_after_start = False
     Cfg.env.priv_observe_motion = False
@@ -76,7 +152,7 @@ def train_go2(headless=True):
     Cfg.env.priv_observe_gravity_transformed_foot_displacement = False
 
     Cfg.env.num_privileged_obs = 2
-    Cfg.env.num_observation_history = 30
+    Cfg.env.num_observation_history = OBSERVATION_HISTORY_LENGTH
     Cfg.reward_scales.feet_contact_forces = 0.0
 
     Cfg.domain_rand.rand_interval_s = 4
@@ -205,25 +281,64 @@ def train_go2(headless=True):
     Cfg.commands.binary_phases = True
     Cfg.commands.gaitwise_curricula = True
 
-    env = VelocityTrackingEasyEnv(sim_device='cuda:0', headless=False, cfg=Cfg)
+    time_reversal_config = None
+    if algorithm == "trsppo":
+        from go2_gym_learn.ppo_cse.time_reversal import validate_environment
+        from go2_gym_learn.ppo_cse.time_reversal_ppo import TimeReversalConfig
+        from go2_gym.envs.wrappers.time_reversal_history_wrapper import TimeReversalHistoryWrapper
+
+        validate_environment(Cfg)
+        if RunnerArgs.num_steps_per_env < Cfg.env.num_observation_history + 2:
+            raise ValueError("TimeReversalPPO needs num_steps_per_env >= history_length + 2")
+        time_reversal_config = TimeReversalConfig(
+            actor_loss_coef=tr_actor_loss_coef, value_loss_coef=tr_value_loss_coef,
+            warmup_iterations=tr_warmup_iterations,
+            min_abs_command_velocity=tr_min_abs_command_velocity,
+            clip_actions=Cfg.normalization.clip_actions, command_scale=Cfg.obs_scales.lin_vel,
+        )
+        HistoryWrapper = TimeReversalHistoryWrapper
+    if num_envs is not None:
+        Cfg.env.num_envs = num_envs
+    env = VelocityTrackingEasyEnv(sim_device='cuda:0', headless=headless, cfg=Cfg)
 
     # log the experiment parameters
-    logger.log_params(AC_Args=vars(AC_Args), PPO_Args=vars(PPO_Args), RunnerArgs=vars(RunnerArgs),
+    logger.log_params(robot=robot, algorithm=algorithm,
+                      AC_Args=vars(AC_Args), PPO_Args=vars(PPO_Args), RunnerArgs=vars(RunnerArgs),
                       Cfg=vars(Cfg))
+    if time_reversal_config is not None:
+        logger.log_params(TimeReversalConfig=vars(time_reversal_config))
 
     env = HistoryWrapper(env)
     gpu_id = 0
-    runner = Runner(env, device=f"cuda:{gpu_id}")
-    runner.learn(num_learning_iterations=100000, init_at_random_ep_len=True, eval_freq=100)
+    runner = Runner(env, device=f"cuda:{gpu_id}", time_reversal_config=time_reversal_config)
+    writer = None
+    if tensorboard or tensorboard_log_dir is not None:
+        from pathlib import Path
+
+        log_dir = (Path(tensorboard_log_dir) if tensorboard_log_dir is not None
+                   else Path(logger.root) / logger.prefix / "tensorboard")
+        log_dir = log_dir.expanduser().resolve()
+        writer = SummaryWriter(log_dir=str(log_dir), flush_secs=10)
+        print(f"TensorBoard logs: {log_dir}")
+    try:
+        runner.learn(num_learning_iterations=num_learning_iterations, init_at_random_ep_len=True,
+                     eval_freq=100, summary_writer=writer)
+    finally:
+        if writer is not None:
+            writer.close()
 
 
 if __name__ == '__main__':
+    args = parse_args()
+    # The legacy PPO_Args class registers its own CLI. Our arguments are already consumed.
+    import sys
+    sys.argv = [sys.argv[0]]
     from pathlib import Path
     from ml_logger import logger
     from go2_gym import MINI_GYM_ROOT_DIR
 
-    stem = Path(__file__).stem
-    logger.configure(logger.utcnow(f'gait-conditioned-agility/%Y-%m-%d/{stem}/%H%M%S.%f'),
+    is_trsppo = args.algorithm == "trsppo"
+    logger.configure(logger.utcnow(f'gait-conditioned-agility/{args.robot}/{args.algorithm}/%Y-%m-%d_%H-%M-%S.%f'),
                      root=Path(f"{MINI_GYM_ROOT_DIR}/runs").resolve(), )
     logger.log_text("""
                 charts: 
@@ -253,5 +368,15 @@ if __name__ == '__main__':
                   xKey: iterations
                 """, filename=".charts.yml", dedent=True)
 
-    # to see the environment rendering, set headless=False
-    train_go2(headless=False)
+    if is_trsppo:
+        logger.log_text("""
+                - yKey: tr_actor_loss/mean
+                  xKey: iterations
+                - yKey: tr_value_loss/mean
+                  xKey: iterations
+                - yKey: tr_valid_pair_fraction/mean
+                  xKey: iterations
+                - yKey: tr_active/mean
+                  xKey: iterations
+                """, filename=".charts.yml", dedent=True, overwrite=False)
+    train_go2(**vars(args))

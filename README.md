@@ -27,6 +27,75 @@ Start training:
 python scripts/train.py
 ```
 
+Select time-reversal PPO with:
+```bash
+python scripts/train.py --algorithm trsppo --headless
+```
+TRS-PPO adds actor consistency with weight 0.1; value consistency is disabled.
+Runs are saved under `runs/gait-conditioned-agility/{robot}/{algorithm}/{date_time}/`,
+with `robot=go2` by default and `algorithm` equal to `ppo` or `trsppo`.
+The UTC timestamp combines date and time, for example `2026-10-22_14-30-12.123456`.
+Select the training environment with `--robot go2`, `--robot x1`, or `--robot x1_go2bend`.
+The default algorithm is the original PPO (`--algorithm ppo`). See
+[time-reversal PPO training](docs/time_reversal_ppo.md) for options, implementation details, and tests.
+
+View the latest PPO/TRS-PPO reward curves with `python scripts/plot_training.py`;
+the plot is saved to `tmp/training_rewards.png`.
+
+`train.sh` enables TensorBoard logging for both algorithms. Set up and run it with:
+
+```bash
+conda activate trsppo
+python -m pip install -e '.[tensorboard]'
+bash train.sh
+```
+
+In another terminal, run `conda activate trsppo` and `tensorboard --logdir runs`,
+then open http://localhost:6006. Each run writes a `tensorboard/` directory with
+reward components, PPO losses, timing, and (for TRS-PPO) time-reversal metrics.
+Scalars use training iteration as the horizontal axis and the same summaries as
+`metrics.pkl` (every 10 iterations and at the end of training).
+For a direct launch, add `--tensorboard` to `scripts/train.py`; use
+`--tensorboard-log-dir <directory>` to choose a different event directory.
+`train.sh` defaults to `x1_go2bend`; select a robot with `--robot <name>` or `ROBOT=<name> bash train.sh`.
+Plot a robot's latest runs with `python scripts/plot_training.py --robot <name>`.
+
+Train MLP policies on X1 or the variant with rear legs bending in the same direction as the front:
+
+```bash
+bash train.sh --robot x1
+bash train.sh --robot x1_go2bend
+```
+
+Each command runs PPO followed by TRS-PPO with TensorBoard logging. All three robots
+share the Go2 training task: pronk, trot, pace, and bound, with a configured gait-frequency
+range of 2–4 Hz, the same command ranges, curricula, rewards, termination thresholds,
+terrain, and domain randomization. All use 70 observations per frame, including the full
+15-command vector, and a 20-frame history (1400 policy inputs).
+Both X1 environments use position PD control with `Kp=30`, `Kd=1.2`;
+Go2 uses its actuator network. X1's front thigh/calf reference angles are `0.7/-1.5`
+radians and rear angles are `-0.7/1.5`; `x1_go2bend` changes only the rear thigh/calf
+references to `0.7/-1.5`. Both use the same imported X1 URDF, meshes, and joint limits.
+The existing MLP actor, adaptation network, and privileged critic are retained.
+Go2, X1, and `x1_go2bend` all use 20 history frames and default to 24 rollout steps
+for both PPO and TRS-PPO. Override the rollout length with `--num-steps-per-env`.
+Arguments such as `--num-envs 16 --iterations 2` are forwarded to both runs.
+Earlier X1 checkpoints used a trot-only task and 58 observations per frame (1160 inputs
+with 20 history frames, or 1740 with 30). They require their saved configuration for
+inference. Start new X1 training runs for the shared 70-observation, four-gait task.
+
+Evaluate saved policies on all four gaits and six forward/backward speeds:
+
+```bash
+bash evaluation_metrics.sh --dry-run
+bash evaluation_metrics.sh
+```
+
+This selects all three robots and both algorithms, with 100 trials per gait/speed.
+Use `--robot go2 --algorithm ppo` to select a subset. Results are saved under
+`evaluations/`. See [evaluation instructions](docs/evaluation.md) for checkpoint
+selection, metric definitions, gait commands, and evaluation conditions.
+
 `go2_gym` and `go2_gym_learn` folders are the main folders for training process.
 
 Play the model:

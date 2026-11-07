@@ -9,6 +9,8 @@ tmp/
 *.pyc
 *.egg-info/
 __pycache__/
+events.out.tfevents.*
+/evaluations/
 
 # 忽略所有 .DS_Store 文件（macOS系统生成的文件）
 .DS_Store
@@ -19,3 +21,7 @@ __pycache__/
 
 go2_gym_deploy/build/
 go2_gym_deploy/unitree_sdk2_bin/library/unitree_sdk2/build/
+
+
+
+runs/

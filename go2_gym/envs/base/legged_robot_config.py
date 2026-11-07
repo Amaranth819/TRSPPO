@@ -102,6 +102,8 @@ class Cfg(PrefixProto, cli=False):
         center_span = 5
 
     class commands(PrefixProto, cli=False):
+        cmd_indices = None  # Observe all commands; [0, 1, 2] supports legacy velocity-only policies.
+        gait_category_names = None  # None uses pronk, trot, pace, and bound for every robot.
         command_curriculum = False
         max_reverse_curriculum = 1.
         max_forward_curriculum = 1.

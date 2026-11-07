@@ -61,11 +61,12 @@ class RunnerArgs(PrefixProto, cli=False):
 
 class Runner:
 
-    def __init__(self, env, device='cpu'):
-        from .ppo import PPO
+    def __init__(self, env, device='cpu', time_reversal_config=None):
+        from .algorithms import make_algorithm, normalize_algorithm
 
         self.device = device
         self.env = env
+        self.algorithm_name = normalize_algorithm(RunnerArgs.algorithm_class_name)
 
         actor_critic = ActorCritic(self.env.num_obs,
                                       self.env.num_privileged_obs,
@@ -90,7 +91,10 @@ class Runner:
                     self.env.curricula[gait_id].weights = distribution_last[f"weights_{gait_name}"]
                     print(gait_name)
 
-        self.alg = PPO(actor_critic, device=self.device)
+        self.alg = make_algorithm(RunnerArgs.algorithm_class_name, actor_critic, device=self.device,
+                                  time_reversal_config=time_reversal_config)
+        if RunnerArgs.resume and self.algorithm_name == 'trsppo':
+            self.alg.load_training_state(loader.load_torch("checkpoints/time_reversal_state_last.pt"))
         self.num_steps_per_env = RunnerArgs.num_steps_per_env
 
         # init storage and model
@@ -99,12 +103,13 @@ class Runner:
 
         self.tot_timesteps = 0
         self.tot_time = 0
-        self.current_learning_iteration = 0
+        self.current_learning_iteration = getattr(self.alg, 'update_count', 0)
         self.last_recording_it = 0
 
         self.env.reset()
 
-    def learn(self, num_learning_iterations, init_at_random_ep_len=False, eval_freq=100, curriculum_dump_freq=500, eval_expert=False):
+    def learn(self, num_learning_iterations, init_at_random_ep_len=False, eval_freq=100,
+              curriculum_dump_freq=500, eval_expert=False, summary_writer=None):
         from ml_logger import logger
         # initialize writer
         assert logger.prefix, "you will overwrite the entire instrument server"
@@ -202,6 +207,8 @@ class Runner:
                                          path=f"curriculum/distribution.pkl", append=True)
 
             mean_value_loss, mean_surrogate_loss, mean_adaptation_module_loss, mean_decoder_loss, mean_decoder_loss_student, mean_adaptation_module_test_loss, mean_decoder_test_loss, mean_decoder_test_loss_student = self.alg.update()
+            if self.algorithm_name == 'trsppo':
+                logger.store_metrics(**self.alg.last_tr_metrics)
             stop = time.time()
             learn_time = stop - start
 
@@ -223,8 +230,14 @@ class Runner:
                 self.log_video(it)
 
             self.tot_timesteps += self.num_steps_per_env * self.env.num_envs
-            if logger.every(RunnerArgs.log_freq, "iteration", start_on=1):
+            if logger.every(RunnerArgs.log_freq, "iteration", start_on=1) or it == tot_iter - 1:
                 # if it % Config.log_freq == 0:
+                if summary_writer is not None:
+                    # Read without clearing; ml_logger logs the same aggregated values below.
+                    for key, value in logger.summary_cache.summary_stats().items():
+                        summary_writer.add_scalar(key, value, global_step=it)
+                    summary_writer.add_scalar("timesteps", self.tot_timesteps, global_step=it)
+                    summary_writer.flush()
                 logger.log_metrics_summary(key_values={"timesteps": self.tot_timesteps, "iterations": it})
                 logger.job_running()
 
@@ -232,6 +245,7 @@ class Runner:
                 with logger.Sync():
                     logger.torch_save(self.alg.actor_critic.state_dict(), f"checkpoints/ac_weights_{it:06d}.pt")
                     logger.duplicate(f"checkpoints/ac_weights_{it:06d}.pt", f"checkpoints/ac_weights_last.pt")
+                    self._save_time_reversal_state(it)
 
                     path = './tmp/legged_data'
 
@@ -250,11 +264,15 @@ class Runner:
                     logger.upload_file(file_path=adaptation_module_path, target_path=f"checkpoints/", once=False)
                     logger.upload_file(file_path=body_path, target_path=f"checkpoints/", once=False)
 
-            self.current_learning_iteration += num_learning_iterations
+            if self.algorithm_name == 'trsppo':
+                self.current_learning_iteration = self.alg.update_count
+            else:
+                self.current_learning_iteration += num_learning_iterations
 
         with logger.Sync():
             logger.torch_save(self.alg.actor_critic.state_dict(), f"checkpoints/ac_weights_{it:06d}.pt")
             logger.duplicate(f"checkpoints/ac_weights_{it:06d}.pt", f"checkpoints/ac_weights_last.pt")
+            self._save_time_reversal_state(it)
 
             path = './tmp/legged_data'
 
@@ -273,6 +291,12 @@ class Runner:
             logger.upload_file(file_path=adaptation_module_path, target_path=f"checkpoints/", once=False)
             logger.upload_file(file_path=body_path, target_path=f"checkpoints/", once=False)
 
+
+    def _save_time_reversal_state(self, iteration):
+        if self.algorithm_name == 'trsppo':
+            path = f"checkpoints/time_reversal_state_{iteration:06d}.pt"
+            logger.torch_save(self.alg.training_state(), path)
+            logger.duplicate(path, "checkpoints/time_reversal_state_last.pt")
 
     def log_video(self, it):
         if it - self.last_recording_it >= RunnerArgs.save_video_interval:
