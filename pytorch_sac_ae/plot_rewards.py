@@ -10,11 +10,11 @@ import numpy as np
 
 REWARD_TAG = 'eval/episode_reward'
 ALGORITHM_STYLES = {
-    'ppo': ('PPO', '#1f77b4'),
-    'trsppo_policy_0.1_value_0': ('TRSPPO_policy_0.1_value_0', '#ff7f0e'),
-    'trsppo_policy_0.1_value_0.25': ('TRSPPO_policy_0.1_value_0.25', '#ff0000'),
-    'trsppo_policy_0.5_value_0': ('TRSPPO_policy_0.5_value_0', '#00ff00'),
-    'trsppo_policy_0.25_value_0': ('TRSPPO_policy_0.25_value_0', '#0000ff'),
+    'ppo': ('PPO', '#036ead'),
+    'trsppo_policy_0.1_value_0': (r'PPO-TRS ($w=0.1$)', '#f3962f'),
+    # 'trsppo_policy_0.1_value_0.25': ('TRSPPO_policy_0.1_value_0.25', '#66d28e'),
+    'trsppo_policy_0.25_value_0': (r'PPO-TRS ($w=0.25$)', '#5e379d'),
+    'trsppo_policy_0.5_value_0': (r'PPO-TRS ($w=0.5$)', '#dd656d'),
 }
 RunCurve = namedtuple('RunCurve', 'path steps rewards')
 CurveStats = namedtuple('CurveStats', 'steps mean std counts')
@@ -121,8 +121,8 @@ def plot_curves(curves, domain, task, step_interval, output, max_training_steps=
             stats = aggregate_runs(runs, step_interval, max_training_steps)
             ax.plot(stats.steps, stats.mean, color=color, linewidth=2, linestyle='-',
                     marker='o' if len(stats.steps) == 1 else None,
-                    label='{} ({} run{})'.format(label, len(runs), '' if len(runs) == 1 else 's'))
-                    # label='{}'.format(label))
+                    # label='{} ({} run{})'.format(label, len(runs), '' if len(runs) == 1 else 's'))
+                    label='{}'.format(label))
             ax.fill_between(stats.steps, stats.mean - stats.std, stats.mean + stats.std,
                             color=color, alpha=0.2, linewidth=0)
             print('{}: {} runs, {} plotted points, {}-{} runs contributing per point'.format(
@@ -130,7 +130,8 @@ def plot_curves(curves, domain, task, step_interval, output, max_training_steps=
             for run in runs:
                 print('  {}: {} evaluations, steps {}-{}'.format(
                     run.path, len(run.steps), run.steps[0], run.steps[-1]))
-        ax.set_title('{}_{}'.format(domain, task))
+        # ax.set_title('{}_{}'.format(domain, task))
+        ax.set_title('{}_{}'.format(domain.capitalize(), task.capitalize()))
         ax.set_xlabel('Training Steps')
         ax.set_ylabel('Episode Return')
         ax.ticklabel_format(axis='x', style='sci', scilimits=(0, 0))

@@ -18,3 +18,8 @@ runs
 pytorch_sac_ae/logs/
 .vscode/
 *nohup.out
+
+
+pytorch_sac_ae/analysis/
+pytorch_sac_ae/condor_logs/
+pytorch_sac_ae/tables/
